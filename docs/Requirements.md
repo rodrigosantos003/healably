@@ -20,7 +20,11 @@
 
 1. A aplicação deverá ser desevolvida em Android
 2. A aplicação deverá ser compatível o maior número de dispositivos Android possível
-3. As passwords utilizadas na aplicação devem cumprir as regras da Política de Passwords
+3. As passwords utilizadas na aplicação devem cumprir as regras da [Política de Passwords](./Password%20Policy.md)
+
+<br>
+
+<br>
 
 # Requirements
 
@@ -40,4 +44,4 @@
 
 1. The app should be developed in Android
 2. The app should be compatible with the greatest number of Android devices possible
-3. The passwords used in the app must comply with the rules of the Password Policy
+3. The passwords used in the app must comply with the rules of the [Password Policy](./Password%20Policy.md)
