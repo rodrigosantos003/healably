@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">healably</string>
+    <string name="login_header">Login</string>
 </resources>
