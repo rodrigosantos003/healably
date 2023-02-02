@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,7 +13,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent it = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(it);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent it = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(it);
+
+                finish();
+            }
+        },3000);
     }
 }
