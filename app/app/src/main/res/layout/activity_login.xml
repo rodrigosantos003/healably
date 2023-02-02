@@ -39,7 +39,8 @@
             android:layout_marginTop="10dp"
             android:padding="10dp"
             android:textColorHint="@color/white"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:inputType="textEmailAddress"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -57,7 +58,8 @@
             android:padding="10dp"
             android:textColorHint="@color/white"
             android:background="@drawable/edit_text_border"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:inputType="textPassword"/>
 
 
 
