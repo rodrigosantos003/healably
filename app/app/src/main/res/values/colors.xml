@@ -7,9 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="cor1">#29313A</color>
-    <color name="cor2">#BDE5E8</color>
-    <color name="cor3">#147881</color>
-    <color name="cor4">#819DA1</color>
-    <color name="cor5">#55666D</color>
+    <color name="gunmetal">#29313A</color>
+    <color name="powder_blue">#BDE5E8</color>
+    <color name="metallic_seaweed">#147881</color>
+    <color name="weldon_blue">#819DA1</color>
+    <color name="black_coral">#55666D</color>
 </resources>

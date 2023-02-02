@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">Healably</string>
-    <string name="login_header">Login</string>
+    <string name="app_name" translatable="false">Healably</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="password">Password</string>
+    <string name="passsword_hint">Enter your password</string>
 </resources>
