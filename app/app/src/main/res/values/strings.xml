@@ -6,4 +6,12 @@
     <string name="email_hint">Enter your email</string>
     <string name="password">Password</string>
     <string name="passsword_hint">Enter your password</string>
+    <string name="name">Name</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="gender">Gender</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="date_of_birth_hint">Pick your date of birth</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
 </resources>

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.healably.accounts.views.LoginActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

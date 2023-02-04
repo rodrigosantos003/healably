@@ -20,7 +20,7 @@ As passwords devem ser compostas pelos seguintes caracteres:
 - Minúsculas [a-z]
 - Maiúsculas [A-Z]
 - Dígitos [0-9]
-- Caracteres Especiais [!, #, $, %, &, /, =, ., -, _]
+- Caracteres Especiais [@, !, #, $, %, &, /, =, ., -, _]
 
 ## Frequência de Alteração
 

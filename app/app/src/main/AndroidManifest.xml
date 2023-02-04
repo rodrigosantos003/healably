@@ -14,7 +14,10 @@
         android:theme="@style/Theme.Healably"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".accounts.views.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".accounts.views.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
