@@ -2,10 +2,12 @@ package com.example.healably.accounts.model;
 
 import android.util.Patterns;
 
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class User {
+    String id;
     String name;
     String gender;
     String dateOfBirth;
@@ -14,18 +16,22 @@ public class User {
     boolean authenticated;
 
     public User(String name, String gender, String dateOfBirth, String email, String password) {
-        setName(name);
-        setGender(gender);
-        setDateOfBirth(dateOfBirth);
-        setEmail(email);
-        setPassword(password);
-        setAuthenticated(false);
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.password = password;
     }
 
     public User(String email, String password){
-        setEmail(email);
-        setPassword(password);
-        setAuthenticated(false);
+        this.email = email;
+        this.password = password;
+        this.authenticated = false;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
