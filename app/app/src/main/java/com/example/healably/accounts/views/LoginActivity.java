@@ -17,7 +17,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText editEmail;
     EditText editPassword;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                 User user = new User(email, password);
 
                 if(user.isEmailValid() && user.isPasswordValid()){
+                    //TODO: Query DB to find user and create a new object with the retrieved data
                     user.setAuthenticated(true);
                     Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                     //TODO: Login user

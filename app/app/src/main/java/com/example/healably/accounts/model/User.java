@@ -22,6 +22,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.password = password;
+        this.authenticated = false;
     }
 
     public User(String email, String password){

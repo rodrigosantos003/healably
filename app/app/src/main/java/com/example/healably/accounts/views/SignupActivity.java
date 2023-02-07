@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,9 +76,6 @@ public class SignupActivity extends AppCompatActivity {
                     dialog.show();
                 } else{
                     Toast.makeText(SignupActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
-                    editName.setText("");
-                    editEmail.setText("");
-                    editPassword.setText("");
                 }
             }
         });
