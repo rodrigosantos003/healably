@@ -49,10 +49,10 @@ O código-fonte da aplicação pode ser encontrado [aqui](./app/)
 
 # Index
 
-- [What is Healably?]
-- [What are the app features?]
-- [Documentation]
-- [Source Code]
+- [What is Healably?](#what-is-healably)
+- [What are the app features?](#what-are-the-app-features)
+- [Documentation](#documentation)
+- [Source Code](#source-code)
 
 # What is Healably?
 

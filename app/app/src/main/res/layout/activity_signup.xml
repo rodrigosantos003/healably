@@ -9,7 +9,7 @@
     android:background="@color/gunmetal">
 
     <TextView
-        android:id="@+id/lbl_Signup"
+        android:id="@+id/lbl_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signup"
@@ -24,7 +24,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/lbl_Signup"
+        app:layout_constraintTop_toBottomOf="@id/lbl_signup"
         app:layout_constraintBottom_toBottomOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +48,7 @@
 
         <!-- Nome -->
         <TextView
-            android:id="@+id/lbl_nome"
+            android:id="@+id/lbl_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -67,13 +67,13 @@
             android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:inputType="textEmailAddress"
-            app:layout_constraintTop_toBottomOf="@id/lbl_nome"
+            app:layout_constraintTop_toBottomOf="@id/lbl_name"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
 
         <!-- Genero -->
         <TextView
-            android:id="@+id/lbl_genero"
+            android:id="@+id/lbl_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gender"
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/lbl_genero"
+            app:layout_constraintTop_toBottomOf="@id/lbl_gender"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd">
             <RadioButton
@@ -111,7 +111,7 @@
 
         <!-- Data nascimento -->
         <TextView
-            android:id="@+id/lbl_data"
+            android:id="@+id/lbl_date_of_birth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date_of_birth"
@@ -135,7 +135,7 @@
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            app:layout_constraintTop_toBottomOf="@id/lbl_data"
+            app:layout_constraintTop_toBottomOf="@id/lbl_date_of_birth"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
 

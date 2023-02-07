@@ -31,7 +31,7 @@
                 app:layout_constraintGuide_percent="0.95" />
 
             <TextView
-                android:id="@+id/lbl_Login"
+                android:id="@+id/lbl_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
@@ -45,12 +45,12 @@
 
             <!-- Email -->
             <TextView
-                android:id="@+id/lbl_Email"
+                android:id="@+id/lbl_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/lbl_Login"
+                app:layout_constraintTop_toBottomOf="@id/lbl_login"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
                 android:layout_marginTop="70dp"/>
 
@@ -65,13 +65,13 @@
                 android:inputType="textEmailAddress"
                 android:padding="5dp"
                 android:layout_marginTop="12dp"
-                app:layout_constraintTop_toBottomOf="@id/lbl_Email"
+                app:layout_constraintTop_toBottomOf="@id/lbl_email"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
 
             <!-- Password -->
             <TextView
-                android:id="@+id/lbl_Password"
+                android:id="@+id/lbl_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
@@ -90,7 +90,7 @@
                 android:background="@drawable/edit_text_border"
                 android:textColor="@color/white"
                 android:inputType="textPassword"
-                app:layout_constraintTop_toBottomOf="@id/lbl_Password"
+                app:layout_constraintTop_toBottomOf="@id/lbl_password"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 android:layout_marginTop="12dp"

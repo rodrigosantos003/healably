@@ -8,7 +8,7 @@
     <string name="signup">Registo</string>
     <string name="name">Nome</string>
     <string name="name_hint">Introduza o nome</string>
-    <string name="gender">Introduza o género</string>
+    <string name="gender">Género</string>
     <string name="date_of_birth">Data de Nascimento</string>
     <string name="date_of_birth_hint">Selecione a data de nascimento</string>
     <string name="male">Masculino</string>
