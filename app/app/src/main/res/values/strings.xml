@@ -14,4 +14,12 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Other</string>
+    <string name="invalid_data">Invalid Data</string>
+    <string name="correct_fields">Correct the following fields:</string>
+    <string name="cannot_be_empty">Can not be empty</string>
+    <string name="cannot_contain_digits">Can not contain digits</string>
+    <string name="must_be_valid_address">Must be a valid address</string>
+    <string name="password_requirements">Must have between 8 and 14 characters and contain at least one uppercase, one lowercase, one digit and one symbol</string>
+    <string name="success">Success</string>
+    <string name="signedup_successfully">Signed up successfully</string>
 </resources>

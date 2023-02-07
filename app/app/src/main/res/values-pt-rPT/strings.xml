@@ -14,4 +14,12 @@
     <string name="male">Masculino</string>
     <string name="female">Feminino</string>
     <string name="other">Outro</string>
+    <string name="invalid_data">Dados Inválidos</string>
+    <string name="correct_fields">Corrija os seguintes campos:</string>
+    <string name="cannot_be_empty">Não pode ser vazio</string>
+    <string name="cannot_contain_digits">Não pode conter dígitos</string>
+    <string name="must_be_valid_address">Tem de ser um endereço válido</string>
+    <string name="password_requirements">Tem de ter entre 8 e 14 caracteres e conter pelo menos uma maiúscula, uma minúscula, um dígito e um símbolo</string>
+    <string name="success">Sucesso</string>
+    <string name="signedup_successfully">Registado com sucesso</string>
 </resources>

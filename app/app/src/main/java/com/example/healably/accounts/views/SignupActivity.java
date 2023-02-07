@@ -60,12 +60,18 @@ public class SignupActivity extends AppCompatActivity {
 
                 User user = new User(name, gender, dateOfBirth, email, password);
 
-                if(user.isNameValid() && !gender.isEmpty() && !dateOfBirth.isEmpty() && user.isEmailValid() && user.isPasswordValid()){
+                boolean validName = user.isNameValid();
+                boolean validGender = !gender.isEmpty();
+                boolean validDateOfBirth = !dateOfBirth.isEmpty();
+                boolean validEmail = user.isEmailValid();
+                boolean validPassword = user.isPasswordValid();
+
+                if (validName && validGender && validDateOfBirth && validEmail && validPassword) {
                     //TODO: Create user account on DB
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                    builder.setMessage("Signed up successfully")
-                            .setTitle("Success")
+                    builder.setMessage(R.string.signedup_successfully)
+                            .setTitle(R.string.success)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -74,14 +80,26 @@ public class SignupActivity extends AppCompatActivity {
                             });
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                } else{
-                    Toast.makeText(SignupActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
+                } else {
+                    String text = invalidDataText(validName, validGender, validDateOfBirth, validEmail, validPassword);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                    builder.setMessage(text)
+                            .setTitle(R.string.invalid_data)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             }
         });
     }
 
-    private DatePickerDialog.OnDateSetListener pickedDateOfBirth(){
+    private DatePickerDialog.OnDateSetListener pickedDateOfBirth() {
         return new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -94,13 +112,33 @@ public class SignupActivity extends AppCompatActivity {
         };
     }
 
-    private void updateDateOfBirth(){
+    private void updateDateOfBirth() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         editDateOfBirth.setText(dateFormat.format(calendar.getTime()));
     }
 
-    private String selectedGender(){
+    private String selectedGender() {
         int selectedId = ((RadioGroup) findViewById(R.id.signup_rg_gender)).getCheckedRadioButtonId();
-        return ((RadioButton) findViewById(selectedId)).getText().toString();
+        if(selectedId != -1)
+            return ((RadioButton) findViewById(selectedId)).getText().toString();
+
+        return "";
+    }
+
+    private String invalidDataText(boolean validName, boolean validGender, boolean validDateOfBirth, boolean validEmail, boolean validPassword) {
+        String output = getString(R.string.correct_fields) + "\n";
+
+        if (!validName)
+            output += "\n" + getString(R.string.name) + " - " + getString(R.string.cannot_be_empty) + "; " + getString(R.string.cannot_contain_digits) + "\n";
+        if (!validGender)
+            output += "\n" + getString(R.string.gender) + " - " + getString(R.string.cannot_be_empty) + "\n";
+        if (!validDateOfBirth)
+            output += "\n" + getString(R.string.date_of_birth) + " - " + getString(R.string.cannot_be_empty) + "\n";
+        if (!validEmail)
+            output += "\n" + getString(R.string.email) + " - " + getString(R.string.must_be_valid_address) + "\n";
+        if (!validPassword)
+            output += "\n" + getString(R.string.password) + " - " + getString(R.string.password_requirements);
+
+        return output;
     }
 }
