@@ -96,6 +96,20 @@
                 android:layout_marginTop="12dp"
                 android:padding="5dp"/>
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineButtonsStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineButtonsEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+
             <Button
                 android:id="@+id/login_bt_signup"
                 android:layout_width="0dp"
@@ -105,8 +119,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/login_edit_password"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintEnd_toStartOf="@id/login_bt_login"
-                android:layout_marginEnd="100dp"
+                app:layout_constraintEnd_toStartOf="@id/guidelineButtonsStart"
                 android:layout_marginTop="120dp"/>
 
             <Button
@@ -119,7 +132,7 @@
                 android:text="@string/login"
                 app:layout_constraintTop_toTopOf="@id/login_bt_signup"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                app:layout_constraintStart_toEndOf="@id/login_bt_signup"/>
+                app:layout_constraintStart_toEndOf="@id/guidelineButtonsEnd"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
