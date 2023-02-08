@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.healably.MainActivity;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
                     user.setAuthenticated(true);
                     Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                     //TODO: Login user
+                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(it);
                 } else{
                     Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                     editEmail.setText("");
