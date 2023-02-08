@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_body_structure"
+        android:icon="@drawable/ic_body_structure"
+        android:title="@string/body_structure" />
+
+    <item
+        android:id="@+id/navigation_blood_sugar"
+        android:icon="@drawable/ic_blood_sugar"
+        android:title="@string/blood_sugar" />
+
+    <item
+        android:id="@+id/navigation_blood_pressure"
+        android:icon="@drawable/ic_blood_pressure"
+        android:title="@string/blood_pressure" />
+
+    <item
+        android:id="@+id/navigation_reports"
+        android:icon="@drawable/ic_reports"
+        android:title="@string/reports" />
+
+</menu>

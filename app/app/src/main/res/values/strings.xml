@@ -22,4 +22,8 @@
     <string name="password_requirements">Must have between 8 and 14 characters and contain at least one uppercase, one lowercase, one digit and one symbol</string>
     <string name="success">Success</string>
     <string name="signedup_successfully">Signed up successfully</string>
+    <string name="body_structure">Body Structure</string>
+    <string name="blood_sugar">Blood Sugar</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="reports">Reports</string>
 </resources>

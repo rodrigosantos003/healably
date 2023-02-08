@@ -22,4 +22,8 @@
     <string name="password_requirements">Tem de ter entre 8 e 14 caracteres e conter pelo menos uma maiúscula, uma minúscula, um dígito e um símbolo</string>
     <string name="success">Sucesso</string>
     <string name="signedup_successfully">Registado com sucesso</string>
+    <string name="body_structure">Estrutura Corporal</string>
+    <string name="blood_sugar">Glicémia</string>
+    <string name="blood_pressure">Tensão Arterial</string>
+    <string name="reports">Relatórios</string>
 </resources>

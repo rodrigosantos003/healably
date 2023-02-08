@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_body_structure">
+    <fragment
+        android:id="@+id/navigation_body_structure"
+        android:name="com.example.healably.ui.body_structure.BodyStructureFragment"
+        android:label="@string/body_structure"
+        tools:layout="@layout/fragment_body_structure" />
+
+    <fragment
+        android:id="@+id/navigation_blood_sugar"
+        android:name="com.example.healably.ui.blood_sugar.BloodSugarFragment"
+        android:label="@string/blood_sugar"
+        tools:layout="@layout/fragment_blood_sugar" />
+
+    <fragment
+        android:id="@+id/navigation_blood_pressure"
+        android:name="com.example.healably.ui.blood_pressure.BloodPressureFragment"
+        android:label="@string/blood_pressure"
+        tools:layout="@layout/fragment_blood_pressure" />
+
+    <fragment
+        android:id="@+id/navigation_reports"
+        android:name="com.example.healably.ui.reports.ReportsFragment"
+        android:label="@string/reports"
+        tools:layout="@layout/fragment_reports"/>
+</navigation>
