@@ -1,10 +1,7 @@
-package com.example.healably.ui.body_structure;
+package com.example.healably.user_profile.blood_pressure;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,33 +12,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.healably.MySQLiteHelper;
+import com.example.healably.data.MySQLiteHelper;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 
-import org.w3c.dom.Text;
+public class BloodPressureFragment extends Fragment {
 
-public class BodyStructureFragment extends Fragment {
+    private BloodPressureViewModel mViewModel;
 
-    private BodyStructureViewModel mViewModel;
-
-    public static BodyStructureFragment newInstance() {
-        return new BodyStructureFragment();
+    public static BloodPressureFragment newInstance() {
+        return new BloodPressureFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_body_structure, container, false);
+        return inflater.inflate(R.layout.fragment_blood_pressure, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: Get logged user
         MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getContext());
         User user = mySQLiteHelper.getUserById(0);
 
@@ -53,7 +46,8 @@ public class BodyStructureFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BodyStructureViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(BloodPressureViewModel.class);
         // TODO: Use the ViewModel
     }
+
 }

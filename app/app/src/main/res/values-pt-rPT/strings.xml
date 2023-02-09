@@ -27,4 +27,6 @@
     <string name="blood_pressure">Tensão Arterial</string>
     <string name="reports">Relatórios</string>
     <string name="hello">Olá,</string>
+    <string name="invalid_credentials">Credenciais Inválidas</string>
+    <string name="logged_in_successfully">Login com Sucesso</string>
 </resources>

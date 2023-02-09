@@ -1,4 +1,4 @@
-package com.example.healably.ui.blood_pressure;
+package com.example.healably.user_profile.blood_pressure;
 
 import androidx.lifecycle.ViewModel;
 

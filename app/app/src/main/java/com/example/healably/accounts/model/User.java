@@ -1,6 +1,9 @@
 package com.example.healably.accounts.model;
 
 import android.util.Patterns;
+import android.widget.TextView;
+
+import com.example.healably.R;
 
 import java.io.Serializable;
 import java.util.UUID;

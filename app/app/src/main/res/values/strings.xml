@@ -27,4 +27,6 @@
     <string name="blood_pressure">Blood Pressure</string>
     <string name="reports">Reports</string>
     <string name="hello">Hello, </string>
+    <string name="invalid_credentials">Invalid Credentials</string>
+    <string name="logged_in_successfully">Logged In Successfully</string>
 </resources>
