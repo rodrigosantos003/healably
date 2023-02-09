@@ -26,4 +26,5 @@
     <string name="blood_sugar">Blood Sugar</string>
     <string name="blood_pressure">Blood Pressure</string>
     <string name="reports">Reports</string>
+    <string name="hello">Hello, </string>
 </resources>

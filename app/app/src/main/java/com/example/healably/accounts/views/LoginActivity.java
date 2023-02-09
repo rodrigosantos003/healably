@@ -3,6 +3,7 @@ package com.example.healably.accounts.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                     //TODO: Login user
                     Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                    it.putExtra("EMAIL", user.getEmail());
                     startActivity(it);
                 } else{
                     Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();

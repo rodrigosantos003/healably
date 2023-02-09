@@ -2,6 +2,7 @@ package com.example.healably.accounts.model;
 
 import android.util.Patterns;
 
+import java.io.Serializable;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
