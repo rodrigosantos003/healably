@@ -39,7 +39,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USER_TABLE = "CREATE Table user ( " +
-                KEY_ID + " PRIMARY KEY AUTOINCREMENT, " +
+                KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 KEY_NAME+ " TEXT, " +
                 KEY_GENDER+ " TEXT, " +
                 KEY_DATEOFBIRTH+ " TEXT, " +
@@ -80,7 +80,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public User getUser(int id){
+    public User getUserById(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor =
@@ -146,5 +146,38 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // return users
         return users;
     }
+    public User getUserByLogin(String email, String password){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor =
+                db.query(TABLE_USER, // a. table
+                        TABLE_USER_COLUMNS, // b. column names
+                        " email = ? && password = ?", // c. selections
+                        new String[] { email, password }, // d. selections args
+                        null, // e. group by
+                        null, // f. having
+                        null, // g. order by
+                        null); // h. limit
+
+        if(cursor != null){
+            cursor.moveToFirst();
+
+            User user = new User(
+                    cursor.getInt(0) /*Id*/,
+                    cursor.getString(1) /*Name*/,
+                    cursor.getString(2) /*Gender*/,
+                    cursor.getString(3) /*DateOfBirth*/,
+                    cursor.getString(4) /*Email*/,
+                    cursor.getString(5) /*Password*/
+            );
+
+            Log.d("getUserByLogin("+ email + "," + password + ")", user.toString());
+
+            return user;
+        }
+
+        return null;
+    }
+
 
 }
