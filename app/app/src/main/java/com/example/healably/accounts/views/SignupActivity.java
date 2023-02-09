@@ -19,6 +19,7 @@ import com.example.healably.accounts.model.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -65,21 +66,44 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (validName && validGender && validDateOfBirth && validEmail && validPassword) {
                     MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getApplicationContext());
-                    mySQLiteHelper.addUser(user);
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                    builder.setMessage(R.string.signedup_successfully)
-                            .setTitle(R.string.success)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    editEmail.setText("");
-                                    editPassword.setText("");
-                                    finish();
-                                }
-                            });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    boolean userExists = false;
+
+                    List<User> users = mySQLiteHelper.getAllUsers();
+                    for(User item : users){
+                        if(item.getEmail().equals(user.getEmail()))
+                            userExists = true;
+                    }
+
+                    if(!userExists){
+                        mySQLiteHelper.addUser(user);
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                        builder.setMessage(R.string.signedup_successfully)
+                                .setTitle(R.string.success)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        editEmail.setText("");
+                                        editPassword.setText("");
+                                        finish();
+                                    }
+                                });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    } else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                        builder.setMessage(R.string.user_already_exists)
+                                .setTitle(R.string.error)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 } else {
                     String text = invalidDataText(validName, validGender, validDateOfBirth, validEmail, validPassword);
 

@@ -29,4 +29,6 @@
     <string name="hello">Hello, </string>
     <string name="invalid_credentials">Invalid Credentials</string>
     <string name="logged_in_successfully">Logged In Successfully</string>
+    <string name="error">Error</string>
+    <string name="user_already_exists">A user with the provided email already exists</string>
 </resources>
