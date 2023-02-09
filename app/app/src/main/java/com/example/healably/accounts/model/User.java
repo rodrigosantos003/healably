@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class User {
-    String id;
+    int id;
     String name;
     String gender;
     String dateOfBirth;
@@ -16,8 +16,9 @@ public class User {
     String password;
     boolean authenticated;
 
-    public User(String name, String gender, String dateOfBirth, String email, String password) {
-        this.id = UUID.randomUUID().toString();
+    //Recebe id (usado na leitura da bd)
+    public User(int id, String name, String gender, String dateOfBirth, String email, String password) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
@@ -26,13 +27,24 @@ public class User {
         this.authenticated = false;
     }
 
+    //Não recebe id (usado na escrita da bd, o id é criado atraves da bd)
+    public User(String name, String gender, String dateOfBirth, String email, String password) {
+        this.name = name;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.password = password;
+        this.authenticated = false;
+    }
+
+    //Usado no login
     public User(String email, String password){
         this.email = email;
         this.password = password;
         this.authenticated = false;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -110,5 +122,10 @@ public class User {
         matcher = pattern.matcher(password);
 
         return (matcher.matches() && password.length() >= 8 && password.length() <= 14);
+    }
+
+    @Override
+    public String toString(){
+        return "User: " + id + ", " + name + ", " + email;
     }
 }
