@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.healably.MySQLiteHelper;
 import com.example.healably.R;
+import com.example.healably.accounts.model.User;
 
 public class ReportsFragment extends Fragment {
 
@@ -33,8 +35,11 @@ public class ReportsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: Set user name
-        String text = getString(R.string.hello) + " " + "NOME";
+        //TODO: Get logged user
+        MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getContext());
+        User user = mySQLiteHelper.getUserById(0);
+
+        String text = getString(R.string.hello) + " " + user.getName();
         TextView tv = (TextView) view.findViewById(R.id.tv_user);
         tv.setText(text);
     }

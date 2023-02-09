@@ -14,7 +14,6 @@ public class User {
     String dateOfBirth;
     String email;
     String password;
-    boolean authenticated;
 
     //Recebe id (usado na leitura da bd)
     public User(int id, String name, String gender, String dateOfBirth, String email, String password) {
@@ -24,7 +23,6 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.password = password;
-        this.authenticated = false;
     }
 
     //Não recebe id (usado na escrita da bd, o id é criado atraves da bd)
@@ -34,14 +32,12 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.password = password;
-        this.authenticated = false;
     }
 
     //Usado no login
     public User(String email, String password){
         this.email = email;
         this.password = password;
-        this.authenticated = false;
     }
 
     public int getId() {
@@ -68,10 +64,6 @@ public class User {
         return password;
     }
 
-    public boolean isAuthenticated() {
-        return authenticated;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -90,10 +82,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setAuthenticated(boolean authenticated) {
-        this.authenticated = authenticated;
     }
 
     public boolean isNameValid(){

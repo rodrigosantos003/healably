@@ -15,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.healably.MySQLiteHelper;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 
@@ -32,8 +34,6 @@ public class BodyStructureFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Bundle args = getArguments();
-        String email = args.getString("EMAIL");
         return inflater.inflate(R.layout.fragment_body_structure, container, false);
     }
 
@@ -41,8 +41,11 @@ public class BodyStructureFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: Set user name
-        String text = getString(R.string.hello) + " " + "NOME";
+        //TODO: Get logged user
+        MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getContext());
+        User user = mySQLiteHelper.getUserById(0);
+
+        String text = getString(R.string.hello) + " " + user.getName();
         TextView tv = (TextView) view.findViewById(R.id.tv_user);
         tv.setText(text);
     }

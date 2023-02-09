@@ -152,7 +152,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Cursor cursor =
                 db.query(TABLE_USER, // a. table
                         TABLE_USER_COLUMNS, // b. column names
-                        " email = ? && password = ?", // c. selections
+                        " email = ? and password = ?", // c. selections
                         new String[] { email, password }, // d. selections args
                         null, // e. group by
                         null, // f. having

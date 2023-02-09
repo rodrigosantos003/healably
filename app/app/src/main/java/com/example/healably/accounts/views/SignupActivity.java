@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.healably.MySQLiteHelper;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 
@@ -67,7 +68,8 @@ public class SignupActivity extends AppCompatActivity {
                 boolean validPassword = user.isPasswordValid();
 
                 if (validName && validGender && validDateOfBirth && validEmail && validPassword) {
-                    //TODO: Create user account on DB
+                    MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getApplicationContext());
+                    mySQLiteHelper.addUser(user);
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                     builder.setMessage(R.string.signedup_successfully)
