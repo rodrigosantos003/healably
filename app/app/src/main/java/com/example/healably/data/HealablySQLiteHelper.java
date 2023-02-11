@@ -19,20 +19,26 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "HealablyDB";
     private static final int DATABASE_VERSION = 1;
 
-    //Table Users info
+    //Table Names
     private static final String TABLE_USER = "user";
     private static final String TABLE_LOGGED_USER = "logged_user";
+    private static final String TABLE_USER_DATA = "user_data";
 
-    // User Table Columns names
+    //Column names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_GENDER = "gender";
     private static final String KEY_DATEOFBIRTH = "dateOfBirth";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PASSWORD = "password";
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_VALUE_TYPE = "value_type";
+    private static final String KEY_VALUE = "value";
+    private static final String KEY_DATE = "date";
 
-    //User Table All Columns
+    //Columns
     private static final String[] TABLE_USER_COLUMNS = {KEY_ID, KEY_NAME, KEY_GENDER, KEY_DATEOFBIRTH, KEY_EMAIL, KEY_PASSWORD};
+    private static final String[] TABLE_USER_DATA_COLUMNS = {KEY_ID, KEY_USER_ID, KEY_VALUE_TYPE, KEY_VALUE, KEY_DATE};
 
     public HealablySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -56,14 +62,23 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
                 KEY_EMAIL + " TEXT, " +
                 KEY_PASSWORD + " TEXT)";
 
+        String CREATE_USER_DATA_TABLE = "CREATE Table user_data ( " +
+                KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_USER_ID + " INTEGER, " +
+                KEY_VALUE_TYPE + " TEXT, " +
+                KEY_VALUE + " DECIMAL(10, 5), " +
+                KEY_DATE + " TEXT)";
+
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_LOGGED_USER_TABLE);
+        db.execSQL(CREATE_USER_DATA_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF exists user");
         db.execSQL("DROP TABLE IF exists logged_user");
+        db.execSQL("DROP TABLE IF exists user_data");
         this.onCreate(db);
     }
 
@@ -236,5 +251,57 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
 
         db.execSQL("delete from " + TABLE_LOGGED_USER);
         db.close();
+    }
+
+    public void addUserData(UserData userData){
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER_ID, userData.getUserId());
+        values.put(KEY_VALUE_TYPE, userData.getValueType());
+        values.put(KEY_VALUE, userData.getValue());
+        values.put(KEY_DATE, userData.getDate());
+
+        // 3. insert
+        db.insert(TABLE_USER_DATA, // table
+                null, //nullColumnHack
+                values); // key/value -> keys = column names/ values = column values
+
+        // 4. close
+        db.close();
+    }
+
+    public List<UserData> getUserData(int userId){
+        List<UserData> userDataList = new LinkedList<UserData>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor =
+                db.query(TABLE_USER_DATA, // a. table
+                        TABLE_USER_DATA_COLUMNS, // b. column names
+                        " user_id = ?", // c. selections
+                        new String[]{String.valueOf(userId)}, // d. selections args
+                        null, // e. group by
+                        null, // f. having
+                        null, // g. order by
+                        null); // h. limit
+
+        UserData userData = null;
+        if (cursor.moveToFirst()) {
+            do {
+                userData = new UserData(
+                        cursor.getInt(0), /*ID*/
+                        cursor.getInt(1), /*User ID*/
+                        cursor.getString(2), /*Value Type*/
+                        cursor.getDouble(3), /*Value*/
+                        cursor.getString(4) /*Date*/
+                );
+
+                userDataList.add(userData);
+            } while (cursor.moveToNext());
+        }
+
+        return userDataList;
     }
 }
