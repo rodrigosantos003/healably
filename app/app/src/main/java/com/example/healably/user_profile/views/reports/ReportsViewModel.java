@@ -1,4 +1,4 @@
-package com.example.healably.user_profile.reports;
+package com.example.healably.user_profile.views.reports;
 
 import androidx.lifecycle.ViewModel;
 

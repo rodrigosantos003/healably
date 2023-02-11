@@ -6,25 +6,25 @@
     app:startDestination="@+id/navigation_body_structure">
     <fragment
         android:id="@+id/navigation_body_structure"
-        android:name="com.example.healably.user_profile.body_structure.BodyStructureFragment"
+        android:name="com.example.healably.user_profile.views.body_structure.BodyStructureFragment"
         android:label="@string/body_structure"
         tools:layout="@layout/fragment_body_structure" />
 
     <fragment
         android:id="@+id/navigation_blood_sugar"
-        android:name="com.example.healably.user_profile.blood_sugar.BloodSugarFragment"
+        android:name="com.example.healably.user_profile.views.blood_sugar.BloodSugarFragment"
         android:label="@string/blood_sugar"
         tools:layout="@layout/fragment_blood_sugar" />
 
     <fragment
         android:id="@+id/navigation_blood_pressure"
-        android:name="com.example.healably.user_profile.blood_pressure.BloodPressureFragment"
+        android:name="com.example.healably.user_profile.views.blood_pressure.BloodPressureFragment"
         android:label="@string/blood_pressure"
         tools:layout="@layout/fragment_blood_pressure" />
 
     <fragment
         android:id="@+id/navigation_reports"
-        android:name="com.example.healably.user_profile.reports.ReportsFragment"
+        android:name="com.example.healably.user_profile.views.reports.ReportsFragment"
         android:label="@string/reports"
         tools:layout="@layout/fragment_reports"/>
 </navigation>

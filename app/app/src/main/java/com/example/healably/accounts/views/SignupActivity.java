@@ -6,14 +6,16 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import com.example.healably.data.MySQLiteHelper;
+import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 
@@ -65,32 +67,39 @@ public class SignupActivity extends AppCompatActivity {
                 boolean validPassword = user.isPasswordValid();
 
                 if (validName && validGender && validDateOfBirth && validEmail && validPassword) {
-                    MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getApplicationContext());
+                    HealablySQLiteHelper healablySQLiteHelper = new HealablySQLiteHelper(getApplicationContext());
 
                     boolean userExists = false;
 
-                    List<User> users = mySQLiteHelper.getAllUsers();
+                    List<User> users = healablySQLiteHelper.getAllUsers();
                     for(User item : users){
-                        if(item.getEmail().equals(user.getEmail()))
+                        if (item.getEmail().equals(user.getEmail())) {
                             userExists = true;
+                            break;
+                        }
                     }
 
                     if(!userExists){
-                        mySQLiteHelper.addUser(user);
+                        try {
+                            healablySQLiteHelper.addUser(user);
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                        builder.setMessage(R.string.signedup_successfully)
-                                .setTitle(R.string.success)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        editEmail.setText("");
-                                        editPassword.setText("");
-                                        finish();
-                                    }
-                                });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                            builder.setMessage(R.string.signedup_successfully)
+                                    .setTitle(R.string.success)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            editEmail.setText("");
+                                            editPassword.setText("");
+                                            finish();
+                                        }
+                                    });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        } catch (Exception e){
+                            Log.d("ERROR", e.getMessage());
+                            Toast.makeText(SignupActivity.this, R.string.error_occurred, Toast.LENGTH_SHORT).show();
+                        }
                     } else{
                         AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                         builder.setMessage(R.string.user_already_exists)

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_profile.blood_sugar.BloodSugarFragment">
+    tools:context=".user_profile.views.blood_sugar.BloodSugarFragment">
 
     <include layout="@layout/user_text"/>
 

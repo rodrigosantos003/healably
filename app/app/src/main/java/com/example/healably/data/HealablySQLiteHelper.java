@@ -2,23 +2,22 @@ package com.example.healably.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.example.healably.accounts.model.User;
+import com.example.healably.user_profile.model.UserData;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class MySQLiteHelper extends SQLiteOpenHelper {
+public class HealablySQLiteHelper extends SQLiteOpenHelper {
 
     //DB Info
     private static final String DATABASE_NAME = "HealablyDB";
     private static final int DATABASE_VERSION = 1;
-
 
     //Table Users info
     private static final String TABLE_USER = "user";
@@ -35,7 +34,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     //User Table All Columns
     private static final String[] TABLE_USER_COLUMNS = {KEY_ID, KEY_NAME, KEY_GENDER, KEY_DATEOFBIRTH, KEY_EMAIL, KEY_PASSWORD};
 
-    public MySQLiteHelper(Context context) {
+    public HealablySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -74,7 +73,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, user.getId());
         values.put(KEY_NAME, user.getName());
         values.put(KEY_GENDER, user.getGender());
         values.put(KEY_DATEOFBIRTH, user.getDateOfBirth());
@@ -190,7 +188,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, user.getId());
         values.put(KEY_NAME, user.getName());
         values.put(KEY_GENDER, user.getGender());
         values.put(KEY_DATEOFBIRTH, user.getDateOfBirth());
@@ -227,9 +224,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                     cursor.getString(5) /*Password*/
             );
 
+            //return User
             return user;
         }
 
         return null;
+    }
+
+    public void logoutUser(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("delete from " + TABLE_LOGGED_USER);
+        db.close();
     }
 }

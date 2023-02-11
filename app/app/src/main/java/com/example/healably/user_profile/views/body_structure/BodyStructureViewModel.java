@@ -1,4 +1,4 @@
-package com.example.healably.user_profile.body_structure;
+package com.example.healably.user_profile.views.body_structure;
 
 import androidx.lifecycle.ViewModel;
 

@@ -1,4 +1,4 @@
-package com.example.healably.user_profile.blood_sugar;
+package com.example.healably.user_profile.views.blood_sugar;
 
 import androidx.lifecycle.ViewModel;
 

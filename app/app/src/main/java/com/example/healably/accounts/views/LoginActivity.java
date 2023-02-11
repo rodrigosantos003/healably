@@ -3,6 +3,7 @@ package com.example.healably.accounts.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.healably.MainActivity;
-import com.example.healably.data.MySQLiteHelper;
+import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 
@@ -38,17 +39,20 @@ public class LoginActivity extends AppCompatActivity {
                 User user = new User(email, password);
 
                 if(user.isEmailValid() && user.isPasswordValid()){
-                    MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getApplicationContext());
+                    HealablySQLiteHelper healablySQLiteHelper = new HealablySQLiteHelper(getApplicationContext());
 
                     try {
-                        User loggedUser = mySQLiteHelper.getUserByLogin(user.getEmail(), user.getPassword());
-                        mySQLiteHelper.loginUser(loggedUser);
+                        User loggedUser = healablySQLiteHelper.getUserByLogin(user.getEmail(), user.getPassword());
+                        healablySQLiteHelper.logoutUser(); //TODO: Implement this on logout feature (user profile)
+                        healablySQLiteHelper.loginUser(loggedUser);
                         Toast.makeText(LoginActivity.this, R.string.logged_in_successfully, Toast.LENGTH_SHORT).show();
                         Intent it = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(it);
-                    } catch (Exception e) {
-                        Log.d("EXCEPTION", e.getMessage());
+                    } catch (CursorIndexOutOfBoundsException e) {
                         Toast.makeText(LoginActivity.this, R.string.invalid_credentials, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e){
+                        Log.d("EXCEPTION", e.getMessage());
+                        Toast.makeText(LoginActivity.this, R.string.error_occurred, Toast.LENGTH_SHORT).show();
                     }
                 } else{
                     Toast.makeText(LoginActivity.this, R.string.invalid_credentials, Toast.LENGTH_SHORT).show();

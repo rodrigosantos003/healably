@@ -1,4 +1,4 @@
-package com.example.healably.user_profile.blood_sugar;
+package com.example.healably.user_profile.views.blood_pressure;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,42 +11,45 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.healably.data.MySQLiteHelper;
 import com.example.healably.R;
-import com.example.healably.accounts.model.User;
+import com.example.healably.user_profile.controller.UserDataController;
 
-public class BloodSugarFragment extends Fragment {
+public class BloodPressureFragment extends Fragment {
 
-    private BloodSugarViewModel mViewModel;
+    private BloodPressureViewModel mViewModel;
 
-    public static BloodSugarFragment newInstance() {
-        return new BloodSugarFragment();
+    public static BloodPressureFragment newInstance() {
+        return new BloodPressureFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_blood_sugar, container, false);
+        return inflater.inflate(R.layout.fragment_blood_pressure, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(getContext());
-        User user = mySQLiteHelper.getLoggedUser();
+        /*
+        UserSQLiteHelper userSQLiteHelper = new UserSQLiteHelper(getContext());
+        User user = userSQLiteHelper.getLoggedUser();
 
         String text = getString(R.string.hello) + " " + user.getName();
         TextView tv = (TextView) view.findViewById(R.id.tv_user);
         tv.setText(text);
+         */
+
+        UserDataController userDataController = new UserDataController(getContext(), view);
+        userDataController.setUserText();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BloodSugarViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(BloodPressureViewModel.class);
         // TODO: Use the ViewModel
     }
 

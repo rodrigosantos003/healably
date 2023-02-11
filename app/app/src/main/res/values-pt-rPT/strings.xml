@@ -31,4 +31,8 @@
     <string name="logged_in_successfully">Login com Sucesso</string>
     <string name="error">Erro</string>
     <string name="user_already_exists">Já existe um utilizador com o email fornecido</string>
+    <string name="height">Altura</string>
+    <string name="weight">Peso</string>
+    <string name="abdominal_perimeter">Perímetro Abdominal</string>
+    <string name="error_occurred">Ocorreu um erro</string>
 </resources>
