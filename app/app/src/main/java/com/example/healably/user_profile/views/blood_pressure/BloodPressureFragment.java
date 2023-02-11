@@ -33,15 +33,6 @@ public class BloodPressureFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
-        UserSQLiteHelper userSQLiteHelper = new UserSQLiteHelper(getContext());
-        User user = userSQLiteHelper.getLoggedUser();
-
-        String text = getString(R.string.hello) + " " + user.getName();
-        TextView tv = (TextView) view.findViewById(R.id.tv_user);
-        tv.setText(text);
-         */
-
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
     }

@@ -2,7 +2,6 @@ package com.example.healably.data;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -38,6 +37,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
 
     //Columns
     private static final String[] TABLE_USER_COLUMNS = {KEY_ID, KEY_NAME, KEY_GENDER, KEY_DATEOFBIRTH, KEY_EMAIL, KEY_PASSWORD};
+    private static final String[] TABLE_LOGGED_USER_COLUMNS = {KEY_ID, KEY_USER_ID, KEY_NAME, KEY_GENDER, KEY_DATEOFBIRTH, KEY_EMAIL, KEY_PASSWORD};
     private static final String[] TABLE_USER_DATA_COLUMNS = {KEY_ID, KEY_USER_ID, KEY_VALUE_TYPE, KEY_VALUE, KEY_DATE};
 
     public HealablySQLiteHelper(Context context) {
@@ -56,6 +56,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
 
         String CREATE_LOGGED_USER_TABLE = "CREATE Table logged_user ( " +
                 KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_USER_ID + " INTEGER, " +
                 KEY_NAME + " TEXT, " +
                 KEY_GENDER + " TEXT, " +
                 KEY_DATEOFBIRTH + " TEXT, " +
@@ -204,6 +205,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, user.getName());
+        values.put(KEY_USER_ID, user.getId());
         values.put(KEY_GENDER, user.getGender());
         values.put(KEY_DATEOFBIRTH, user.getDateOfBirth());
         values.put(KEY_EMAIL, user.getEmail());
@@ -231,12 +233,12 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
 
             user = new User(
-                    cursor.getInt(0) /*Id*/,
-                    cursor.getString(1) /*Name*/,
-                    cursor.getString(2) /*Gender*/,
-                    cursor.getString(3) /*DateOfBirth*/,
-                    cursor.getString(4) /*Email*/,
-                    cursor.getString(5) /*Password*/
+                    cursor.getInt(1) /*User Id*/,
+                    cursor.getString(2) /*Name*/,
+                    cursor.getString(3) /*Gender*/,
+                    cursor.getString(5) /*DateOfBirth*/,
+                    cursor.getString(5) /*Email*/,
+                    cursor.getString(6) /*Password*/
             );
 
             //return User

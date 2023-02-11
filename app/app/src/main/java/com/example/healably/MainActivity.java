@@ -2,7 +2,6 @@ package com.example.healably;
 
 import android.os.Bundle;
 
-import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

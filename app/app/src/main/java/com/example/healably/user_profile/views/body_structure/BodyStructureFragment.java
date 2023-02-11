@@ -8,16 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.healably.R;
-import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.user_profile.controller.UserDataController;
-import com.example.healably.user_profile.model.UserData;
 
 public class BodyStructureFragment extends Fragment {
 
@@ -37,17 +34,14 @@ public class BodyStructureFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
-        UserSQLiteHelper userSQLiteHelper = new UserSQLiteHelper(getContext());
-        User user = userSQLiteHelper.getLoggedUser();
-
-        String text = getString(R.string.hello) + " " + user.getName();
-        TextView tv = (TextView) view.findViewById(R.id.tv_user);
-        tv.setText(text);
-         */
-
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
+
+        //Just to test controller
+        /*
+        String bmi = String.valueOf(userDataController.calculateBMI());
+        Toast.makeText(getContext(), bmi, Toast.LENGTH_SHORT).show();
+         */
     }
 
     @Override
