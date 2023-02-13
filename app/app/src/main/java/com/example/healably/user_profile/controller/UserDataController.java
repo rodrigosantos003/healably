@@ -72,10 +72,28 @@ public class UserDataController {
     /**
      * Calcula o IMC atual
      * @return Valor do IMC*/
-    public double calculateBMI(){
+    private double calculateBMI(){
         double weight = getValue("WEIGHT");
         double height = getValue("HEIGHT");
 
         return weight / (height * height);
+    }
+
+    /**
+     * Apresenta o resultado do IMC*/
+    public void showBMIResult(){
+        double bmi = calculateBMI();
+
+        TextView bmiValue = view.findViewById(R.id.imc_valor);
+
+        if(bmi < 18.5){
+            bmiValue.setTextColor(context.getResources().getColor(R.color.powder_blue, null));
+        } else if(bmi >= 18.5 && bmi <= 24.9){
+            bmiValue.setTextColor(context.getResources().getColor(R.color.yellow, null));
+        } else if(bmi > 24.9){
+            bmiValue.setTextColor(context.getResources().getColor(R.color.red, null));
+        }
+
+        bmiValue.setText(String.format("%.2f", bmi));
     }
 }

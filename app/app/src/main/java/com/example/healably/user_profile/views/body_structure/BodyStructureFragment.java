@@ -36,12 +36,7 @@ public class BodyStructureFragment extends Fragment {
 
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
-
-        //Just to test controller
-        /*
-        String bmi = String.valueOf(userDataController.calculateBMI());
-        Toast.makeText(getContext(), bmi, Toast.LENGTH_SHORT).show();
-         */
+        userDataController.showBMIResult();
     }
 
     @Override
