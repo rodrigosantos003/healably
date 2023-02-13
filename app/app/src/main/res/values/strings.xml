@@ -29,10 +29,9 @@
     <string name="hello">Hello, </string>
     <string name="invalid_credentials">Invalid Credentials</string>
     <string name="logged_in_successfully">Logged In Successfully</string>
-    <string name="error">Error</string>
+    <string name="error">An error occurred</string>
     <string name="user_already_exists">A user with the provided email already exists</string>
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="abdominal_perimeter">Abdominal Perimeter</string>
-    <string name="error_occurred">An error occurred</string>
 </resources>
