@@ -12,6 +12,8 @@ import com.example.healably.user_profile.model.UserData;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * SQLiteHelper da aplicação*/
 public class HealablySQLiteHelper extends SQLiteOpenHelper {
 
     //DB Info
@@ -37,7 +39,6 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
 
     //Columns
     private static final String[] TABLE_USER_COLUMNS = {KEY_ID, KEY_NAME, KEY_GENDER, KEY_DATEOFBIRTH, KEY_EMAIL, KEY_PASSWORD};
-    private static final String[] TABLE_LOGGED_USER_COLUMNS = {KEY_ID, KEY_USER_ID, KEY_NAME, KEY_GENDER, KEY_DATEOFBIRTH, KEY_EMAIL, KEY_PASSWORD};
     private static final String[] TABLE_USER_DATA_COLUMNS = {KEY_ID, KEY_USER_ID, KEY_VALUE_TYPE, KEY_VALUE, KEY_DATE};
 
     public HealablySQLiteHelper(Context context) {
@@ -83,6 +84,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
+    /**
+     * Adiciona um utilizador à BD
+     * @param user Utilizador a adicionar*/
     public void addUser(User user) {
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -104,6 +108,10 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Obtém um utilizador da BD, dado o seu ID
+     * @param id ID do utilizador
+     * @return Utilizador pretendido*/
     public User getUserById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -135,6 +143,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    /**
+     * Obtém a lista de todos os utilizadores da BD
+     * @return Lista de utilizadores*/
     public List<User> getAllUsers() {
         List<User> users = new LinkedList<User>();
 
@@ -167,6 +178,11 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         return users;
     }
 
+    /**
+     * Obtém um uitlizador da BD, dado os seus dados de login
+     * @param email Email do utilizador
+     * @param password Password do utilizador
+     * @return Utilizador pretendido*/
     public User getUserByLogin(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -198,6 +214,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    /**
+     * Regista um utilizador na BD como loggado
+     * @param user Utilizador a loggar*/
     public void loginUser(User user) {
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -220,6 +239,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Obtém o utilizador loggado
+     * @return Utilizador loggado*/
     public User getLoggedUser() {
         // 1. build the query
         String query = "SELECT * FROM " + TABLE_LOGGED_USER;
@@ -248,6 +270,8 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    /**
+     * Remove o utilizador loggado da BD*/
     public void logoutUser(){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -255,6 +279,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Adiciona dados do utilizador a BD
+     * @param userData Dados a introduzir*/
     public void addUserData(UserData userData){
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -275,6 +302,10 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Obtém a lista de dados de um utilizador da BD
+     * @param userId ID do utilizador
+     * @return Lista de dados*/
     public List<UserData> getUserData(int userId){
         List<UserData> userDataList = new LinkedList<UserData>();
 

@@ -5,6 +5,8 @@ import android.util.Patterns;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Modelo de dados de Utilizador*/
 public class User {
     int id;
     String name;
@@ -38,6 +40,7 @@ public class User {
         this.password = password;
     }
 
+    //Getters
     public int getId() {
         return id;
     }
@@ -62,6 +65,7 @@ public class User {
         return password;
     }
 
+    //Setters
     public void setName(String name) {
         this.name = name;
     }
@@ -82,6 +86,9 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * Valida se o nome do utilizador é válido
+     * @return True se o nome for válido, False caso contrário*/
     public boolean isNameValid(){
         if(name.isEmpty())
             return false;
@@ -96,10 +103,16 @@ public class User {
         return true;
     }
 
+    /**
+     * Valida se o email do utilizador é válido
+     * @return True se o email for válido, False caso contrário*/
     public boolean isEmailValid() {
         return (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
+    /**
+     * Valida se a password do utilizador é válido
+     * @return True se a password for válida, False caso contrário*/
     public boolean isPasswordValid() {
         Pattern pattern;
         Matcher matcher;

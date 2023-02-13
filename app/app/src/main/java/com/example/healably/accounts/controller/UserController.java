@@ -11,6 +11,9 @@ import com.example.healably.data.HealablySQLiteHelper;
 
 import java.util.List;
 
+/**
+ * Controlador para funcionalidade de Contas
+ * */
 public class UserController {
 
     Context context;
@@ -21,6 +24,12 @@ public class UserController {
         this.healablySQLiteHelper = new HealablySQLiteHelper(this.context);
     }
 
+    /**
+     * Realiza o login de utilizadores
+     * @param email Email do utilizador
+     * @param password Password do utilizador
+     * @return True se o login ocorreu com sucesso, False caso contrário
+     * @throws CursorIndexOutOfBoundsException Se não for encontrado o utilizador pretendido*/
     public boolean loginUser(String email, String password) throws CursorIndexOutOfBoundsException {
         User user = new User(email, password);
 
@@ -35,6 +44,15 @@ public class UserController {
         return false;
     }
 
+    /**
+     * Realiza o registo de utilizadores
+     * @param name Nome do utilizador
+     * @param gender Género do utilizador
+     * @param dateOfBirth Data de nascimento do utilizador
+     * @param email Email do utilizador
+     * @param password Password do utilizador
+     * @return True se o registo ocorreu com sucesso, False caso contrário
+     * @throws Exception Se ocorrer um erro no BD*/
     public boolean signupUser(String name, String gender, String dateOfBirth, String email, String password) throws Exception{
         User user = new User(name, gender, dateOfBirth, email, password);
 
@@ -57,6 +75,11 @@ public class UserController {
         return false;
     }
 
+    /**
+     * Valida se um utilizador já existe
+     * @param user Utilizador a validar
+     * @return True se o utilizador existir, False caso contrário
+     * */
     private boolean userExists(User user){
         List<User> users = healablySQLiteHelper.getAllUsers();
         for(User item : users){
@@ -68,6 +91,9 @@ public class UserController {
         return false;
     }
 
+    /**
+     * Apresenta uma caixa de diálogo com descrição dos dados inválidos
+     * @param text Texto a apresentar na caixa*/
     private void showInvalidDataDialog(String text){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(text)
@@ -82,6 +108,14 @@ public class UserController {
         dialog.show();
     }
 
+    /**
+     * Contrói o texto de dados inválidos, com base na validação dos campos introduzidos
+     * @param validName Nome válido
+     * @param validGender Género válido
+     * @param validDateOfBirth Data de nascimento válida
+     * @param validEmail Email válido
+     * @param validPassword Password válida
+     * @return Texto de dados inválidos*/
     private String invalidDataText(boolean validName, boolean validGender, boolean validDateOfBirth, boolean validEmail, boolean validPassword) {
         String output = context.getString(R.string.correct_fields) + "\n";
 

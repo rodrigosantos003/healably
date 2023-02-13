@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Controlador para a funcionalidade de Perfil de Utilizador*/
 public class UserDataController {
     Context context;
     View view;
@@ -26,19 +28,25 @@ public class UserDataController {
         this.user = healablySQLiteHelper.getLoggedUser();
     }
 
-    //Set the text on the TextView with the name of the logged user
+    /**
+     * Define o texto na TextView, com o nome do utilizador*/
     public void setUserText() {
         String text = context.getString(R.string.hello) + " " + user.getName();
         TextView tv = (TextView) view.findViewById(R.id.tv_user);
         tv.setText(text);
     }
 
-    //Get user data from DB
+    /**
+     * Obtém os dados do utilizador
+     * @return Lista de dados*/
     public List<UserData> getData(){
         return healablySQLiteHelper.getUserData(user.getId());
     }
 
-    //Add a user data value on DB
+    /**
+     * Adiciona um valor aos dados
+     * @param valueType Tipo de dado a adicionar
+     * @param value Valor a adicionar*/
     public void addValue(String valueType, double value){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(new Date());
@@ -47,7 +55,10 @@ public class UserDataController {
         healablySQLiteHelper.addUserData(userData);
     }
 
-    //Get a user data value from DB
+    /**
+     * Obtém um valor dos dados
+     * @param valueType Tipo de dado pretendido
+     * @return Valor pretendido*/
     public double getValue(String valueType){
         for(UserData item : getData()){
             if(item.getValueType().equals(valueType)){
@@ -58,7 +69,9 @@ public class UserDataController {
         return 0.0;
     }
 
-    //Calculate current BMI
+    /**
+     * Calcula o IMC atual
+     * @return Valor do IMC*/
     public double calculateBMI(){
         double weight = getValue("WEIGHT");
         double height = getValue("HEIGHT");

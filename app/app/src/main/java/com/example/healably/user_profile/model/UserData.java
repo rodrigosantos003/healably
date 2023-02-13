@@ -1,5 +1,7 @@
 package com.example.healably.user_profile.model;
 
+/**
+ * Modelo de dados de Dados de Utilizador*/
 public class UserData {
     int id;
     int userId;
@@ -22,6 +24,7 @@ public class UserData {
         this.date = date;
     }
 
+    //Getters
     public int getId() {
         return id;
     }
@@ -42,6 +45,7 @@ public class UserData {
         return date;
     }
 
+    //Setters
     public void setUserId(int userId) {
         this.userId = userId;
     }
