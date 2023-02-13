@@ -1,8 +1,6 @@
 package com.example.healably.accounts.controller;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.CursorIndexOutOfBoundsException;
 
 import com.example.healably.R;
@@ -18,10 +16,12 @@ public class UserController {
 
     Context context;
     HealablySQLiteHelper healablySQLiteHelper;
+    String invalidDataText;
 
     public UserController(Context context) {
         this.context = context;
         this.healablySQLiteHelper = new HealablySQLiteHelper(this.context);
+        this.invalidDataText = "";
     }
 
     /**
@@ -51,9 +51,8 @@ public class UserController {
      * @param dateOfBirth Data de nascimento do utilizador
      * @param email Email do utilizador
      * @param password Password do utilizador
-     * @return True se o registo ocorreu com sucesso, False caso contrário
-     * @throws Exception Se ocorrer um erro no BD*/
-    public boolean signupUser(String name, String gender, String dateOfBirth, String email, String password) throws Exception{
+     * @return True se o registo ocorreu com sucesso, False caso contrário*/
+    public boolean signupUser(String name, String gender, String dateOfBirth, String email, String password){
         User user = new User(name, gender, dateOfBirth, email, password);
 
         boolean validName = user.isNameValid();
@@ -68,8 +67,7 @@ public class UserController {
                 return true;
             }
         } else{
-            String text = invalidDataText(validName, validGender, validDateOfBirth, validEmail, validPassword);
-            showInvalidDataDialog(text);
+            setInvalidDataText(validName, validGender, validDateOfBirth, validEmail, validPassword);
         }
 
         return false;
@@ -91,32 +89,19 @@ public class UserController {
         return false;
     }
 
-    /**
-     * Apresenta uma caixa de diálogo com descrição dos dados inválidos
-     * @param text Texto a apresentar na caixa*/
-    private void showInvalidDataDialog(String text){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(text)
-                .setTitle(R.string.invalid_data)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    public String getInvalidDataText() {
+        return invalidDataText;
     }
 
     /**
-     * Contrói o texto de dados inválidos, com base na validação dos campos introduzidos
+     * Constrói o texto de dados inválidos, com base na validação dos campos introduzidos
      * @param validName Nome válido
      * @param validGender Género válido
      * @param validDateOfBirth Data de nascimento válida
      * @param validEmail Email válido
-     * @param validPassword Password válida
-     * @return Texto de dados inválidos*/
-    private String invalidDataText(boolean validName, boolean validGender, boolean validDateOfBirth, boolean validEmail, boolean validPassword) {
+     * @param validPassword Password válida*/
+    private void setInvalidDataText(boolean validName, boolean validGender, boolean validDateOfBirth, boolean validEmail, boolean validPassword) {
+
         String output = context.getString(R.string.correct_fields) + "\n";
 
         if (!validName)
@@ -130,6 +115,6 @@ public class UserController {
         if (!validPassword)
             output += "\n" + context.getString(R.string.password) + " - " + context.getString(R.string.password_requirements);
 
-        return output;
+        invalidDataText = output;
     }
 }

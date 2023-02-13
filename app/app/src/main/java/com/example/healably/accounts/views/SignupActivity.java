@@ -59,22 +59,13 @@ public class SignupActivity extends AppCompatActivity {
 
                 try {
                     if (userController.signupUser(name, gender, dateOfBirth, email, password)) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                        builder.setMessage(R.string.signedup_successfully)
-                                .setTitle(R.string.success)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        editEmail.setText("");
-                                        editPassword.setText("");
-                                        finish();
-                                    }
-                                });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                        showMessage(getString(R.string.signedup_successfully), getString(R.string.success), "CLOSE_APP");
+                    } else{
+                        String text = userController.getInvalidDataText();
+                        showMessage(text, getString(R.string.invalid_data), "DISMISS");
                     }
                 } catch (Exception e) {
-                    Log.d("EXCEPTION", e.getMessage());
+                    showMessage(e.getMessage(), getString(R.string.error), "DISMISS");
                 }
             }
         });
@@ -104,5 +95,27 @@ public class SignupActivity extends AppCompatActivity {
             return ((RadioButton) findViewById(selectedId)).getText().toString();
 
         return "";
+    }
+
+    private void showMessage(String message, String title, String action){
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+        builder.setMessage(message)
+                .setTitle(title)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        messageOnClick(action, dialog);
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void messageOnClick(String action, DialogInterface dialog){
+        if(action.equals("DISMISS")){
+            dialog.dismiss();
+        } else if(action.equals("CLOSE_APP")){
+            finish();
+        }
     }
 }
