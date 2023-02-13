@@ -35,7 +35,7 @@ public class UserController {
 
         if (user.isEmailValid() && user.isPasswordValid()) {
             User userToLogin = healablySQLiteHelper.getUserByLogin(user.getEmail(), user.getPassword());
-            healablySQLiteHelper.logoutUser();
+            healablySQLiteHelper.logoutUser(); //TODO: Implement this on logout feature
             healablySQLiteHelper.loginUser(userToLogin);
 
             return true;
@@ -52,11 +52,28 @@ public class UserController {
      * @param email Email do utilizador
      * @param password Password do utilizador
      * @return True se o registo ocorreu com sucesso, False caso contrário*/
-    public boolean signupUser(String name, String gender, String dateOfBirth, String email, String password){
-        User user = new User(name, gender, dateOfBirth, email, password);
+    public boolean signupUser(String name, int gender, String dateOfBirth, String email, String password){
+
+        String genderText;
+
+        switch(gender){
+            case 1:
+                genderText = "MALE";
+                break;
+            case 2:
+                genderText = "FEMALE";
+                break;
+            case 3:
+                genderText = "OTHER";
+                break;
+            default:
+                genderText = "";
+        }
+
+        User user = new User(name, genderText, dateOfBirth, email, password);
 
         boolean validName = user.isNameValid();
-        boolean validGender = !gender.isEmpty();
+        boolean validGender = !genderText.isEmpty();
         boolean validDateOfBirth = !dateOfBirth.isEmpty();
         boolean validEmail = user.isEmailValid();
         boolean validPassword = user.isPasswordValid();

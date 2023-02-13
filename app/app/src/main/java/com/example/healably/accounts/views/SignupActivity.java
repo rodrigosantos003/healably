@@ -19,6 +19,7 @@ import com.example.healably.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -42,7 +43,9 @@ public class SignupActivity extends AppCompatActivity {
         editDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SignupActivity.this, pickedDateOfBirth(), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(SignupActivity.this, pickedDateOfBirth(), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+                datePickerDialog.show();
             }
         });
 
@@ -50,7 +53,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = editName.getText().toString();
-                String gender = selectedGender();
+                int gender = ((RadioGroup) findViewById(R.id.signup_rg_gender)).getCheckedRadioButtonId();
                 String dateOfBirth = editDateOfBirth.getText().toString();
                 String email = editEmail.getText().toString();
                 String password = editPassword.getText().toString();
@@ -59,7 +62,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 try {
                     if (userController.signupUser(name, gender, dateOfBirth, email, password)) {
-                        showMessage(getString(R.string.signedup_successfully), getString(R.string.success), "CLOSE_APP");
+                        showMessage(getString(R.string.signedup_successfully), getString(R.string.success), "CLOSE_ACTIVITY");
                     } else{
                         String text = userController.getInvalidDataText();
                         showMessage(text, getString(R.string.invalid_data), "DISMISS");
@@ -89,14 +92,6 @@ public class SignupActivity extends AppCompatActivity {
         editDateOfBirth.setText(dateFormat.format(calendar.getTime()));
     }
 
-    private String selectedGender() {
-        int selectedId = ((RadioGroup) findViewById(R.id.signup_rg_gender)).getCheckedRadioButtonId();
-        if (selectedId != -1)
-            return ((RadioButton) findViewById(selectedId)).getText().toString();
-
-        return "";
-    }
-
     private void showMessage(String message, String title, String action){
         AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
         builder.setMessage(message)
@@ -114,7 +109,7 @@ public class SignupActivity extends AppCompatActivity {
     private void messageOnClick(String action, DialogInterface dialog){
         if(action.equals("DISMISS")){
             dialog.dismiss();
-        } else if(action.equals("CLOSE_APP")){
+        } else if(action.equals("CLOSE_ACTIVITY")){
             finish();
         }
     }
