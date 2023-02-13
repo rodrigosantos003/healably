@@ -34,4 +34,5 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="abdominal_perimeter">Abdominal Perimeter</string>
+    <string name="no_data_available">No data available</string>
 </resources>
