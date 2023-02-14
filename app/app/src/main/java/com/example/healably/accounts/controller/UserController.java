@@ -97,13 +97,8 @@ public class UserController {
      * */
     private boolean userExists(User user){
         List<User> users = healablySQLiteHelper.getAllUsers();
-        for(User item : users){
-            if (item.getEmail().equals(user.getEmail())) {
-                return true;
-            }
-        }
 
-        return false;
+        return users.contains(user);
     }
 
     public String getInvalidDataText() {

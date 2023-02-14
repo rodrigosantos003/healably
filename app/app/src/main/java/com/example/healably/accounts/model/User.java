@@ -127,4 +127,23 @@ public class User {
     public String toString(){
         return "User: " + id + ", " + name + ", " + email;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final User other = (User) obj;
+
+        if (this.email != other.email) {
+            return false;
+        }
+
+        return true;
+    }
 }
