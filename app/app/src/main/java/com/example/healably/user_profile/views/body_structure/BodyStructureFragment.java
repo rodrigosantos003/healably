@@ -2,6 +2,8 @@ package com.example.healably.user_profile.views.body_structure;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +13,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.healably.R;
+import com.example.healably.accounts.views.SignupActivity;
 import com.example.healably.user_profile.controller.UserDataController;
 
 public class BodyStructureFragment extends Fragment {
@@ -36,7 +40,14 @@ public class BodyStructureFragment extends Fragment {
 
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
-        userDataController.showBMIResult();
+        userDataController.showBodyStructure();
+
+        ((Button) view.findViewById(R.id.bodyStructure_btn_add_value)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Show activity to add a value
+            }
+        });
     }
 
     @Override

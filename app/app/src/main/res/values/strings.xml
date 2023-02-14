@@ -139,4 +139,12 @@
         Your Heart Rate is on an extremely high value, which means that your heart is pumping <b>way too harder</b> than the recommended for your body.
         You have <b>extreme</b> high risk of suffering a Heart Attack, so call 911 <b>IMMEDIATELY</b>.
     </string>
+    <string name="add_value">Add Value</string>
+    <string name="bmi">BMI</string>
+    <string name="date">Date</string>
+    <string name="value">Value</string>
+    <string name="kg_m2" translatable="false">Kg/m<sup>2</sup></string>
+    <string name="kg" translatable="false">Kg</string>
+    <string name="cm" translatable="false">cm</string>
+    <string name="m" translatable="false">m</string>
 </resources>

@@ -143,4 +143,8 @@
         do que o recomendado para o seu corpo.
         Tem rsico <b>extremo</b> de sofrer um Ataque Cardíaco, então ligue 112 <b>IMEDIATAMENTE</b>.
     </string>
+    <string name="add_value">Adicionar Valor</string>
+    <string name="bmi">IMC</string>
+    <string name="date">Data</string>
+    <string name="value">Valor</string>
 </resources>

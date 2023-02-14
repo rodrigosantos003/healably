@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bodyStructure_guidelineBottom"
@@ -45,18 +45,18 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <TextView
-        android:id="@+id/imc_label"
+        android:id="@+id/lbl_bmi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="IMC"
+        android:text="@string/bmi"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/include" />
 
     <TextView
-        android:id="@+id/imc_valor"
+        android:id="@+id/bmi_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="18"
@@ -64,14 +64,15 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imc_label" />
+        app:layout_constraintTop_toBottomOf="@id/lbl_bmi" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_Peso"
+        android:id="@+id/card_Weight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/card_Altura"
+        android:backgroundTint="@color/black_coral"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/card_Height"
         app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/bodyStructure_guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/bodyStructure_guidelineTop">
@@ -82,68 +83,69 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/bodyStructure_peso_titulo"
+                android:id="@+id/bodyStructure_weight_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Peso"
+                android:text="@string/weight"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/bodyStructure_peso_lblData"
+                android:id="@+id/bodyStructure_lbl_weightDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Data"
+                android:text="@string/date"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@id/bodyStructure_peso_lblValor"
+                app:layout_constraintEnd_toStartOf="@id/bodyStructure_lbl_weightValue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_peso_titulo" />
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_weight_title" />
 
             <TextView
-                android:id="@+id/bodyStructure_peso_lblValor"
+                android:id="@+id/bodyStructure_lbl_weightValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Valor"
+                android:text="@string/value"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/bodyStructure_peso_lblData"
-                app:layout_constraintTop_toTopOf="@id/bodyStructure_peso_lblData" />
+                app:layout_constraintStart_toEndOf="@id/bodyStructure_lbl_weightDate"
+                app:layout_constraintTop_toTopOf="@id/bodyStructure_lbl_weightDate" />
 
             <TextView
-                android:id="@+id/bodyStructure_peso_valorData"
+                android:id="@+id/bodyStructure_weight_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10/02/2023"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@id/bodyStructure_peso_lblData"
-                app:layout_constraintStart_toStartOf="@id/bodyStructure_peso_lblData"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_peso_lblData" />
+                app:layout_constraintEnd_toEndOf="@id/bodyStructure_lbl_weightDate"
+                app:layout_constraintStart_toStartOf="@id/bodyStructure_lbl_weightDate"
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_lbl_weightDate" />
 
             <TextView
-                android:id="@+id/bodyStructure_peso_valorPeso"
+                android:id="@+id/bodyStructure_weight_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="60kg"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@id/bodyStructure_peso_lblValor"
-                app:layout_constraintStart_toStartOf="@id/bodyStructure_peso_lblValor"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_peso_lblValor" />
+                app:layout_constraintEnd_toEndOf="@id/bodyStructure_lbl_weightValue"
+                app:layout_constraintStart_toStartOf="@id/bodyStructure_lbl_weightValue"
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_lbl_weightValue" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_Altura"
+        android:id="@+id/card_Height"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/card_PerimetroAbdominal"
+        android:backgroundTint="@color/black_coral"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/card_AbdominalPerimeter"
         app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/bodyStructure_guidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/card_Peso">
+        app:layout_constraintTop_toBottomOf="@id/card_Weight">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -151,68 +153,68 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/bodyStructure_altura_titulo"
+                android:id="@+id/bodyStructure_height_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Altura"
+                android:text="@string/height"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/bodyStructure_altura_lblData"
+                android:id="@+id/bodyStructure_lbl_heightDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Data"
+                android:text="@string/date"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@id/bodyStructure_altura_lblValor"
+                app:layout_constraintEnd_toStartOf="@id/bodyStructure_lbl_heightValue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_altura_titulo" />
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_height_title" />
 
             <TextView
-                android:id="@+id/bodyStructure_altura_lblValor"
+                android:id="@+id/bodyStructure_lbl_heightValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Valor"
+                android:text="@string/value"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/bodyStructure_altura_lblData"
-                app:layout_constraintTop_toTopOf="@id/bodyStructure_altura_lblData" />
+                app:layout_constraintStart_toEndOf="@id/bodyStructure_lbl_heightDate"
+                app:layout_constraintTop_toTopOf="@id/bodyStructure_lbl_heightDate" />
 
             <TextView
-                android:id="@+id/bodyStructure_altura_valorData"
+                android:id="@+id/bodyStructure_height_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10/02/2023"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@id/bodyStructure_altura_lblData"
-                app:layout_constraintStart_toStartOf="@id/bodyStructure_altura_lblData"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_altura_lblData" />
+                app:layout_constraintEnd_toEndOf="@id/bodyStructure_lbl_heightDate"
+                app:layout_constraintStart_toStartOf="@id/bodyStructure_lbl_heightDate"
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_lbl_heightDate" />
 
             <TextView
-                android:id="@+id/bodyStructure_altura_valorPeso"
+                android:id="@+id/bodyStructure_height_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1.65m"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@id/bodyStructure_altura_lblValor"
-                app:layout_constraintStart_toStartOf="@id/bodyStructure_altura_lblValor"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_altura_lblValor" />
+                app:layout_constraintEnd_toEndOf="@id/bodyStructure_lbl_heightValue"
+                app:layout_constraintStart_toStartOf="@id/bodyStructure_lbl_heightValue"
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_lbl_heightValue" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_PerimetroAbdominal"
+        android:id="@+id/card_AbdominalPerimeter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/black_coral"
         app:layout_constraintBottom_toTopOf="@+id/bodyStructure_guidelineBottom"
         app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/bodyStructure_guidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/card_Altura">
+        app:layout_constraintTop_toBottomOf="@id/card_Height">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -220,63 +222,64 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/bodyStructure_perimetroabdominal_titulo"
+                android:id="@+id/bodyStructure_abdominalPerimeter_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Perimetro Abdominal"
+                android:text="@string/abdominal_perimeter"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/bodyStructure_perimetroabdominal_lblData"
+                android:id="@+id/bodyStructure_lbl_abdominalPerimeterDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Data"
+                android:text="@string/date"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@id/bodyStructure_perimetroabdominal_lblValor"
+                app:layout_constraintEnd_toStartOf="@id/bodyStructure_lbl_abdominalPerimeterValue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_perimetroabdominal_titulo" />
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_abdominalPerimeter_title" />
 
             <TextView
-                android:id="@+id/bodyStructure_perimetroabdominal_lblValor"
+                android:id="@+id/bodyStructure_lbl_abdominalPerimeterValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Valor"
+                android:text="@string/value"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/bodyStructure_perimetroabdominal_lblData"
-                app:layout_constraintTop_toTopOf="@id/bodyStructure_perimetroabdominal_lblData" />
+                app:layout_constraintStart_toEndOf="@id/bodyStructure_lbl_abdominalPerimeterDate"
+                app:layout_constraintTop_toTopOf="@id/bodyStructure_lbl_abdominalPerimeterDate" />
 
             <TextView
-                android:id="@+id/bodyStructure_perimetroabdominal_valorData"
+                android:id="@+id/bodyStructure_abdominalPerimeter_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10/02/2023"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@id/bodyStructure_perimetroabdominal_lblData"
-                app:layout_constraintStart_toStartOf="@id/bodyStructure_perimetroabdominal_lblData"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_perimetroabdominal_lblData" />
+                app:layout_constraintEnd_toEndOf="@id/bodyStructure_lbl_abdominalPerimeterDate"
+                app:layout_constraintStart_toStartOf="@id/bodyStructure_lbl_abdominalPerimeterDate"
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_lbl_abdominalPerimeterDate" />
 
             <TextView
-                android:id="@+id/bodyStructure_perimetroabdominal_valorPeso"
+                android:id="@+id/bodyStructure_abdominalPerimeter_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="50cm"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@id/bodyStructure_perimetroabdominal_lblValor"
-                app:layout_constraintStart_toStartOf="@id/bodyStructure_perimetroabdominal_lblValor"
-                app:layout_constraintTop_toBottomOf="@id/bodyStructure_perimetroabdominal_lblValor" />
+                app:layout_constraintEnd_toEndOf="@id/bodyStructure_lbl_abdominalPerimeterValue"
+                app:layout_constraintStart_toStartOf="@id/bodyStructure_lbl_abdominalPerimeterValue"
+                app:layout_constraintTop_toBottomOf="@id/bodyStructure_lbl_abdominalPerimeterValue" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_editar"
+        android:id="@+id/bodyStructure_btn_add_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="@string/add_value"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"

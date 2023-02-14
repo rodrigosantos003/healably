@@ -1,5 +1,6 @@
 package com.example.healably.user_profile.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
@@ -81,14 +82,14 @@ public class UserDataController {
      * @param valueType Tipo de dado pretendido
      * @return Valor pretendido
      */
-    private double getValue(String valueType) {
+    private UserData getDataOfType(String valueType) {
         for (UserData item : getData()) {
             if (item.getValueType().equals(valueType)) {
-                return item.getValue();
+                return item;
             }
         }
 
-        return 0.0;
+        return null;
     }
 
     private List<UserData> getListOfValues(String valueType) {
@@ -126,23 +127,68 @@ public class UserDataController {
     /**
      * Apresenta o resultado do IMC
      */
-    public void showBMIResult() {
-        double bmi = calculateBMI();
+    public void showBodyStructure() {
+        UserData weight = getDataOfType(WEIGHT);
+        UserData height = getDataOfType(HEIGHT);
+        UserData abdominalPerimeter = getDataOfType(ABDOMINAL_PERIMETER);
 
-        TextView bmiValue = view.findViewById(R.id.imc_valor);
+        double weightValue = weight != null ? weight.getValue() : 0.0;
+        double heightValue = height != null ? height.getValue() : 0.0;
+        double abdominalPerimeterValue = abdominalPerimeter != null ? abdominalPerimeter.getValue() : 0.0;
+        double bmi = calculateBMI(weightValue, heightValue);
 
-        if (bmi < LOW_BMI) {
-            bmiValue.setTextColor(context.getResources().getColor(R.color.powder_blue, null));
-        } else if (bmi >= LOW_BMI && bmi <= NORMAL_BMI) {
-            bmiValue.setTextColor(context.getResources().getColor(R.color.yellow, null));
-        } else if (bmi >= HIGH_BMI) {
-            bmiValue.setTextColor(context.getResources().getColor(R.color.red, null));
+        TextView bmiValueText = view.findViewById(R.id.bmi_value);
+        TextView weightValueText = view.findViewById(R.id.bodyStructure_weight_value);
+        TextView heightValueText = view.findViewById(R.id.bodyStructure_height_value);
+        TextView abdominalPerimeterValueText = view.findViewById(R.id.bodyStructure_abdominalPerimeter_value);
+        TextView weightDateText = view.findViewById(R.id.bodyStructure_weight_date);
+        TextView heightDateText = view.findViewById(R.id.bodyStructure_height_date);
+        TextView abdominalPerimeterDateText = view.findViewById(R.id.bodyStructure_abdominalPerimeter_date);
+
+        showBMIResult(bmi, bmiValueText);
+
+        if(weightValue > 0.0){
+            String text = String.format("%.2f", weightValue) + context.getString(R.string.kg);
+            weightValueText.setText(text);
+            weightDateText.setText(weight.getDate());
+        } else{
+            weightValueText.setText("0.0");
+            weightDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
 
+        if(heightValue > 0.0){
+            String text = String.format("%.2f", heightValue) + context.getString(R.string.m);
+            heightValueText.setText(text);
+            heightDateText.setText(height.getDate());
+        } else{
+            heightValueText.setText("0.0");
+            heightDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        }
+
+        if(abdominalPerimeterValue > 0.0){
+            String text = String.format("%.2f", abdominalPerimeterValue) + context.getString(R.string.cm);
+            abdominalPerimeterValueText.setText(text);
+            abdominalPerimeterDateText.setText(abdominalPerimeter.getDate());
+        } else{
+            abdominalPerimeterValueText.setText("0.0");
+            abdominalPerimeterDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        }
+    }
+
+    private void showBMIResult(double bmi, TextView tv){
         if(bmi > 0.0){
-            bmiValue.setText(String.format("%.2f", bmi));
+            if (bmi < LOW_BMI) {
+                tv.setTextColor(context.getResources().getColor(R.color.powder_blue, null));
+            } else if (bmi <= NORMAL_BMI) {
+                tv.setTextColor(context.getResources().getColor(R.color.yellow, null));
+            } else if (bmi >= HIGH_BMI) {
+                tv.setTextColor(context.getResources().getColor(R.color.red, null));
+            }
+
+            String text = String.format("%.2f", bmi) + R.string.kg_m2;
+            tv.setText(text);
         } else {
-            bmiValue.setText(context.getString(R.string.no_data_available));
+            tv.setText(context.getString(R.string.no_data_available));
         }
     }
 
@@ -151,16 +197,19 @@ public class UserDataController {
      *
      * @return Valor do IMC
      */
-    private double calculateBMI() {
-        double weight = getValue(WEIGHT);
-        double height = getValue(HEIGHT);
-
+    private double calculateBMI(double weight, double height) {
         return weight / (height * height);
     }
 
     public void bodyStructureReport() {
-        double bmi = calculateBMI();
-        double abdominalPerimeter = getValue(ABDOMINAL_PERIMETER);
+        UserData weight = getDataOfType(WEIGHT);
+        UserData height = getDataOfType(HEIGHT);
+        UserData abdominalPerimeter = getDataOfType(ABDOMINAL_PERIMETER);
+
+        double weightValue = weight != null ? weight.getValue() : 0.0;
+        double heightValue = height != null ? height.getValue() : 0.0;
+        double bmi = calculateBMI(weightValue, heightValue);
+        double abdominalPerimeterValue = abdominalPerimeter != null ? abdominalPerimeter.getValue() : 0.0;
 
         String title = "";
         String text = "";
@@ -178,10 +227,10 @@ public class UserDataController {
 
         switch (user.getGender()) {
             case "MALE":
-                maleAbdominalPerimeterAnalysis(abdominalPerimeter);
+                maleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
                 break;
             case "FEMALE":
-                femaleAbdominalPerimeterAnalysis(abdominalPerimeter);
+                femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
                 break;
             case "OTHER":
                 //TODO: Write text explaining abdominal perimeter for both genders
