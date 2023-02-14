@@ -32,6 +32,7 @@ public class UserDataController {
     public static final String BLOOD_SUGAR = "BLOOD SUGAR";
     public static final String SYS_BLOOD_PRESSURE = "SYSTOLIC BLOOD PRESSURE";
     public static final String DIA_BLOOD_PRESSURE = "DIASTOLIC BLOOD PRESSURE";
+    public static final String HEART_RATE = "HEART RATE";
 
     //Valores de Referência
     private static final double LOW_BMI = 18.5;
@@ -161,12 +162,18 @@ public class UserDataController {
         double bmi = calculateBMI();
         double abdominalPerimeter = getValue(ABDOMINAL_PERIMETER);
 
+        String title = "";
+        String text = "";
+
         if (bmi < LOW_BMI) {
-            //TODO: Write text for low BMI
+            title = context.getString(R.string.low_bmi);
+            text = context.getString(R.string.low_bmi_description);
         } else if (bmi >= LOW_BMI && bmi <= NORMAL_BMI) {
-            //TODO: Write text for normal BMI
+            title = context.getString(R.string.normal_bmi);
+            text = context.getString(R.string.normal_bmi_description);
         } else if (bmi >= HIGH_BMI) {
-            //TODO: Write text for high BMI
+            title = context.getString(R.string.high_bmi);
+            text = context.getString(R.string.high_bmi_description);
         }
 
         switch (user.getGender()) {
@@ -183,22 +190,34 @@ public class UserDataController {
     }
 
     private void maleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
+        String title = "";
+        String text = "";
+
         if (abdominalPerimeter <= MALE_ABDOMINAL_PERIMETER) {
-            //TODO: Write text for normal abdominal perimeter
+            title = context.getString(R.string.normal_ap);
+            text = context.getString(R.string.normal_ap_description);
         } else if (abdominalPerimeter > MALE_ABDOMINAL_PERIMETER && abdominalPerimeter < HIGH_MALE_ABDOMINAL_PERIMETER) {
-            //TODO: Write text for augmented abdominal perimeter
+            title = context.getString(R.string.augmented_ap);
+            text = context.getString(R.string.augmented_ap_description);
         } else if (abdominalPerimeter >= HIGH_MALE_ABDOMINAL_PERIMETER) {
-            //TODO: Write text for concerning abdominal perimeter (look for a doctor)
+            title = context.getString(R.string.high_ap);
+            text = context.getString(R.string.high_ap_description);
         }
     }
 
     private void femaleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
+        String title = "";
+        String text = "";
+
         if (abdominalPerimeter <= FEMALE_ABDOMINAL_PERIMETER) {
-            //TODO: Write text for normal abdominal perimeter
+            title = context.getString(R.string.normal_ap);
+            text = context.getString(R.string.normal_ap_description);
         } else if (abdominalPerimeter > FEMALE_ABDOMINAL_PERIMETER && abdominalPerimeter < HIGH_FEMALE_ABDOMINAL_PERIMETER) {
-            //TODO: Write text for augmented abdominal perimeter
+            title = context.getString(R.string.augmented_ap);
+            text = context.getString(R.string.augmented_ap_description);
         } else if (abdominalPerimeter >= HIGH_FEMALE_ABDOMINAL_PERIMETER) {
-            //TODO: Write text for concerning abdominal perimeter (look for a doctor)
+            title = context.getString(R.string.high_ap);
+            text = context.getString(R.string.high_ap_description);
         }
     }
 
@@ -213,12 +232,18 @@ public class UserDataController {
 
         average /= bloodSugarValues.size();
 
+        String title = "";
+        String text = "";
+
         if (average < NORMAL_BLOOD_SUGAR) {
-            //TODO: Write text for lower blood sugar than recommended
+            title = context.getString(R.string.low_bs);
+            text = context.getString(R.string.low_bs_description);
         } else if (average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR) {
-            //TODO: Write text for normal blood sugar
+            title = context.getString(R.string.normal_bs);
+            text = context.getString(R.string.normal_bs_description);
         } else {
-            //TODO: Write text for high blood sugar
+            title = context.getString(R.string.high_bs);
+            text = context.getString(R.string.high_bs_description);
         }
     }
 
@@ -239,22 +264,64 @@ public class UserDataController {
         }
         diaAverage /= diaBloodPressureValues.size();
 
+        String title = "";
+        String text = "";
+
         if (userAge() <= 80) {
             if (sysAverage < NORMAL_SYS_BP && diaAverage < NORMAL_DIA_BP) {
-                //TODO: Write text for low blood pressure
+                title = context.getString(R.string.low_bp);
+                text = context.getString(R.string.low_bp_description);
             } else if (sysAverage >= NORMAL_SYS_BP && sysAverage < HIGH_BLOOD_SUGAR) {
                 if (diaAverage >= NORMAL_DIA_BP && diaAverage < HIGH_DIA_BP) {
-                    //TODO: Write text for normal blood pressure
+                    title = context.getString(R.string.normal_bp);
+                    text = context.getString(R.string.normal_bp_description);
                 }
             } else if (sysAverage >= HIGH_SYS_BP && diaAverage >= HIGH_DIA_BP) {
-                //TODO: Write text for high blood pressure
+                title = context.getString(R.string.high_bp);
+                text = context.getString(R.string.high_bp_description);
             }
         } else{
             if(sysAverage < ELDERLY_SYS_BP && diaAverage <= NORMAL_DIA_BP){
-                //TODO: Write text for normal blood pressure
+                title = context.getString(R.string.normal_bp);
+                text = context.getString(R.string.normal_bp_description);
             } else{
-                //TODO: Write text for normal high pressure
+                title = context.getString(R.string.high_bp);
+                text = context.getString(R.string.high_bp_description);
             }
+        }
+    }
+
+    public void heartRateReport(){
+        List<UserData> heartRateValues = getListOfValues(HEART_RATE);
+
+        double average = 0.0;
+
+        for(UserData heartRate : heartRateValues){
+            average += heartRate.getValue();
+        }
+
+        average /= heartRateValues.size();
+
+        //Fórmula de Tanaka
+        double maximumHeartRate = 208 - (0.7 * userAge());
+
+        String title = "";
+        String text = "";
+
+        if(average < 60){
+            title = context.getString(R.string.low_hr);
+            text = context.getString(R.string.low_hr_description);
+        } else if(average >= 60 && average <= 100){
+            title = context.getString(R.string.normal_hr);
+            text = context.getString(R.string.normal_hr_description);
+        } else{
+            title = context.getString(R.string.high_hr);
+            text = context.getString(R.string.high_hr_description);
+        }
+
+        if(average >= maximumHeartRate){
+            title = context.getString(R.string.extreme_hr);
+            text = context.getString(R.string.extreme_hr_description);
         }
     }
 }
