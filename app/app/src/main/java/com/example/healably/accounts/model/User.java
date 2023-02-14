@@ -140,7 +140,7 @@ public class User {
 
         final User other = (User) obj;
 
-        if (this.email != other.email) {
+        if (!this.email.equals(other.email)) {
             return false;
         }
 

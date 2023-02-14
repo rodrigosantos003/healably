@@ -83,6 +83,9 @@ public class UserController {
                 healablySQLiteHelper.addUser(user);
                 return true;
             }
+            else{
+                this.invalidDataText = context.getString(R.string.user_already_exists);
+            }
         } else{
             setInvalidDataText(validName, validGender, validDateOfBirth, validEmail, validPassword);
         }
