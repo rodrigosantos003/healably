@@ -35,7 +35,6 @@ public class UserController {
 
         if (user.isEmailValid() && user.isPasswordValid()) {
             User userToLogin = healablySQLiteHelper.getUserByLogin(user.getEmail(), user.getPassword());
-            healablySQLiteHelper.logoutUser(); //TODO: Implement this on logout feature
             healablySQLiteHelper.loginUser(userToLogin);
 
             return true;

@@ -5,8 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
+import com.example.healably.accounts.model.User;
 import com.example.healably.accounts.views.LoginActivity;
+import com.example.healably.data.HealablySQLiteHelper;
+import com.example.healably.user_profile.model.UserData;
+
+import java.util.List;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,8 +25,19 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent it = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(it);
+                HealablySQLiteHelper healablySQLiteHelper = new HealablySQLiteHelper(SplashActivity.this);
+                try{
+                    User loggedUser = healablySQLiteHelper.getLoggedUser();
+                    if(loggedUser != null){
+                        Intent it = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(it);
+                    } else{
+                        Intent it = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(it);
+                    }
+                } catch (Exception e){
+                    Log.d("EXCEPTION", e.getMessage());
+                }
 
                 finish();
             }
