@@ -29,6 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText editPassword;
 
     final Calendar calendar = Calendar.getInstance();
+    String gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,12 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        onGenderChanged();
+
         ((Button) findViewById(R.id.signup_bt_signup)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = editName.getText().toString();
-                int gender = ((RadioGroup) findViewById(R.id.signup_rg_gender)).getCheckedRadioButtonId();
                 String dateOfBirth = editDateOfBirth.getText().toString();
                 String email = editEmail.getText().toString();
                 String password = editPassword.getText().toString();
@@ -69,6 +71,28 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     showMessage(e.getMessage(), getString(R.string.error), "DISMISS");
+                }
+            }
+        });
+    }
+
+    private void onGenderChanged(){
+        ((RadioGroup) findViewById(R.id.signup_rg_gender)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rb_male:
+                        gender = "MALE";
+                        break;
+                    case R.id.rb_female:
+                        gender = "FEMALE";
+                        break;
+                    case R.id.rb_other:
+                        gender = "OTHER";
+                        break;
+                    default:
+                        gender = "";
+                        break;
                 }
             }
         });
