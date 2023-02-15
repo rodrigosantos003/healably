@@ -1,10 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gunmetal"
     tools:context=".user_profile.views.blood_sugar.BloodSugarFragment">
 
-    <include layout="@layout/user_text"/>
+    <include
+        android:id="@+id/include"
+        layout="@layout/user_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodSugar_guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodSugar_guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodSugar_guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodSugar_guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/lbl_hba1c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/hba1c"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/include" />
+
+    <TextView
+        android:id="@+id/hba1c_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6.5"
+        android:textColor="#FFEB3B"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/bloodSugar_guidelineTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lbl_hba1c" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_LastMeasurement"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gunmetal"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toBottomOf="@id/bloodSugar_guidelineTop"
+        app:layout_constraintBottom_toTopOf="@id/bloodSugar_guidelineBottom"
+        app:layout_constraintStart_toEndOf="@id/bloodSugar_guidelineStart"
+        app:layout_constraintEnd_toStartOf="@id/bloodSugar_guidelineEnd">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/bloodSugar_lastMeasurement_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_measurement"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/bloodSugar_lbl_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/date"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@id/bloodSugar_lbl_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bloodSugar_lastMeasurement_title" />
+
+            <TextView
+                android:id="@+id/bloodSugar_lbl_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/value"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/bloodSugar_lbl_date"
+                app:layout_constraintTop_toTopOf="@id/bloodSugar_lbl_date" />
+
+            <TextView
+                android:id="@+id/bloodSugar_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10/02/2023"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/bloodSugar_lbl_date"
+                app:layout_constraintStart_toStartOf="@id/bloodSugar_lbl_date"
+                app:layout_constraintTop_toBottomOf="@id/bloodSugar_lbl_date" />
+
+            <TextView
+                android:id="@+id/bloodSugar_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="70mg/dL"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/bloodSugar_lbl_value"
+                app:layout_constraintStart_toStartOf="@id/bloodSugar_lbl_value"
+                app:layout_constraintTop_toBottomOf="@id/bloodSugar_lbl_value" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/info_hba1c"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/approximated_hba1c"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/bloodSugar_guidelineBottom"
+        app:layout_constraintBottom_toTopOf="@id/bloodSugar_btn_addValue"
+        app:layout_constraintStart_toEndOf="@id/bloodSugar_guidelineStart"
+        app:layout_constraintEnd_toStartOf="@id/bloodSugar_guidelineEnd"/>
+
+    <Button
+        android:id="@+id/bloodSugar_btn_addValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_value"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/info_hba1c"
+        app:layout_constraintEnd_toEndOf="@id/bloodSugar_guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/bloodSugar_guidelineStart" />
+</androidx.constraintlayout.widget.ConstraintLayout>

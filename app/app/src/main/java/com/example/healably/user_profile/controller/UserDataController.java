@@ -10,6 +10,8 @@ import com.example.healably.accounts.model.User;
 import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.user_profile.model.UserData;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -205,10 +207,13 @@ public class UserDataController {
         UserData bloodSugar = getDataOfType(BLOOD_SUGAR);
 
         double bloodSugarValue = bloodSugar != null ? bloodSugar.getValue() : 0.0;
+        double hba1c = calculateHbA1c();
 
-        /*
+        TextView hba1cText = (TextView) view.findViewById(R.id.hba1c_value);
         TextView bloodSugarValueText = (TextView) view.findViewById(R.id.bloodSugar_value);
         TextView bloodSugarDateText = (TextView) view.findViewById(R.id.bloodSugar_date);
+
+        showHbA1cResult(hba1c, hba1cText);
 
         if(bloodSugarValue > 0.0){
             String text = String.format("%.2f", bloodSugarValue) + context.getString(R.string.mg_dl);
@@ -218,8 +223,52 @@ public class UserDataController {
             bloodSugarValueText.setText("0.0");
             bloodSugarDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
-         */
     }
+
+    private double calculateHbA1c(){
+        List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
+
+        double average = 0.0;
+        double value = 0.0;
+
+        for (UserData bloodSugar : bloodSugarValues) {
+            average += bloodSugar.getValue();
+        }
+        average /= bloodSugarValues.size();
+
+        if(average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR)
+            value = 4;
+        else if(average >= HIGH_BLOOD_SUGAR && average < 140)
+            value = 6;
+        else if(average >= 140 && average < 154)
+            value = 6.5;
+        else if(average >= 154 && average < 169)
+            value = 7;
+        else if(average >= 169 && average < 183)
+            value = 7.5;
+        else if(average >= 183 && average < 197)
+            value = 8;
+        else if(average >= 197 && average < 212)
+            value = 8.5;
+        else if(average >= 212 && average < 226)
+            value = 9;
+        else if(average >= 226 && average < 240)
+            value = 9.5;
+        else if(average >= 240)
+            value = 10;
+
+        return value;
+    }
+
+    private void showHbA1cResult(double hba1c, TextView tv){
+        if(hba1c > 0.0){
+            String text = "~ " + String.format("%.2f", hba1c) + "%";
+            tv.setText(text);
+        } else {
+            tv.setText(context.getString(R.string.no_data_available));
+        }
+    }
+
     public void showBloodPressure(){
         UserData sysBloodPressure = getDataOfType(SYS_BLOOD_PRESSURE);
         UserData diaBloodPressure = getDataOfType(DIA_BLOOD_PRESSURE);
@@ -322,11 +371,11 @@ public class UserDataController {
         List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
 
         double average = 0.0;
+        double value = 0.0;
 
         for (UserData bloodSugar : bloodSugarValues) {
             average += bloodSugar.getValue();
         }
-
         average /= bloodSugarValues.size();
 
         String title = "";
