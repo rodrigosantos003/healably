@@ -35,6 +35,7 @@ public class BloodSugarFragment extends Fragment {
 
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
+        userDataController.showBloodSugar();
     }
 
     @Override

@@ -147,4 +147,6 @@
     <string name="kg" translatable="false">Kg</string>
     <string name="cm" translatable="false">cm</string>
     <string name="m" translatable="false">m</string>
+    <string name="mg_dl" translatable="false">mg/dL</string>
+    <string name="mm_hg">mm Hg</string>
 </resources>

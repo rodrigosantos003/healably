@@ -201,6 +201,49 @@ public class UserDataController {
         return weight / (height * height);
     }
 
+    public void showBloodSugar(){
+        UserData bloodSugar = getDataOfType(BLOOD_SUGAR);
+
+        double bloodSugarValue = bloodSugar != null ? bloodSugar.getValue() : 0.0;
+
+        /*
+        TextView bloodSugarValueText = (TextView) view.findViewById(R.id.bloodSugar_value);
+        TextView bloodSugarDateText = (TextView) view.findViewById(R.id.bloodSugar_date);
+
+        if(bloodSugarValue > 0.0){
+            String text = String.format("%.2f", bloodSugarValue) + context.getString(R.string.mg_dl);
+            bloodSugarValueText.setText(text);
+            bloodSugarDateText.setText(bloodSugar.getDate());
+        }else{
+            bloodSugarValueText.setText("0.0");
+            bloodSugarDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        }
+         */
+    }
+    public void showBloodPressure(){
+        UserData sysBloodPressure = getDataOfType(SYS_BLOOD_PRESSURE);
+        UserData diaBloodPressure = getDataOfType(DIA_BLOOD_PRESSURE);
+
+        double sysBloodPressureValue = sysBloodPressure != null ? sysBloodPressure.getValue() : 0.0;
+        double diaBloodPressureValue = diaBloodPressure != null ? diaBloodPressure.getValue() : 0.0;
+
+        /*
+        TextView bloodPressureValueText = (TextView) view.findViewById(R.id.bloodPressure_value);
+        TextView bloodPressureDateText = (TextView) view.findViewById(R.id.bloodPressure_date);
+
+        if(sysBloodPressureValue > 0.0 && diaBloodPressureValue > 0.0){
+            String sysText = String.format("%.0f", sysBloodPressureValue);
+            String diaText = String.format("%.0f", diaBloodPressureValue);
+            String text = sysText + "/" + diaText + context.getString(R.string.mm_hg);
+            bloodPressureValueText.setText(text);
+            bloodPressureDateText.setText(sysBloodPressure.getDate());
+        }else{
+            bloodPressureValueText.setText("0.0");
+            bloodPressureDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        }
+         */
+    }
+
     public void bodyStructureReport() {
         UserData weight = getDataOfType(WEIGHT);
         UserData height = getDataOfType(HEIGHT);
@@ -233,7 +276,7 @@ public class UserDataController {
                 femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
                 break;
             case "OTHER":
-                //TODO: Write text explaining abdominal perimeter for both genders
+                neutralAbdominalPerimeterAnalysis();
                 break;
         }
     }
@@ -268,6 +311,11 @@ public class UserDataController {
             title = context.getString(R.string.high_ap);
             text = context.getString(R.string.high_ap_description);
         }
+    }
+
+    private void neutralAbdominalPerimeterAnalysis(){
+        String title = context.getString(R.string.abdominal_perimeter);
+        String text = context.getString(R.string.neutral_ap_description);
     }
 
     public void bloodSugarReport() {

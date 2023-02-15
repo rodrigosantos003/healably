@@ -35,6 +35,7 @@ public class BloodPressureFragment extends Fragment {
 
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
+        userDataController.showBloodPressure();
     }
 
     @Override
