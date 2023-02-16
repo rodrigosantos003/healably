@@ -1,7 +1,5 @@
 package com.example.healably.user_profile.views;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -35,5 +33,4 @@ public class BloodPressureFragment extends Fragment {
         userDataController.setUserText();
         userDataController.showBloodPressure();
     }
-
 }

@@ -12,12 +12,14 @@ import com.example.healably.user_profile.model.UserData;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Controlador para a funcionalidade de Perfil de Utilizador
@@ -150,7 +152,7 @@ public class UserDataController {
         showBMIResult(bmi, bmiValueText);
 
         if(weightValue > 0.0){
-            String text = String.format("%.2f", weightValue) + context.getString(R.string.kg);
+            String text = String.format("%.2f", weightValue) + " " + context.getString(R.string.kg);
             weightValueText.setText(text);
             weightDateText.setText(weight.getDate());
         } else{
@@ -159,7 +161,7 @@ public class UserDataController {
         }
 
         if(heightValue > 0.0){
-            String text = String.format("%.2f", heightValue) + context.getString(R.string.m);
+            String text = String.format("%.2f", heightValue) + " " + context.getString(R.string.m);
             heightValueText.setText(text);
             heightDateText.setText(height.getDate());
         } else{
@@ -187,8 +189,9 @@ public class UserDataController {
                 tv.setTextColor(context.getResources().getColor(R.color.red, null));
             }
 
-            String text = String.format("%.2f", bmi) + R.string.kg_m2;
+            String text = String.format("%.2f", bmi) + " " + context.getString(R.string.kg_m2);
             tv.setText(text);
+
         } else {
             tv.setText(context.getString(R.string.no_data_available));
         }
@@ -200,7 +203,10 @@ public class UserDataController {
      * @return Valor do IMC
      */
     private double calculateBMI(double weight, double height) {
-        return weight / (height * height);
+        if(weight > 0.0 && height > 0.0)
+            return weight / (height * height);
+
+        return 0.0;
     }
 
     public void showBloodSugar(){
@@ -216,7 +222,7 @@ public class UserDataController {
         showHbA1cResult(hba1c, hba1cText);
 
         if(bloodSugarValue > 0.0){
-            String text = String.format("%.2f", bloodSugarValue) + context.getString(R.string.mg_dl);
+            String text = String.format("%.2f", bloodSugarValue) + " " + context.getString(R.string.mg_dl);
             bloodSugarValueText.setText(text);
             bloodSugarDateText.setText(bloodSugar.getDate());
         }else{
@@ -262,7 +268,7 @@ public class UserDataController {
 
     private void showHbA1cResult(double hba1c, TextView tv){
         if(hba1c > 0.0){
-            String text = "~ " + String.format("%.2f", hba1c) + "%";
+            String text = String.format("%.2f", hba1c) + " %";
             tv.setText(text);
         } else {
             tv.setText(context.getString(R.string.no_data_available));
