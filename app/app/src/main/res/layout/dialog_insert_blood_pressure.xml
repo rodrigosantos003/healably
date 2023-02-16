@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gunmetal"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/sys_bp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edit_sys_bp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="@string/value_hint"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/dia_bp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edit_dia_bp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="@string/value_hint"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/heart_rate"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edit_hr"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="@string/value_hint"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:inputType="numberDecimal" />
+</LinearLayout>

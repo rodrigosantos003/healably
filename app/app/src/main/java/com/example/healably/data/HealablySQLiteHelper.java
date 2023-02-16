@@ -317,7 +317,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
                         new String[]{String.valueOf(userId)}, // d. selections args
                         null, // e. group by
                         null, // f. having
-                        null, // g. order by
+                        "id DESC", // g. order by
                         null); // h. limit
 
         UserData userData = null;

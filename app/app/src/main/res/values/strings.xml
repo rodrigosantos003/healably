@@ -35,6 +35,26 @@
     <string name="weight">Weight</string>
     <string name="abdominal_perimeter">Abdominal Perimeter</string>
     <string name="no_data_available">No data available</string>
+    <string name="add_value">Add Value</string>
+    <string name="bmi">BMI</string>
+    <string name="date">Date</string>
+    <string name="value">Value</string>
+    <string name="kg_m2" translatable="false">Kg/m<sup>2</sup></string>
+    <string name="kg" translatable="false">Kg</string>
+    <string name="cm" translatable="false">cm</string>
+    <string name="m" translatable="false">m</string>
+    <string name="mg_dl" translatable="false">mg/dL</string>
+    <string name="mm_hg" translatable="false">mm Hg</string>
+    <string name="last_measurement">Last Measurement</string>
+    <string name="hba1c" translatable="false">HbA1c</string>
+    <string name="approximated_hba1c">&#x2139; The HbA1c value is on an approximated value. To know the exact value, please do de recommended blood test</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="value_hint">Enter a value</string>
+    <string name="value_type">Value Type</string>
+    <string name="sys_bp">Systolic Blood Pressure</string>
+    <string name="dia_bp">Diastolic Blood Pressure</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
     <!--REPORT STRINGS-->
     <!--BMI-->
@@ -139,20 +159,4 @@
         Your Heart Rate is on an extremely high value, which means that your heart is pumping <b>way too harder</b> than the recommended for your body.
         You have <b>extreme</b> high risk of suffering a Heart Attack, so call 911 <b>IMMEDIATELY</b>.
     </string>
-    <string name="add_value">Add Value</string>
-    <string name="bmi">BMI</string>
-    <string name="date">Date</string>
-    <string name="value">Value</string>
-    <string name="kg_m2" translatable="false">Kg/m<sup>2</sup></string>
-    <string name="kg" translatable="false">Kg</string>
-    <string name="cm" translatable="false">cm</string>
-    <string name="m" translatable="false">m</string>
-    <string name="mg_dl" translatable="false">mg/dL</string>
-    <string name="mm_hg" translatable="false">mm Hg</string>
-    <string name="last_measurement">Last Measurement</string>
-    <string name="hba1c" translatable="false">HbA1c</string>
-    <string name="approximated_hba1c">&#x2139; The HbA1c value is on an approximated value. To know the exact value, please do de recommended blood test</string>
-    <string name="heart_rate">Heart Rate</string>
-    <string name="value_hint">Enter a value</string>
-    <string name="value_type">Value Type</string>
 </resources>

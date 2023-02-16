@@ -2,6 +2,8 @@ package com.example.healably.user_profile.views;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,11 +13,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.example.healably.R;
 import com.example.healably.user_profile.controller.UserDataController;
 
 public class BloodSugarFragment extends Fragment {
+
+    UserDataController userDataController;
+    EditText valueText;
 
     public static BloodSugarFragment newInstance() {
         return new BloodSugarFragment();
@@ -31,9 +39,53 @@ public class BloodSugarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        UserDataController userDataController = new UserDataController(getContext(), view);
+        userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
         userDataController.showBloodSugar();
+
+        ((Button) view.findViewById(R.id.bloodSugar_btn_addValue)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog = onCreateDialog(savedInstanceState);
+                dialog.show();
+            }
+        });
     }
 
+
+    public AlertDialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // Get the layout inflater
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(inflater.inflate(R.layout.dialog_insert_blood_sugar, null))
+                .setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        double value = Double.parseDouble(valueText.getText().toString());
+                        userDataController.addValue(UserDataController.BLOOD_SUGAR, value);
+                        userDataController.showBloodSugar();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getWindow().setBackgroundDrawableResource(R.color.gunmetal);
+
+                valueText = (EditText) dialog.findViewById(R.id.bloodSugar_edit_value);
+            }
+        });
+
+        return dialog;
+    }
 }

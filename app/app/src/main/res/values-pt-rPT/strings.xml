@@ -35,6 +35,19 @@
     <string name="weight">Peso</string>
     <string name="abdominal_perimeter">Perímetro Abdominal</string>
     <string name="no_data_available">Sem dados disponíveis</string>
+    <string name="add_value">Adicionar Valor</string>
+    <string name="bmi">IMC</string>
+    <string name="date">Data</string>
+    <string name="value">Valor</string>
+    <string name="last_measurement">Última Medição</string>
+    <string name="approximated_hba1c">&#x2139; O valor da HbA1c é apenas um valor aproximado. Para saber o valor exato, por favor realiza a análise ao sangue recomendada</string>
+    <string name="heart_rate">Frequência Cardíaca</string>
+    <string name="value_hint">Introduza um valor</string>
+    <string name="value_type">Valor a introduzir</string>
+    <string name="sys_bp">Tensão Arterial Sistólica</string>
+    <string name="dia_bp">Tensão Arterial Diastólica</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
 
     <!--REPORT STRINGS-->
     <string name="low_bmi">IMC Baixo</string>
@@ -143,13 +156,4 @@
         do que o recomendado para o seu corpo.
         Tem rsico <b>extremo</b> de sofrer um Ataque Cardíaco, então ligue 112 <b>IMEDIATAMENTE</b>.
     </string>
-    <string name="add_value">Adicionar Valor</string>
-    <string name="bmi">IMC</string>
-    <string name="date">Data</string>
-    <string name="value">Valor</string>
-    <string name="last_measurement">Última Medição</string>
-    <string name="approximated_hba1c">&#x2139; O valor da HbA1c é apenas um valor aproximado. Para saber o valor exato, por favor realiza a análise ao sangue recomendada</string>
-    <string name="heart_rate">Frequencia Cardiaca</string>
-    <string name="value_hint">Introduza um valor</string>
-    <string name="value_type">Valor a introduzir</string>
 </resources>

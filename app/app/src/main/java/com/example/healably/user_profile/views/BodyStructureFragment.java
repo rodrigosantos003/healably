@@ -63,11 +63,10 @@ public class BodyStructureFragment extends Fragment {
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.dialog_insert_body_structure, null))
-                .setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String text = valueText.getText().toString();
-                        double value = Double.parseDouble(text);
+                        double value = Double.parseDouble(valueText.getText().toString());
 
                         switch (valueType) {
                             case UserDataController.WEIGHT:
@@ -84,7 +83,7 @@ public class BodyStructureFragment extends Fragment {
                         userDataController.showBodyStructure();
                     }
                 })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -96,7 +95,7 @@ public class BodyStructureFragment extends Fragment {
             @Override
             public void onShow(DialogInterface dialogInterface) {
                 dialog.getWindow().setBackgroundDrawableResource(R.color.gunmetal);
-                valueText = (EditText) dialog.findViewById(R.id.edit_value);
+                valueText = (EditText) dialog.findViewById(R.id.bodyStructure_edit_value);
                 ((RadioGroup) dialog.findViewById(R.id.rg_valueType)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {

@@ -49,7 +49,7 @@
         android:textSize="20sp"/>
 
     <EditText
-        android:id="@+id/edit_value"
+        android:id="@+id/bodyStructure_edit_value"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/edit_text_border"

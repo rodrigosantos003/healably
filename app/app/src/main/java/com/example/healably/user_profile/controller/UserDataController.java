@@ -278,22 +278,31 @@ public class UserDataController {
     public void showBloodPressure(){
         UserData sysBloodPressure = getDataOfType(SYS_BLOOD_PRESSURE);
         UserData diaBloodPressure = getDataOfType(DIA_BLOOD_PRESSURE);
+        UserData heartRate = getDataOfType(HEART_RATE);
 
         double sysBloodPressureValue = sysBloodPressure != null ? sysBloodPressure.getValue() : 0.0;
         double diaBloodPressureValue = diaBloodPressure != null ? diaBloodPressure.getValue() : 0.0;
+        double heartRateValue = heartRate != null ? heartRate.getValue() : 0.0;
 
-
+        TextView heartRateValueText = (TextView) view.findViewById(R.id.fc_value);
         TextView bloodPressureValueText = (TextView) view.findViewById(R.id.bloodPressure_value);
         TextView bloodPressureDateText = (TextView) view.findViewById(R.id.bloodPressure_date);
+
+        if(heartRateValue > 0.0){
+            String hrText = String.format("%.0f", heartRateValue);
+            heartRateValueText.setText(hrText);
+        } else{
+            heartRateValueText.setText(R.string.no_data_available);
+        }
 
         if(sysBloodPressureValue > 0.0 && diaBloodPressureValue > 0.0){
             String sysText = String.format("%.0f", sysBloodPressureValue);
             String diaText = String.format("%.0f", diaBloodPressureValue);
-            String text = sysText + "/" + diaText + context.getString(R.string.mm_hg);
+            String text = sysText + "/" + diaText + " " + context.getString(R.string.mm_hg);
             bloodPressureValueText.setText(text);
             bloodPressureDateText.setText(sysBloodPressure.getDate());
         }else {
-            bloodPressureValueText.setText("0.0");
+            bloodPressureValueText.setText("0/0");
             bloodPressureDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
     }
