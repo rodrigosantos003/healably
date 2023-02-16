@@ -152,4 +152,5 @@
     <string name="last_measurement">Last Measurement</string>
     <string name="hba1c" translatable="false">HbA1c</string>
     <string name="approximated_hba1c">&#x2139; The HbA1c value is on an approximated value. To know the exact value, please do de recommended blood test</string>
+    <string name="heart_rate">Heart Rate</string>
 </resources>

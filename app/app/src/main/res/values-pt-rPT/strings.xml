@@ -149,4 +149,5 @@
     <string name="value">Valor</string>
     <string name="last_measurement">Última Medição</string>
     <string name="approximated_hba1c">&#x2139; O valor da HbA1c é apenas um valor aproximado. Para saber o valor exato, por favor realiza a análise ao sangue recomendada</string>
+    <string name="heart_rate">Frequencia Cardiaca</string>
 </resources>

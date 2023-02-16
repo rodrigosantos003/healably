@@ -1,4 +1,4 @@
-package com.example.healably.user_profile.views.blood_pressure;
+package com.example.healably.user_profile.views;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -15,18 +15,16 @@ import android.view.ViewGroup;
 import com.example.healably.R;
 import com.example.healably.user_profile.controller.UserDataController;
 
-public class BloodPressureFragment extends Fragment {
+public class BloodSugarFragment extends Fragment {
 
-    private BloodPressureViewModel mViewModel;
-
-    public static BloodPressureFragment newInstance() {
-        return new BloodPressureFragment();
+    public static BloodSugarFragment newInstance() {
+        return new BloodSugarFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_blood_pressure, container, false);
+        return inflater.inflate(R.layout.fragment_blood_sugar, container, false);
     }
 
     @Override
@@ -35,14 +33,7 @@ public class BloodPressureFragment extends Fragment {
 
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
-        userDataController.showBloodPressure();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BloodPressureViewModel.class);
-        // TODO: Use the ViewModel
+        userDataController.showBloodSugar();
     }
 
 }

@@ -1,10 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_profile.views.blood_pressure.BloodPressureFragment">
+    android:background="@color/gunmetal"
+    tools:context=".user_profile.views.BloodPressureFragment">
 
-    <include layout="@layout/user_text"/>
+    <include
+        android:id="@+id/include"
+        layout="@layout/user_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodPressure_guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodPressure_guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodPressure_guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bloodPressure_guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineActionBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="?attr/actionBarSize"
+        />
+
+    <TextView
+        android:id="@+id/lbl_fc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heart_rate"
+        android:textSize="36sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/include" />
+
+    <TextView
+        android:id="@+id/fc_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="72"
+        android:textColor="#FFEB3B"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lbl_fc" />
+
+    <TextView
+        android:id="@+id/bloodPressure_lastMeasurement_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_measurement"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@id/bloodPressure_guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/bloodPressure_guidelineTop"
+        app:layout_constraintEnd_toEndOf="@id/bloodPressure_guidelineEnd"/>
+
+    <TextView
+        android:id="@+id/bloodPressure_lbl_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/date"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/bloodPressure_lbl_value"
+        app:layout_constraintStart_toStartOf="@id/bloodPressure_guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/bloodPressure_lastMeasurement_title" />
+
+    <TextView
+        android:id="@+id/bloodPressure_lbl_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/value"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/bloodPressure_guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/bloodPressure_lbl_date"
+        app:layout_constraintTop_toTopOf="@id/bloodPressure_lbl_date" />
+
+    <TextView
+        android:id="@+id/bloodPressure_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10/02/2023"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/bloodPressure_lbl_date"
+        app:layout_constraintStart_toStartOf="@id/bloodPressure_lbl_date"
+        app:layout_constraintTop_toBottomOf="@id/bloodPressure_lbl_date" />
+
+    <TextView
+        android:id="@+id/bloodPressure_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="120/60 mm Hg"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/bloodPressure_lbl_value"
+        app:layout_constraintStart_toStartOf="@id/bloodPressure_lbl_value"
+        app:layout_constraintTop_toBottomOf="@id/bloodPressure_lbl_value" />
+
+    <Button
+        android:id="@+id/bloodPressure_btn_addValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_value"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineActionBar"
+        app:layout_constraintEnd_toEndOf="@id/bloodPressure_guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/bloodPressure_guidelineStart" />
+</androidx.constraintlayout.widget.ConstraintLayout>

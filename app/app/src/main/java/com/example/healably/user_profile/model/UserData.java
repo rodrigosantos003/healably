@@ -1,8 +1,12 @@
 package com.example.healably.user_profile.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Modelo de dados de Dados de Utilizador*/
-public class UserData {
+public class UserData implements Comparable<UserData>{
     int id;
     int userId;
     String valueType;
@@ -70,5 +74,20 @@ public class UserData {
                 ", type=" + valueType +
                 ", value=" + value +
                 '}';
+    }
+
+    @Override
+    public int compareTo(UserData userData) {
+        Date thisDate = new Date();
+        Date otherDate = new Date();
+        try {
+            thisDate = new SimpleDateFormat("dd/MM/yyyy").parse(getDate());
+            otherDate = new SimpleDateFormat("dd/MM/yyyy").parse(userData.getDate());
+        } catch (ParseException e) {};
+
+        if (thisDate == null || otherDate == null) {
+            return 0;
+        }
+        return thisDate.compareTo(otherDate);
     }
 }

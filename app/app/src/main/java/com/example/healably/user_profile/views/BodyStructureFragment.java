@@ -1,4 +1,4 @@
-package com.example.healably.user_profile.views.blood_sugar;
+package com.example.healably.user_profile.views;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,22 +11,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.healably.R;
 import com.example.healably.user_profile.controller.UserDataController;
 
-public class BloodSugarFragment extends Fragment {
+public class BodyStructureFragment extends Fragment {
 
-    private BloodSugarViewModel mViewModel;
-
-    public static BloodSugarFragment newInstance() {
-        return new BloodSugarFragment();
+    public static BodyStructureFragment newInstance() {
+        return new BodyStructureFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_blood_sugar, container, false);
+        return inflater.inflate(R.layout.fragment_body_structure, container, false);
     }
 
     @Override
@@ -35,14 +34,13 @@ public class BloodSugarFragment extends Fragment {
 
         UserDataController userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText();
-        userDataController.showBloodSugar();
-    }
+        userDataController.showBodyStructure();
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BloodSugarViewModel.class);
-        // TODO: Use the ViewModel
+        ((Button) view.findViewById(R.id.bodyStructure_btn_add_value)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Show activity to add a value
+            }
+        });
     }
-
 }

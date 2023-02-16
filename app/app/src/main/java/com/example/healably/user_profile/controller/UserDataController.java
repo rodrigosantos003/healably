@@ -276,7 +276,7 @@ public class UserDataController {
         double sysBloodPressureValue = sysBloodPressure != null ? sysBloodPressure.getValue() : 0.0;
         double diaBloodPressureValue = diaBloodPressure != null ? diaBloodPressure.getValue() : 0.0;
 
-        /*
+
         TextView bloodPressureValueText = (TextView) view.findViewById(R.id.bloodPressure_value);
         TextView bloodPressureDateText = (TextView) view.findViewById(R.id.bloodPressure_date);
 
@@ -286,11 +286,10 @@ public class UserDataController {
             String text = sysText + "/" + diaText + context.getString(R.string.mm_hg);
             bloodPressureValueText.setText(text);
             bloodPressureDateText.setText(sysBloodPressure.getDate());
-        }else{
+        }else {
             bloodPressureValueText.setText("0.0");
             bloodPressureDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
-         */
     }
 
     public void bodyStructureReport() {
