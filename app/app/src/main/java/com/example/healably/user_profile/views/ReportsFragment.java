@@ -44,7 +44,7 @@ public class ReportsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         UserDataController userDataController = new UserDataController(getContext(), view);
-        userDataController.setUserText();
+        userDataController.setUserText(getActivity());
 
         ((Button) view.findViewById(R.id.reports_btnStructure)).setOnClickListener(new View.OnClickListener() {
             @Override

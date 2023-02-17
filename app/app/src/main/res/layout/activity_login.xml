@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:backgroundTint="@color/white"
-                android:hint="@string/passsword_hint"
+                android:hint="@string/password_hint"
                 android:textColorHint="@color/white"
                 android:background="@drawable/edit_text_border"
                 android:textColor="@color/white"

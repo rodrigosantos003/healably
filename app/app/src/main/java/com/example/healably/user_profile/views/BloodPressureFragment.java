@@ -41,19 +41,19 @@ public class BloodPressureFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userDataController = new UserDataController(getContext(), view);
-        userDataController.setUserText();
+        userDataController.setUserText(getActivity());
         userDataController.showBloodPressure();
 
         ((Button) view.findViewById(R.id.bloodPressure_btn_addValue)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog dialog = onCreateDialog(savedInstanceState);
+                AlertDialog dialog = onCreateDialog();
                 dialog.show();
             }
         });
     }
 
-    public AlertDialog onCreateDialog(Bundle savedInstanceState) {
+    public AlertDialog onCreateDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = requireActivity().getLayoutInflater();

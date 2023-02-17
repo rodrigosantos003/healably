@@ -5,7 +5,7 @@
     <string name="email">Email</string>
     <string name="email_hint">Enter your email</string>
     <string name="password">Password</string>
-    <string name="passsword_hint">Enter your password</string>
+    <string name="password_hint">Enter your password</string>
     <string name="name">Name</string>
     <string name="name_hint">Enter your name</string>
     <string name="gender">Gender</string>
@@ -159,4 +159,5 @@
         Your Heart Rate is on an extremely high value, which means that your heart is pumping <b>way too harder</b> than the recommended for your body.
         You have <b>extreme</b> high risk of suffering a Heart Attack, so call 911 <b>IMMEDIATELY</b>.
     </string>
+    <string name="logout">Logout</string>
 </resources>

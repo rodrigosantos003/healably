@@ -214,6 +214,29 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public void updateUserInfo(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_NAME, user.getName());
+        contentValues.put(KEY_GENDER, user.getGender());
+        contentValues.put(KEY_DATEOFBIRTH, user.getDateOfBirth());
+        contentValues.put(KEY_EMAIL, user.getEmail());
+        contentValues.put(KEY_PASSWORD, user.getPassword());
+
+        db.update(TABLE_USER,
+                contentValues,
+                "id = ?",
+                new String[]{String.valueOf(user.getId())});
+
+        db.update(TABLE_LOGGED_USER,
+                contentValues,
+                "user_id = ?",
+                new String[]{String.valueOf(user.getId())});
+
+        db.close();
+    }
+
     /**
      * Regista um utilizador na BD como loggado
      * @param user Utilizador a loggar*/
@@ -258,7 +281,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
                     cursor.getInt(1) /*User Id*/,
                     cursor.getString(2) /*Name*/,
                     cursor.getString(3) /*Gender*/,
-                    cursor.getString(5) /*DateOfBirth*/,
+                    cursor.getString(4) /*DateOfBirth*/,
                     cursor.getString(5) /*Email*/,
                     cursor.getString(6) /*Password*/
             );

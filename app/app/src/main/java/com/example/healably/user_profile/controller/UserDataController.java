@@ -1,12 +1,24 @@
 package com.example.healably.user_profile.controller;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.healably.MainActivity;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
+import com.example.healably.accounts.views.LoginActivity;
+import com.example.healably.accounts.views.SignupActivity;
 import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.user_profile.model.UserData;
 
@@ -16,6 +28,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +42,19 @@ public class UserDataController {
     View view;
     User user;
     HealablySQLiteHelper healablySQLiteHelper;
+
+    //User editing
+    EditText nameValueText;
+    RadioGroup genderValue;
+    final Calendar calendar = Calendar.getInstance();
+    EditText dateOfBirthValueText;
+    EditText emailValueText;
+    EditText passwordValueText;
+    String name;
+    String gender;
+    String dateOfBirth;
+    String email;
+    String password;
 
     //Value Types
     public static final String WEIGHT = "WEIGHT";
@@ -59,16 +85,147 @@ public class UserDataController {
         this.context = context;
         this.view = view;
         this.healablySQLiteHelper = new HealablySQLiteHelper(this.context);
-        this.user = healablySQLiteHelper.getLoggedUser();
+        this.user = getUser();
+    }
+
+    private User getUser(){
+        return healablySQLiteHelper.getLoggedUser();
     }
 
     /**
      * Define o texto na TextView, com o nome do utilizador
      */
-    public void setUserText() {
+    public void setUserText(Activity activity) {
         String text = context.getString(R.string.hello) + " " + user.getName();
         TextView tv = (TextView) view.findViewById(R.id.tv_user);
         tv.setText(text);
+
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showUserProfile(activity);
+            }
+        });
+    }
+
+    private void showUserProfile(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        // Get the layout inflater
+        LayoutInflater inflater = activity.getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(inflater.inflate(R.layout.dialog_edit_user, null))
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        name = nameValueText.getText().toString();
+                        dateOfBirth = dateOfBirthValueText.getText().toString();
+                        email = emailValueText.getText().toString();
+                        password = passwordValueText.getText().toString();
+
+                        User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
+                        healablySQLiteHelper.updateUserInfo(updatedUser);
+
+                        //Reload activity
+                        activity.recreate();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setNeutralButton(R.string.logout, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        healablySQLiteHelper.logoutUser();
+                        Intent it = new Intent(context, LoginActivity.class);
+                        context.startActivity(it);
+                        activity.finish();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getWindow().setBackgroundDrawableResource(R.color.gunmetal);
+                nameValueText = (EditText) dialog.findViewById(R.id.edit_name);
+                genderValue = (RadioGroup) dialog.findViewById(R.id.profile_rg_gender);
+                dateOfBirthValueText = (EditText) dialog.findViewById(R.id.edit_date_of_birth);
+                emailValueText = (EditText) dialog.findViewById(R.id.edit_email);
+                passwordValueText = (EditText) dialog.findViewById(R.id.edit_password);
+
+                genderValue.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        switch (checkedId){
+                            case R.id.profile_rb_male:
+                                gender = "MALE";
+                                break;
+                            case R.id.profile_rb_female:
+                                gender = "FEMALE";
+                                break;
+                            case R.id.profile_rb_other:
+                                gender = "OTHER";
+                                break;
+                            default:
+                                gender = "";
+                                break;
+                        }
+                    }
+                });
+
+                dateOfBirthValueText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(context, pickedDateOfBirth(), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+                        datePickerDialog.show();
+                    }
+                });
+
+                nameValueText.setText(user.getName());
+
+                switch (user.getGender()){
+                    case "MALE":
+                        genderValue.check(R.id.profile_rb_male);
+                        break;
+                    case "FEMALE":
+                        genderValue.check(R.id.profile_rb_female);
+                        break;
+                    case "OTHER":
+                        genderValue.check(R.id.profile_rb_other);
+                        break;
+                }
+
+                dateOfBirthValueText.setText(user.getDateOfBirth());
+                emailValueText.setText(user.getEmail());
+                passwordValueText.setText(user.getPassword());
+            }
+        });
+
+        dialog.show();
+    }
+
+    private DatePickerDialog.OnDateSetListener pickedDateOfBirth() {
+        return new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateDateOfBirth();
+            }
+        };
+    }
+
+    private void updateDateOfBirth() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateOfBirthValueText.setText(dateFormat.format(calendar.getTime()));
     }
 
     /**

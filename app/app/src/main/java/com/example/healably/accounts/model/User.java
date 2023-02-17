@@ -124,8 +124,15 @@ public class User {
     }
 
     @Override
-    public String toString(){
-        return "User: " + id + ", " + name + ", " + email;
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     @Override

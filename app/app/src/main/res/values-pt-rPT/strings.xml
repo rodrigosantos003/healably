@@ -4,7 +4,7 @@
     <string name="email">Email</string>
     <string name="email_hint">Introduza o email</string>
     <string name="password">Password</string>
-    <string name="passsword_hint">Introduza a password</string>
+    <string name="password_hint">Introduza a password</string>
     <string name="signup">Registo</string>
     <string name="name">Nome</string>
     <string name="name_hint">Introduza o nome</string>
@@ -156,4 +156,5 @@
         do que o recomendado para o seu corpo.
         Tem rsico <b>extremo</b> de sofrer um Ataque Cardíaco, então ligue 112 <b>IMEDIATAMENTE</b>.
     </string>
+    <string name="logout">Sair</string>
 </resources>
