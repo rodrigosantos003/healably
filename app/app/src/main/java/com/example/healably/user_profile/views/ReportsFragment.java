@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.example.healably.ListInitializer;
@@ -45,8 +47,13 @@ public class ReportsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright);
+        view.startAnimation(animation);
+
         userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText(getActivity());
+
 
         ((Button) view.findViewById(R.id.reports_btnStructure)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +82,7 @@ public class ReportsFragment extends Fragment {
                 userDataController.bodyStructureReport();
             }
         });
+
 
         ((Button) view.findViewById(R.id.reports_btnSugar)).setOnClickListener(new View.OnClickListener() {
             @Override
