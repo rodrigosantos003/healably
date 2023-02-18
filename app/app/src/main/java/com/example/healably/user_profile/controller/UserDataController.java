@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -43,19 +44,6 @@ public class UserDataController {
     User user;
     HealablySQLiteHelper healablySQLiteHelper;
 
-    //User editing
-    EditText nameValueText;
-    RadioGroup genderValue;
-    final Calendar calendar = Calendar.getInstance();
-    EditText dateOfBirthValueText;
-    EditText emailValueText;
-    EditText passwordValueText;
-    String name;
-    String gender;
-    String dateOfBirth;
-    String email;
-    String password;
-
     //Value Types
     public static final String WEIGHT = "WEIGHT";
     public static final String HEIGHT = "HEIGHT";
@@ -80,6 +68,21 @@ public class UserDataController {
     private static final double NORMAL_DIA_BP = 80.0;
     private static final double HIGH_DIA_BP = 90.0;
     private static final double ELDERLY_SYS_BP = 150.0;
+
+    //User editing
+    EditText nameValueText;
+    RadioGroup genderValue;
+    final Calendar calendar = Calendar.getInstance();
+    EditText dateOfBirthValueText;
+    EditText emailValueText;
+    EditText passwordValueText;
+    String name;
+    String gender;
+    String dateOfBirth;
+    String email;
+    String password;
+
+    String reportResult;
 
     public UserDataController(Context context, View view) {
         this.context = context;
@@ -253,7 +256,7 @@ public class UserDataController {
         return null;
     }
 
-    private List<UserData> getListOfValues(String valueType) {
+    public List<UserData> getListOfValues(String valueType) {
         List<UserData> listOfValues = new LinkedList<UserData>();
 
         for (UserData item : getData()) {
@@ -488,20 +491,25 @@ public class UserDataController {
             text = context.getString(R.string.high_bmi_description);
         }
 
+        reportResult = title + " - " + text + "\n\n";
+
         switch (user.getGender()) {
             case "MALE":
-                maleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
+                reportResult += maleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
                 break;
             case "FEMALE":
-                femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
+                reportResult +=  femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
                 break;
             case "OTHER":
-                neutralAbdominalPerimeterAnalysis();
+                reportResult +=  neutralAbdominalPerimeterAnalysis();
                 break;
         }
+
+        ((TextView) view.findViewById(R.id.lbl_result)).setText(reportResult);
+        scrollReportResult();
     }
 
-    private void maleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
+    private String maleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
         String title = "";
         String text = "";
 
@@ -515,9 +523,11 @@ public class UserDataController {
             title = context.getString(R.string.high_ap);
             text = context.getString(R.string.high_ap_description);
         }
+
+        return title + " - " + text;
     }
 
-    private void femaleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
+    private String femaleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
         String title = "";
         String text = "";
 
@@ -531,11 +541,15 @@ public class UserDataController {
             title = context.getString(R.string.high_ap);
             text = context.getString(R.string.high_ap_description);
         }
+
+        return title + "\n" + text;
     }
 
-    private void neutralAbdominalPerimeterAnalysis(){
+    private String neutralAbdominalPerimeterAnalysis(){
         String title = context.getString(R.string.abdominal_perimeter);
         String text = context.getString(R.string.neutral_ap_description);
+
+        return title + "\n" + text;
     }
 
     public void bloodSugarReport() {
@@ -562,6 +576,11 @@ public class UserDataController {
             title = context.getString(R.string.high_bs);
             text = context.getString(R.string.high_bs_description);
         }
+
+        reportResult = title + " - " + text;
+
+        ((TextView) view.findViewById(R.id.lbl_result)).setText(reportResult);
+        scrollReportResult();
     }
 
     public void bloodPressureReport() {
@@ -592,6 +611,9 @@ public class UserDataController {
                 if (diaAverage >= NORMAL_DIA_BP && diaAverage < HIGH_DIA_BP) {
                     title = context.getString(R.string.normal_bp);
                     text = context.getString(R.string.normal_bp_description);
+                } else{
+                    title = context.getString(R.string.low_bp);
+                    text = context.getString(R.string.low_bp_description);
                 }
             } else if (sysAverage >= HIGH_SYS_BP && diaAverage >= HIGH_DIA_BP) {
                 title = context.getString(R.string.high_bp);
@@ -606,9 +628,15 @@ public class UserDataController {
                 text = context.getString(R.string.high_bp_description);
             }
         }
+
+        reportResult = title + " - " + text;
+        reportResult += "\n\n" + heartRateReport();
+
+        ((TextView) view.findViewById(R.id.lbl_result)).setText(reportResult);
+        scrollReportResult();
     }
 
-    public void heartRateReport(){
+    private String heartRateReport(){
         List<UserData> heartRateValues = getListOfValues(HEART_RATE);
 
         double average = 0.0;
@@ -640,5 +668,11 @@ public class UserDataController {
             title = context.getString(R.string.extreme_hr);
             text = context.getString(R.string.extreme_hr_description);
         }
+
+        return title + " - " + text;
+    }
+
+    private void scrollReportResult(){
+        ((TextView) view.findViewById(R.id.lbl_result)).setMovementMethod(new ScrollingMovementMethod());
     }
 }

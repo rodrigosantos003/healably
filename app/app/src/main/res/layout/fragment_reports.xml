@@ -75,17 +75,6 @@
         app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
         app:layout_constraintBottom_toBottomOf="@id/bodyStructure_guidelineTop"/>
 
-    <TextView
-        android:id="@+id/lbl_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MAAAGROOOO"
-        app:layout_constraintTop_toTopOf="@id/bodyStructure_guidelineTop"
-        android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="@id/bodyStructure_guidelineStart"
-        app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
-        />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reports_rv_history"
         android:layout_width="0dp"
@@ -96,5 +85,20 @@
         app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
         >
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/lbl_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        app:layout_constraintTop_toTopOf="@id/bodyStructure_guidelineTop"
+        android:textSize="15sp"
+        android:padding="15dp"
+        android:lineSpacingMultiplier="1.5"
+        app:layout_constraintStart_toStartOf="@id/bodyStructure_guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
+        android:scrollbars="vertical"
+        android:maxLines="5"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

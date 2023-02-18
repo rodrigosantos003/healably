@@ -48,6 +48,8 @@
     <string name="dia_bp">Tensão Arterial Diastólica</string>
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
+    <string name="logout">Sair</string>
+    <string name="result">Resultado</string>
 
     <!--REPORT STRINGS-->
     <string name="low_bmi">IMC Baixo</string>
@@ -70,7 +72,7 @@
 
     <string name="normal_ap">Perímetro Abdominal Normal</string>
     <string name="normal_ap_description">
-        O seu Perímetro Abdominal está num valor normal, oq ue significa que tem <b>baixo</b> risco de contrair doenças
+        O seu Perímetro Abdominal está num valor normal, o que significa que tem <b>baixo</b> risco de contrair doenças
         cardiovasculares, tais como Diabetes Tipo 2, Colestrol Elevado e Hipertensão.
     </string>
     <string name="augmented_ap">Perímetro Abdominal Aumentado</string>
@@ -156,5 +158,4 @@
         do que o recomendado para o seu corpo.
         Tem rsico <b>extremo</b> de sofrer um Ataque Cardíaco, então ligue 112 <b>IMEDIATAMENTE</b>.
     </string>
-    <string name="logout">Sair</string>
 </resources>

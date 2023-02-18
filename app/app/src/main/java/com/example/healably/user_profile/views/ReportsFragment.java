@@ -28,6 +28,8 @@ import java.util.List;
 
 public class ReportsFragment extends Fragment {
 
+    UserDataController userDataController;
+
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
     }
@@ -43,19 +45,82 @@ public class ReportsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        UserDataController userDataController = new UserDataController(getContext(), view);
+        userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText(getActivity());
 
         ((Button) view.findViewById(R.id.reports_btnStructure)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<UserData> userData = ListInitializer.getLista();
+                //Get data from DB
+                List<UserData> weightList = userDataController.getListOfValues(UserDataController.WEIGHT);
+                List<UserData> heightList = userDataController.getListOfValues(UserDataController.HEIGHT);
+                List<UserData> abdominalPerimeterList = userDataController.getListOfValues(UserDataController.ABDOMINAL_PERIMETER);
+
+                //Add to a list
+                List<UserData> userData = new ArrayList<UserData>();
+                userData.addAll(weightList);
+                userData.addAll(heightList);
+                userData.addAll(abdominalPerimeterList);
+
+                //Sort the list
                 Collections.sort(userData);
+
+                //Put on the recyclerview
                 RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 ReportsListAdapter adapter = new ReportsListAdapter(userData);
                 recyclerView.setAdapter(adapter);
+
+                userDataController.bodyStructureReport();
+            }
+        });
+
+        ((Button) view.findViewById(R.id.reports_btnSugar)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get data from DB
+                List<UserData> bloodSugarList = userDataController.getListOfValues(UserDataController.BLOOD_SUGAR);
+
+                //Sort the list
+                Collections.sort(bloodSugarList);
+
+                //Put on the recyclerview
+                RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                ReportsListAdapter adapter = new ReportsListAdapter(bloodSugarList);
+                recyclerView.setAdapter(adapter);
+
+                userDataController.bloodSugarReport();
+            }
+        });
+
+        ((Button) view.findViewById(R.id.reports_btnPressure)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get data from DB
+                List<UserData> sysBloodPressureList= userDataController.getListOfValues(UserDataController.SYS_BLOOD_PRESSURE);
+                List<UserData> diaBloodPressureList = userDataController.getListOfValues(UserDataController.DIA_BLOOD_PRESSURE);
+                List<UserData> heartRateList = userDataController.getListOfValues(UserDataController.HEART_RATE);
+
+                //Add to a list
+                List<UserData> userData = new ArrayList<UserData>();
+                userData.addAll(sysBloodPressureList);
+                userData.addAll(diaBloodPressureList);
+                userData.addAll(heartRateList);
+
+                //Sort the list
+                Collections.sort(userData);
+
+                //Put on the recyclerview
+                RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                ReportsListAdapter adapter = new ReportsListAdapter(userData);
+                recyclerView.setAdapter(adapter);
+
+                userDataController.bloodPressureReport();
             }
         });
 

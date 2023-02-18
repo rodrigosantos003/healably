@@ -55,6 +55,8 @@
     <string name="dia_bp">Diastolic Blood Pressure</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
+    <string name="result">Result</string>
 
     <!--REPORT STRINGS-->
     <!--BMI-->
@@ -159,5 +161,4 @@
         Your Heart Rate is on an extremely high value, which means that your heart is pumping <b>way too harder</b> than the recommended for your body.
         You have <b>extreme</b> high risk of suffering a Heart Attack, so call 911 <b>IMMEDIATELY</b>.
     </string>
-    <string name="logout">Logout</string>
 </resources>
