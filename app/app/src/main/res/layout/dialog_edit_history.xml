@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gunmetal"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/value"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edit_history_value"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="@string/value_hint"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/editHistory_btDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/delete_value"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="50dp"/>
+</LinearLayout>

@@ -161,4 +161,5 @@
         Your Heart Rate is on an extremely high value, which means that your heart is pumping <b>way too harder</b> than the recommended for your body.
         You have <b>extreme</b> high risk of suffering a Heart Attack, so call 911 <b>IMMEDIATELY</b>.
     </string>
+    <string name="delete_value">Delete Value</string>
 </resources>

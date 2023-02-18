@@ -13,8 +13,12 @@ import com.example.healably.user_profile.model.UserData;
 import java.util.List;
 
 public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private final List<UserData> items;
+    private final OnItemClickListener itemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Object item);
+    }
 
 
     class ReportsViewHolder extends RecyclerView.ViewHolder {
@@ -27,10 +31,20 @@ public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             data = view.findViewById(R.id.report_date);
             valor = view.findViewById(R.id.report_value);
         }
+
+        public void bind(final Object item, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(item);
+                }
+            });
+        }
     }
 
-    public ReportsListAdapter(List<UserData> items) {
+    public ReportsListAdapter(List<UserData> items, OnItemClickListener clickListener) {
         this.items = items;
+        this.itemClickListener = clickListener;
     }
 
     @Override
@@ -51,6 +65,7 @@ public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         reportsViewHolder.titulo.setText(userData.getValueType());
         reportsViewHolder.data.setText(userData.getDate());
         reportsViewHolder.valor.setText(String.valueOf(userData.getValue()));
+        reportsViewHolder.bind(items.get(position), itemClickListener);
     }
 
     @Override

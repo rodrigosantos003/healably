@@ -1,7 +1,9 @@
 package com.example.healably.user_profile.views;
 
-import androidx.lifecycle.ViewModelProvider;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,11 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 
-import com.example.healably.ListInitializer;
 import com.example.healably.R;
 import com.example.healably.ReportsListAdapter;
+import com.example.healably.accounts.model.User;
+import com.example.healably.accounts.views.LoginActivity;
 import com.example.healably.user_profile.controller.UserDataController;
 import com.example.healably.user_profile.model.UserData;
 
@@ -31,6 +36,7 @@ import java.util.List;
 public class ReportsFragment extends Fragment {
 
     UserDataController userDataController;
+    EditText editValueText;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -40,8 +46,6 @@ public class ReportsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reports, container, false);
-
-
     }
 
     @Override
@@ -53,7 +57,6 @@ public class ReportsFragment extends Fragment {
 
         userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText(getActivity());
-
 
         ((Button) view.findViewById(R.id.reports_btnStructure)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +79,13 @@ public class ReportsFragment extends Fragment {
                 RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                ReportsListAdapter adapter = new ReportsListAdapter(userData);
+                ReportsListAdapter adapter = new ReportsListAdapter(userData, new ReportsListAdapter.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(Object item) {
+                        editHistoryValue((UserData) item);
+                    }
+                });
+
                 recyclerView.setAdapter(adapter);
 
                 userDataController.bodyStructureReport();
@@ -97,7 +106,12 @@ public class ReportsFragment extends Fragment {
                 RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                ReportsListAdapter adapter = new ReportsListAdapter(bloodSugarList);
+                ReportsListAdapter adapter = new ReportsListAdapter(bloodSugarList, new ReportsListAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Object item) {
+                        editHistoryValue((UserData) item);
+                    }
+                });
                 recyclerView.setAdapter(adapter);
 
                 userDataController.bloodSugarReport();
@@ -125,7 +139,12 @@ public class ReportsFragment extends Fragment {
                 RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                ReportsListAdapter adapter = new ReportsListAdapter(userData);
+                ReportsListAdapter adapter = new ReportsListAdapter(userData, new ReportsListAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Object item) {
+                        editHistoryValue((UserData) item);
+                    }
+                });
                 recyclerView.setAdapter(adapter);
 
                 userDataController.bloodPressureReport();
@@ -134,4 +153,52 @@ public class ReportsFragment extends Fragment {
 
     }
 
+    private void editHistoryValue(UserData userData) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        // Get the layout inflater
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(inflater.inflate(R.layout.dialog_edit_history, null))
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        double value = Double.parseDouble(editValueText.getText().toString());
+
+                        userData.setValue(value);
+
+                        userDataController.updateValue(userData);
+
+                        getActivity().recreate();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getWindow().setBackgroundDrawableResource(R.color.gunmetal);
+
+                editValueText = dialog.findViewById(R.id.edit_history_value);
+                editValueText.setText(String.valueOf(userData.getValue()));
+                ((Button) dialog.findViewById(R.id.editHistory_btDelete)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        userDataController.deleteValue(userData);
+                        dialog.dismiss();
+                        getActivity().recreate();
+                    }
+                });
+            }
+        });
+
+        dialog.show();
+    }
 }

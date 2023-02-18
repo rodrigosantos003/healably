@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -82,7 +83,9 @@ public class UserDataController {
     String email;
     String password;
 
+    //Reports
     String reportResult;
+    EditText editValueText;
 
     public UserDataController(Context context, View view) {
         this.context = context;
@@ -91,7 +94,7 @@ public class UserDataController {
         this.user = getUser();
     }
 
-    private User getUser(){
+    private User getUser() {
         return healablySQLiteHelper.getLoggedUser();
     }
 
@@ -164,7 +167,7 @@ public class UserDataController {
                 genderValue.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        switch (checkedId){
+                        switch (checkedId) {
                             case R.id.profile_rb_male:
                                 gender = "MALE";
                                 break;
@@ -192,7 +195,7 @@ public class UserDataController {
 
                 nameValueText.setText(user.getName());
 
-                switch (user.getGender()){
+                switch (user.getGender()) {
                     case "MALE":
                         genderValue.check(R.id.profile_rb_male);
                         break;
@@ -288,6 +291,14 @@ public class UserDataController {
         healablySQLiteHelper.addUserData(userData);
     }
 
+    public void updateValue(UserData updatedUserData){
+        healablySQLiteHelper.updateUserData(updatedUserData);
+    }
+
+    public void deleteValue(UserData deletedUserData){
+        healablySQLiteHelper.deleteUserData(deletedUserData);
+    }
+
     /**
      * Apresenta o resultado do IMC
      */
@@ -311,36 +322,36 @@ public class UserDataController {
 
         showBMIResult(bmi, bmiValueText);
 
-        if(weightValue > 0.0){
+        if (weightValue > 0.0) {
             String text = String.format("%.2f", weightValue) + " " + context.getString(R.string.kg);
             weightValueText.setText(text);
             weightDateText.setText(weight.getDate());
-        } else{
+        } else {
             weightValueText.setText("0.0");
             weightDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
 
-        if(heightValue > 0.0){
+        if (heightValue > 0.0) {
             String text = String.format("%.2f", heightValue) + " " + context.getString(R.string.m);
             heightValueText.setText(text);
             heightDateText.setText(height.getDate());
-        } else{
+        } else {
             heightValueText.setText("0.0");
             heightDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
 
-        if(abdominalPerimeterValue > 0.0){
+        if (abdominalPerimeterValue > 0.0) {
             String text = String.format("%.2f", abdominalPerimeterValue) + context.getString(R.string.cm);
             abdominalPerimeterValueText.setText(text);
             abdominalPerimeterDateText.setText(abdominalPerimeter.getDate());
-        } else{
+        } else {
             abdominalPerimeterValueText.setText("0.0");
             abdominalPerimeterDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
     }
 
-    private void showBMIResult(double bmi, TextView tv){
-        if(bmi > 0.0){
+    private void showBMIResult(double bmi, TextView tv) {
+        if (bmi > 0.0) {
             if (bmi < LOW_BMI) {
                 tv.setTextColor(context.getResources().getColor(R.color.powder_blue, null));
             } else if (bmi <= NORMAL_BMI) {
@@ -363,13 +374,13 @@ public class UserDataController {
      * @return Valor do IMC
      */
     private double calculateBMI(double weight, double height) {
-        if(weight > 0.0 && height > 0.0)
+        if (weight > 0.0 && height > 0.0)
             return weight / (height * height);
 
         return 0.0;
     }
 
-    public void showBloodSugar(){
+    public void showBloodSugar() {
         UserData bloodSugar = getDataOfType(BLOOD_SUGAR);
 
         double bloodSugarValue = bloodSugar != null ? bloodSugar.getValue() : 0.0;
@@ -381,17 +392,17 @@ public class UserDataController {
 
         showHbA1cResult(hba1c, hba1cText);
 
-        if(bloodSugarValue > 0.0){
+        if (bloodSugarValue > 0.0) {
             String text = String.format("%.2f", bloodSugarValue) + " " + context.getString(R.string.mg_dl);
             bloodSugarValueText.setText(text);
             bloodSugarDateText.setText(bloodSugar.getDate());
-        }else{
+        } else {
             bloodSugarValueText.setText("0.0");
             bloodSugarDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
     }
 
-    private double calculateHbA1c(){
+    private double calculateHbA1c() {
         List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
 
         double average = 0.0;
@@ -402,32 +413,32 @@ public class UserDataController {
         }
         average /= bloodSugarValues.size();
 
-        if(average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR)
+        if (average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR)
             value = 4;
-        else if(average >= HIGH_BLOOD_SUGAR && average < 140)
+        else if (average >= HIGH_BLOOD_SUGAR && average < 140)
             value = 6;
-        else if(average >= 140 && average < 154)
+        else if (average >= 140 && average < 154)
             value = 6.5;
-        else if(average >= 154 && average < 169)
+        else if (average >= 154 && average < 169)
             value = 7;
-        else if(average >= 169 && average < 183)
+        else if (average >= 169 && average < 183)
             value = 7.5;
-        else if(average >= 183 && average < 197)
+        else if (average >= 183 && average < 197)
             value = 8;
-        else if(average >= 197 && average < 212)
+        else if (average >= 197 && average < 212)
             value = 8.5;
-        else if(average >= 212 && average < 226)
+        else if (average >= 212 && average < 226)
             value = 9;
-        else if(average >= 226 && average < 240)
+        else if (average >= 226 && average < 240)
             value = 9.5;
-        else if(average >= 240)
+        else if (average >= 240)
             value = 10;
 
         return value;
     }
 
-    private void showHbA1cResult(double hba1c, TextView tv){
-        if(hba1c > 0.0){
+    private void showHbA1cResult(double hba1c, TextView tv) {
+        if (hba1c > 0.0) {
             String text = String.format("%.2f", hba1c) + " %";
             tv.setText(text);
         } else {
@@ -435,7 +446,7 @@ public class UserDataController {
         }
     }
 
-    public void showBloodPressure(){
+    public void showBloodPressure() {
         UserData sysBloodPressure = getDataOfType(SYS_BLOOD_PRESSURE);
         UserData diaBloodPressure = getDataOfType(DIA_BLOOD_PRESSURE);
         UserData heartRate = getDataOfType(HEART_RATE);
@@ -448,20 +459,20 @@ public class UserDataController {
         TextView bloodPressureValueText = (TextView) view.findViewById(R.id.bloodPressure_value);
         TextView bloodPressureDateText = (TextView) view.findViewById(R.id.bloodPressure_date);
 
-        if(heartRateValue > 0.0){
+        if (heartRateValue > 0.0) {
             String hrText = String.format("%.0f", heartRateValue);
             heartRateValueText.setText(hrText);
-        } else{
+        } else {
             heartRateValueText.setText(R.string.no_data_available);
         }
 
-        if(sysBloodPressureValue > 0.0 && diaBloodPressureValue > 0.0){
+        if (sysBloodPressureValue > 0.0 && diaBloodPressureValue > 0.0) {
             String sysText = String.format("%.0f", sysBloodPressureValue);
             String diaText = String.format("%.0f", diaBloodPressureValue);
             String text = sysText + "/" + diaText + " " + context.getString(R.string.mm_hg);
             bloodPressureValueText.setText(text);
             bloodPressureDateText.setText(sysBloodPressure.getDate());
-        }else {
+        } else {
             bloodPressureValueText.setText("0/0");
             bloodPressureDateText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
@@ -480,7 +491,7 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if(bmi > 0.0){
+        if (bmi > 0.0) {
             if (bmi < LOW_BMI) {
                 title = context.getString(R.string.low_bmi);
                 text = context.getString(R.string.low_bmi_description);
@@ -493,25 +504,25 @@ public class UserDataController {
             }
 
             reportResult = title + " - " + text + "\n\n";
-        } else{
+        } else {
             reportResult = "";
         }
 
-        if(abdominalPerimeterValue > 0.0){
+        if (abdominalPerimeterValue > 0.0) {
             switch (user.getGender()) {
                 case "MALE":
                     reportResult += maleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
                     break;
                 case "FEMALE":
-                    reportResult +=  femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
+                    reportResult += femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
                     break;
                 case "OTHER":
-                    reportResult +=  neutralAbdominalPerimeterAnalysis();
+                    reportResult += neutralAbdominalPerimeterAnalysis();
                     break;
             }
         }
 
-        if(reportResult.isEmpty()){
+        if (reportResult.isEmpty()) {
             reportResult = context.getString(R.string.no_data_available);
         }
 
@@ -555,7 +566,7 @@ public class UserDataController {
         return title + "\n" + text;
     }
 
-    private String neutralAbdominalPerimeterAnalysis(){
+    private String neutralAbdominalPerimeterAnalysis() {
         String title = context.getString(R.string.abdominal_perimeter);
         String text = context.getString(R.string.neutral_ap_description);
 
@@ -575,7 +586,7 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if(average > 0.0){
+        if (average > 0.0) {
             if (average < NORMAL_BLOOD_SUGAR) {
                 title = context.getString(R.string.low_bs);
                 text = context.getString(R.string.low_bs_description);
@@ -588,11 +599,11 @@ public class UserDataController {
             }
 
             reportResult = title + " - " + text;
-        } else{
+        } else {
             reportResult = "";
         }
 
-        if(reportResult.isEmpty()){
+        if (reportResult.isEmpty()) {
             reportResult = context.getString(R.string.no_data_available);
         }
 
@@ -620,7 +631,7 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if(sysAverage > 0.0 && diaAverage > 0.0){
+        if (sysAverage > 0.0 && diaAverage > 0.0) {
             if (userAge() <= 80) {
                 if (sysAverage < NORMAL_SYS_BP && diaAverage < NORMAL_DIA_BP) {
                     title = context.getString(R.string.low_bp);
@@ -629,7 +640,7 @@ public class UserDataController {
                     if (diaAverage >= NORMAL_DIA_BP && diaAverage < HIGH_DIA_BP) {
                         title = context.getString(R.string.normal_bp);
                         text = context.getString(R.string.normal_bp_description);
-                    } else{
+                    } else {
                         title = context.getString(R.string.low_bp);
                         text = context.getString(R.string.low_bp_description);
                     }
@@ -637,24 +648,24 @@ public class UserDataController {
                     title = context.getString(R.string.high_bp);
                     text = context.getString(R.string.high_bp_description);
                 }
-            } else{
-                if(sysAverage < ELDERLY_SYS_BP && diaAverage <= NORMAL_DIA_BP){
+            } else {
+                if (sysAverage < ELDERLY_SYS_BP && diaAverage <= NORMAL_DIA_BP) {
                     title = context.getString(R.string.normal_bp);
                     text = context.getString(R.string.normal_bp_description);
-                } else{
+                } else {
                     title = context.getString(R.string.high_bp);
                     text = context.getString(R.string.high_bp_description);
                 }
             }
 
             reportResult = title + " - " + text + "\n\n";
-        } else{
+        } else {
             reportResult = "";
         }
 
         reportResult += heartRateReport();
 
-        if(reportResult.isEmpty()){
+        if (reportResult.isEmpty()) {
             reportResult = context.getString(R.string.no_data_available);
         }
 
@@ -662,12 +673,12 @@ public class UserDataController {
         scrollReportResult();
     }
 
-    private String heartRateReport(){
+    private String heartRateReport() {
         List<UserData> heartRateValues = getListOfValues(HEART_RATE);
 
         double average = 0.0;
 
-        for(UserData heartRate : heartRateValues){
+        for (UserData heartRate : heartRateValues) {
             average += heartRate.getValue();
         }
 
@@ -679,19 +690,19 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if(average > 0.0){
-            if(average < 60){
+        if (average > 0.0) {
+            if (average < 60) {
                 title = context.getString(R.string.low_hr);
                 text = context.getString(R.string.low_hr_description);
-            } else if(average >= 60 && average <= 100){
+            } else if (average >= 60 && average <= 100) {
                 title = context.getString(R.string.normal_hr);
                 text = context.getString(R.string.normal_hr_description);
-            } else{
+            } else {
                 title = context.getString(R.string.high_hr);
                 text = context.getString(R.string.high_hr_description);
             }
 
-            if(average >= maximumHeartRate){
+            if (average >= maximumHeartRate) {
                 title = context.getString(R.string.extreme_hr);
                 text = context.getString(R.string.extreme_hr_description);
             }
@@ -702,7 +713,7 @@ public class UserDataController {
         return "";
     }
 
-    private void scrollReportResult(){
+    private void scrollReportResult() {
         ((TextView) view.findViewById(R.id.lbl_result)).setMovementMethod(new ScrollingMovementMethod());
     }
 }

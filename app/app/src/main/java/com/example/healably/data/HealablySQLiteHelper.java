@@ -217,20 +217,20 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
     public void updateUserInfo(User user){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(KEY_NAME, user.getName());
-        contentValues.put(KEY_GENDER, user.getGender());
-        contentValues.put(KEY_DATEOFBIRTH, user.getDateOfBirth());
-        contentValues.put(KEY_EMAIL, user.getEmail());
-        contentValues.put(KEY_PASSWORD, user.getPassword());
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, user.getName());
+        values.put(KEY_GENDER, user.getGender());
+        values.put(KEY_DATEOFBIRTH, user.getDateOfBirth());
+        values.put(KEY_EMAIL, user.getEmail());
+        values.put(KEY_PASSWORD, user.getPassword());
 
         db.update(TABLE_USER,
-                contentValues,
+                values,
                 "id = ?",
                 new String[]{String.valueOf(user.getId())});
 
         db.update(TABLE_LOGGED_USER,
-                contentValues,
+                values,
                 "user_id = ?",
                 new String[]{String.valueOf(user.getId())});
 
@@ -359,5 +359,33 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         }
 
         return userDataList;
+    }
+
+    public void updateUserData(UserData userData){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_VALUE, userData.getValue());
+
+        db.update(
+                TABLE_USER_DATA,
+                values,
+                "id = ?",
+                new String[]{String.valueOf(userData.getId())}
+        );
+
+        db.close();
+    }
+
+    public void deleteUserData(UserData userData){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(
+                TABLE_USER_DATA,
+                "id = ?",
+                new String[]{String.valueOf(userData.getId())}
+        );
+
+        db.close();
     }
 }
