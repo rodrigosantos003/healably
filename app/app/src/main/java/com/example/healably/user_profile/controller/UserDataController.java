@@ -1,6 +1,5 @@
 package com.example.healably.user_profile.controller;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -16,17 +15,12 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.healably.MainActivity;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 import com.example.healably.accounts.views.LoginActivity;
-import com.example.healably.accounts.views.SignupActivity;
 import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.user_profile.model.UserData;
 
-import org.w3c.dom.Text;
-
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -34,7 +28,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Controlador para a funcionalidade de Perfil de Utilizador
@@ -83,10 +76,6 @@ public class UserDataController {
     String email;
     String password;
 
-    //Reports
-    String reportResult;
-    EditText editValueText;
-
     public UserDataController(Context context, View view) {
         this.context = context;
         this.view = view;
@@ -94,6 +83,7 @@ public class UserDataController {
         this.user = healablySQLiteHelper.getLoggedUser();
     }
 
+    //User
     /**
      * Define o texto na TextView, com o nome do utilizador
      */
@@ -126,10 +116,11 @@ public class UserDataController {
                         email = emailValueText.getText().toString();
                         password = passwordValueText.getText().toString();
 
+                        //Atualiza utilizador
                         User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
                         healablySQLiteHelper.updateUserInfo(updatedUser);
 
-                        //Reload activity
+                        //Recarrega atividade
                         activity.recreate();
                     }
                 })
@@ -142,7 +133,10 @@ public class UserDataController {
                 .setNeutralButton(R.string.logout, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //Termina sessão do utilizador
                         healablySQLiteHelper.logoutUser();
+
+                        //Abre ecrã de login
                         Intent it = new Intent(context, LoginActivity.class);
                         context.startActivity(it);
                         activity.finish();
@@ -210,9 +204,11 @@ public class UserDataController {
                 ((Button) dialog.findViewById(R.id.editUser_btDelete)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Elimina utilizador
                         deleteUser();
                         dialog.dismiss();
 
+                        //Abre ecrã de login
                         Intent it = new Intent(context, LoginActivity.class);
                         context.startActivity(it);
                         activity.finish();
@@ -242,10 +238,18 @@ public class UserDataController {
         dateOfBirthValueText.setText(dateFormat.format(calendar.getTime()));
     }
 
+    private int userAge() {
+        LocalDate dateOfBirth = LocalDate.parse(user.getDateOfBirth());
+
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
+
     public void deleteUser(){
+        healablySQLiteHelper.logoutUser();
         healablySQLiteHelper.deleteUser(user.getId());
     }
 
+    //Data
     /**
      * Obtém os dados do utilizador
      *
@@ -283,12 +287,6 @@ public class UserDataController {
         return listOfValues;
     }
 
-    private int userAge() {
-        LocalDate dateOfBirth = LocalDate.parse(user.getDateOfBirth());
-
-        return Period.between(dateOfBirth, LocalDate.now()).getYears();
-    }
-
     /**
      * Adiciona um valor aos dados
      *
@@ -311,8 +309,9 @@ public class UserDataController {
         healablySQLiteHelper.deleteUserData(deletedUserData.getId());
     }
 
+    //Body Structure
     /**
-     * Apresenta o resultado do IMC
+     * Apresenta os dados da Estrutura Corporal
      */
     public void showBodyStructure() {
         UserData weight = getDataOfType(WEIGHT);
@@ -362,6 +361,10 @@ public class UserDataController {
         }
     }
 
+    /**
+     * Apresenta o resultado do IMC na TextView
+     * @param bmi Valor do IMC
+     * @param tv TextView*/
     private void showBMIResult(double bmi, TextView tv) {
         if (bmi > 0.0) {
             if (bmi < LOW_BMI) {
@@ -382,7 +385,8 @@ public class UserDataController {
 
     /**
      * Calcula o IMC atual
-     *
+     * @param weight Peso
+     * @param height Altura
      * @return Valor do IMC
      */
     private double calculateBMI(double weight, double height) {
@@ -392,6 +396,9 @@ public class UserDataController {
         return 0.0;
     }
 
+    //Blood Sugar
+    /**
+     * Apresenta os dados da Glicémia*/
     public void showBloodSugar() {
         UserData bloodSugar = getDataOfType(BLOOD_SUGAR);
 
@@ -414,6 +421,9 @@ public class UserDataController {
         }
     }
 
+    /**
+     * Calcula o valor da HbA1c atual
+     * @return Valor da HbA1c*/
     private double calculateHbA1c() {
         List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
 
@@ -451,6 +461,12 @@ public class UserDataController {
 
     private void showHbA1cResult(double hba1c, TextView tv) {
         if (hba1c > 0.0) {
+            if(hba1c < 5.7 ){
+                tv.setTextColor(context.getResources().getColor(R.color.yellow, null));
+            } else{
+                tv.setTextColor(context.getResources().getColor(R.color.red, null));
+            }
+
             String text = String.format("%.2f", hba1c) + " %";
             tv.setText(text);
         } else {
@@ -458,6 +474,8 @@ public class UserDataController {
         }
     }
 
+    /**
+     * Apresenta os dados da Tensão Arterial*/
     public void showBloodPressure() {
         UserData sysBloodPressure = getDataOfType(SYS_BLOOD_PRESSURE);
         UserData diaBloodPressure = getDataOfType(DIA_BLOOD_PRESSURE);
@@ -490,6 +508,11 @@ public class UserDataController {
         }
     }
 
+    //Reports
+    String reportResult;
+
+    /**
+     * Apresenta o relatório da Estrutura Corporal*/
     public void bodyStructureReport() {
         UserData weight = getDataOfType(WEIGHT);
         UserData height = getDataOfType(HEIGHT);
@@ -542,6 +565,8 @@ public class UserDataController {
         scrollReportResult();
     }
 
+    /**
+     * Constrói o relatório de Perímetro Abdominal para género Masculino*/
     private String maleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
         String title = "";
         String text = "";
@@ -560,6 +585,8 @@ public class UserDataController {
         return title + " - " + text;
     }
 
+    /**
+     * Constrói o relatório de Perímetro Abdominal para género Feminino*/
     private String femaleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
         String title = "";
         String text = "";
@@ -578,6 +605,8 @@ public class UserDataController {
         return title + "\n" + text;
     }
 
+    /**
+     * Constrói o relatório de Perímetro Abdominal para género diferente de Masculino ou Feminino*/
     private String neutralAbdominalPerimeterAnalysis() {
         String title = context.getString(R.string.abdominal_perimeter);
         String text = context.getString(R.string.neutral_ap_description);
@@ -585,6 +614,8 @@ public class UserDataController {
         return title + "\n" + text;
     }
 
+    /**
+     * Apresenta o relatório da Glicémia*/
     public void bloodSugarReport() {
         List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
 
@@ -623,6 +654,8 @@ public class UserDataController {
         scrollReportResult();
     }
 
+    /**
+     * Apresenta o relatório da Tesão Arterial*/
     public void bloodPressureReport() {
         List<UserData> sysBloodPressureValues = getListOfValues(SYS_BLOOD_PRESSURE);
         List<UserData> diaBloodPressureValues = getListOfValues(DIA_BLOOD_PRESSURE);
@@ -685,6 +718,9 @@ public class UserDataController {
         scrollReportResult();
     }
 
+    /**
+     * Constrói o relatório da Frequência Cardíaca
+     * @return Relatório da Frequênica Cardíaca*/
     private String heartRateReport() {
         List<UserData> heartRateValues = getListOfValues(HEART_RATE);
 
@@ -725,6 +761,8 @@ public class UserDataController {
         return "";
     }
 
+    /**
+     * Ajusta a TextView do relatório para ser scrollable*/
     private void scrollReportResult() {
         ((TextView) view.findViewById(R.id.lbl_result)).setMovementMethod(new ScrollingMovementMethod());
     }

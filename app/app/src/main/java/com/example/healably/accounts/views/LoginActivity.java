@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.healably.MainActivity;
+import com.example.healably.user_profile.views.MainActivity;
 import com.example.healably.accounts.controller.UserController;
 import com.example.healably.R;
 

@@ -1,4 +1,4 @@
-package com.example.healably;
+package com.example.healably.user_profile.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.healably.R;
 import com.example.healably.user_profile.model.UserData;
 
 import java.util.List;
 
+/**
+ * Adaptador de dados para a funcionalidade Relatórios*/
 public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<UserData> items;
     private final OnItemClickListener itemClickListener;
@@ -19,7 +22,6 @@ public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public interface OnItemClickListener {
         void onItemClick(Object item);
     }
-
 
     class ReportsViewHolder extends RecyclerView.ViewHolder {
         TextView titulo;

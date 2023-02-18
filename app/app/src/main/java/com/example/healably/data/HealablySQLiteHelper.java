@@ -16,16 +16,16 @@ import java.util.List;
  * SQLiteHelper da aplicação*/
 public class HealablySQLiteHelper extends SQLiteOpenHelper {
 
-    //DB Info
+    //Info da BD
     private static final String DATABASE_NAME = "HealablyDB";
     private static final int DATABASE_VERSION = 1;
 
-    //Table Names
+    //Tabelas
     private static final String TABLE_USER = "user";
     private static final String TABLE_LOGGED_USER = "logged_user";
     private static final String TABLE_USER_DATA = "user_data";
 
-    //Column names
+    //Nomes Colunas
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_GENDER = "gender";
@@ -37,7 +37,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_VALUE = "value";
     private static final String KEY_DATE = "date";
 
-    //Columns
+    //Colunas
     private static final String[] TABLE_USER_COLUMNS = {KEY_ID, KEY_NAME, KEY_GENDER, KEY_DATEOFBIRTH, KEY_EMAIL, KEY_PASSWORD};
     private static final String[] TABLE_USER_DATA_COLUMNS = {KEY_ID, KEY_USER_ID, KEY_VALUE_TYPE, KEY_VALUE, KEY_DATE};
 
@@ -45,6 +45,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //Criação da BD
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USER_TABLE = "CREATE Table user ( " +
@@ -84,14 +85,13 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
+    //User
     /**
      * Adiciona um utilizador à BD
      * @param user Utilizador a adicionar*/
     public void addUser(User user) {
-        // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, user.getName());
         values.put(KEY_GENDER, user.getGender());
@@ -99,48 +99,11 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_EMAIL, user.getEmail());
         values.put(KEY_PASSWORD, user.getPassword());
 
-        // 3. insert
         db.insert(TABLE_USER, // table
                 null, //nullColumnHack
                 values); // key/value -> keys = column names/ values = column values
 
-        // 4. close
         db.close();
-    }
-
-    /**
-     * Obtém um utilizador da BD, dado o seu ID
-     * @param id ID do utilizador
-     * @return Utilizador pretendido*/
-    public User getUserById(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor =
-                db.query(TABLE_USER, // a. table
-                        TABLE_USER_COLUMNS, // b. column names
-                        " id = ?", // c. selections
-                        new String[]{String.valueOf(id)}, // d. selections args
-                        null, // e. group by
-                        null, // f. having
-                        null, // g. order by
-                        null); // h. limit
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-
-            User user = new User(
-                    cursor.getInt(0) /*Id*/,
-                    cursor.getString(1) /*Name*/,
-                    cursor.getString(2) /*Gender*/,
-                    cursor.getString(3) /*DateOfBirth*/,
-                    cursor.getString(4) /*Email*/,
-                    cursor.getString(5) /*Password*/
-            );
-
-            return user;
-        }
-
-        return null;
     }
 
     /**
@@ -149,14 +112,11 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
     public List<User> getAllUsers() {
         List<User> users = new LinkedList<User>();
 
-        // 1. build the query
         String query = "SELECT * FROM " + TABLE_USER;
 
-        // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        // 3. go over each row, build user and add it to list
         User user = null;
         if (cursor.moveToFirst()) {
             do {
@@ -169,12 +129,10 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
                         cursor.getString(5) /*Password*/
                 );
 
-                // Add user to users
                 users.add(user);
             } while (cursor.moveToNext());
         }
 
-        // return users
         return users;
     }
 
@@ -214,6 +172,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    /**
+     * Atualiza a informação de um utilizador na BD
+     * @param user Utilizador a atualizar*/
     public void updateUserInfo(User user){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -237,6 +198,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Elimina um utilizador da BD
+     * @param id Id do utilizador a eliminar*/
     public void deleteUser(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -249,6 +213,7 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    //Logged User
     /**
      * Regista um utilizador na BD como loggado
      * @param user Utilizador a loggar*/
@@ -373,6 +338,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         return userDataList;
     }
 
+    /**
+     * Atualiza dados de utilizador na BD
+     * @param userData Dados a atualizar*/
     public void updateUserData(UserData userData){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -389,6 +357,9 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Elimina dados de utilizador na BD
+     * @param id Id dos dados a eliminar*/
     public void deleteUserData(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -397,13 +368,6 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
                 "id = ?",
                 new String[]{String.valueOf(id)}
         );
-
-        db.delete(
-                TABLE_LOGGED_USER,
-                "user_id = ?",
-                new String[]{String.valueOf(id)}
-        );
-
 
         db.close();
     }

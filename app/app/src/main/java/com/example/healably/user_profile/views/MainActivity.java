@@ -1,7 +1,8 @@
-package com.example.healably;
+package com.example.healably.user_profile.views;
 
 import android.os.Bundle;
 
+import com.example.healably.R;
 import com.example.healably.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

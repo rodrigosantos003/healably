@@ -10,9 +10,7 @@ import android.util.Log;
 import com.example.healably.accounts.model.User;
 import com.example.healably.accounts.views.LoginActivity;
 import com.example.healably.data.HealablySQLiteHelper;
-import com.example.healably.user_profile.model.UserData;
-
-import java.util.List;
+import com.example.healably.user_profile.views.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -28,13 +26,13 @@ public class SplashActivity extends AppCompatActivity {
                 HealablySQLiteHelper healablySQLiteHelper = new HealablySQLiteHelper(SplashActivity.this);
                 try{
                     User loggedUser = healablySQLiteHelper.getLoggedUser();
+                    Intent it;
                     if(loggedUser != null){
-                        Intent it = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(it);
+                        it = new Intent(SplashActivity.this, MainActivity.class);
                     } else{
-                        Intent it = new Intent(SplashActivity.this, LoginActivity.class);
-                        startActivity(it);
+                        it = new Intent(SplashActivity.this, LoginActivity.class);
                     }
+                    startActivity(it);
                 } catch (Exception e){
                     Log.d("EXCEPTION", e.getMessage());
                 }

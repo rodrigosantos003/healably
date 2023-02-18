@@ -66,7 +66,7 @@ public class BloodSugarFragment extends Fragment {
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.dialog_insert_blood_sugar, null))
-                .setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         double value = Double.parseDouble(valueText.getText().toString());
@@ -74,7 +74,7 @@ public class BloodSugarFragment extends Fragment {
                         userDataController.showBloodSugar();
                     }
                 })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

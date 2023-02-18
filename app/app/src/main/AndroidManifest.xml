@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Healably"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".user_profile.views.MainActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

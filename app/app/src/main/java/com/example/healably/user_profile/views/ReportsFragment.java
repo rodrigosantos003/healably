@@ -1,9 +1,7 @@
 package com.example.healably.user_profile.views;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,14 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.healably.R;
-import com.example.healably.ReportsListAdapter;
-import com.example.healably.accounts.model.User;
-import com.example.healably.accounts.views.LoginActivity;
+import com.example.healably.user_profile.adapter.ReportsListAdapter;
 import com.example.healably.user_profile.controller.UserDataController;
 import com.example.healably.user_profile.model.UserData;
 
@@ -85,7 +80,6 @@ public class ReportsFragment extends Fragment {
                         editHistoryValue((UserData) item);
                     }
                 });
-
                 recyclerView.setAdapter(adapter);
 
                 userDataController.bodyStructureReport();
@@ -166,10 +160,11 @@ public class ReportsFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         double value = Double.parseDouble(editValueText.getText().toString());
 
+                        //Atualiza valor
                         userData.setValue(value);
-
                         userDataController.updateValue(userData);
 
+                        //Recarrega atividade
                         getActivity().recreate();
                     }
                 })
@@ -191,8 +186,11 @@ public class ReportsFragment extends Fragment {
                 ((Button) dialog.findViewById(R.id.editHistory_btDelete)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Elimina valor
                         userDataController.deleteValue(userData);
                         dialog.dismiss();
+
+                        //Recarrega atividade
                         getActivity().recreate();
                     }
                 });

@@ -1,11 +1,7 @@
 package com.example.healably.user_profile.views;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
