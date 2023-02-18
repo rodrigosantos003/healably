@@ -480,29 +480,39 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if (bmi < LOW_BMI) {
-            title = context.getString(R.string.low_bmi);
-            text = context.getString(R.string.low_bmi_description);
-        } else if (bmi >= LOW_BMI && bmi <= NORMAL_BMI) {
-            title = context.getString(R.string.normal_bmi);
-            text = context.getString(R.string.normal_bmi_description);
-        } else if (bmi >= HIGH_BMI) {
-            title = context.getString(R.string.high_bmi);
-            text = context.getString(R.string.high_bmi_description);
+        if(bmi > 0.0){
+            if (bmi < LOW_BMI) {
+                title = context.getString(R.string.low_bmi);
+                text = context.getString(R.string.low_bmi_description);
+            } else if (bmi >= LOW_BMI && bmi <= NORMAL_BMI) {
+                title = context.getString(R.string.normal_bmi);
+                text = context.getString(R.string.normal_bmi_description);
+            } else if (bmi >= HIGH_BMI) {
+                title = context.getString(R.string.high_bmi);
+                text = context.getString(R.string.high_bmi_description);
+            }
+
+            reportResult = title + " - " + text + "\n\n";
+        } else{
+            reportResult = "";
         }
 
-        reportResult = title + " - " + text + "\n\n";
+        if(abdominalPerimeterValue > 0.0){
+            switch (user.getGender()) {
+                case "MALE":
+                    reportResult += maleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
+                    break;
+                case "FEMALE":
+                    reportResult +=  femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
+                    break;
+                case "OTHER":
+                    reportResult +=  neutralAbdominalPerimeterAnalysis();
+                    break;
+            }
+        }
 
-        switch (user.getGender()) {
-            case "MALE":
-                reportResult += maleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
-                break;
-            case "FEMALE":
-                reportResult +=  femaleAbdominalPerimeterAnalysis(abdominalPerimeterValue);
-                break;
-            case "OTHER":
-                reportResult +=  neutralAbdominalPerimeterAnalysis();
-                break;
+        if(reportResult.isEmpty()){
+            reportResult = context.getString(R.string.no_data_available);
         }
 
         ((TextView) view.findViewById(R.id.lbl_result)).setText(reportResult);
@@ -556,7 +566,6 @@ public class UserDataController {
         List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
 
         double average = 0.0;
-        double value = 0.0;
 
         for (UserData bloodSugar : bloodSugarValues) {
             average += bloodSugar.getValue();
@@ -566,18 +575,26 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if (average < NORMAL_BLOOD_SUGAR) {
-            title = context.getString(R.string.low_bs);
-            text = context.getString(R.string.low_bs_description);
-        } else if (average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR) {
-            title = context.getString(R.string.normal_bs);
-            text = context.getString(R.string.normal_bs_description);
-        } else {
-            title = context.getString(R.string.high_bs);
-            text = context.getString(R.string.high_bs_description);
+        if(average > 0.0){
+            if (average < NORMAL_BLOOD_SUGAR) {
+                title = context.getString(R.string.low_bs);
+                text = context.getString(R.string.low_bs_description);
+            } else if (average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR) {
+                title = context.getString(R.string.normal_bs);
+                text = context.getString(R.string.normal_bs_description);
+            } else {
+                title = context.getString(R.string.high_bs);
+                text = context.getString(R.string.high_bs_description);
+            }
+
+            reportResult = title + " - " + text;
+        } else{
+            reportResult = "";
         }
 
-        reportResult = title + " - " + text;
+        if(reportResult.isEmpty()){
+            reportResult = context.getString(R.string.no_data_available);
+        }
 
         ((TextView) view.findViewById(R.id.lbl_result)).setText(reportResult);
         scrollReportResult();
@@ -603,34 +620,43 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if (userAge() <= 80) {
-            if (sysAverage < NORMAL_SYS_BP && diaAverage < NORMAL_DIA_BP) {
-                title = context.getString(R.string.low_bp);
-                text = context.getString(R.string.low_bp_description);
-            } else if (sysAverage >= NORMAL_SYS_BP && sysAverage < HIGH_BLOOD_SUGAR) {
-                if (diaAverage >= NORMAL_DIA_BP && diaAverage < HIGH_DIA_BP) {
+        if(sysAverage > 0.0 && diaAverage > 0.0){
+            if (userAge() <= 80) {
+                if (sysAverage < NORMAL_SYS_BP && diaAverage < NORMAL_DIA_BP) {
+                    title = context.getString(R.string.low_bp);
+                    text = context.getString(R.string.low_bp_description);
+                } else if (sysAverage >= NORMAL_SYS_BP && sysAverage < HIGH_BLOOD_SUGAR) {
+                    if (diaAverage >= NORMAL_DIA_BP && diaAverage < HIGH_DIA_BP) {
+                        title = context.getString(R.string.normal_bp);
+                        text = context.getString(R.string.normal_bp_description);
+                    } else{
+                        title = context.getString(R.string.low_bp);
+                        text = context.getString(R.string.low_bp_description);
+                    }
+                } else if (sysAverage >= HIGH_SYS_BP && diaAverage >= HIGH_DIA_BP) {
+                    title = context.getString(R.string.high_bp);
+                    text = context.getString(R.string.high_bp_description);
+                }
+            } else{
+                if(sysAverage < ELDERLY_SYS_BP && diaAverage <= NORMAL_DIA_BP){
                     title = context.getString(R.string.normal_bp);
                     text = context.getString(R.string.normal_bp_description);
                 } else{
-                    title = context.getString(R.string.low_bp);
-                    text = context.getString(R.string.low_bp_description);
+                    title = context.getString(R.string.high_bp);
+                    text = context.getString(R.string.high_bp_description);
                 }
-            } else if (sysAverage >= HIGH_SYS_BP && diaAverage >= HIGH_DIA_BP) {
-                title = context.getString(R.string.high_bp);
-                text = context.getString(R.string.high_bp_description);
             }
+
+            reportResult = title + " - " + text + "\n\n";
         } else{
-            if(sysAverage < ELDERLY_SYS_BP && diaAverage <= NORMAL_DIA_BP){
-                title = context.getString(R.string.normal_bp);
-                text = context.getString(R.string.normal_bp_description);
-            } else{
-                title = context.getString(R.string.high_bp);
-                text = context.getString(R.string.high_bp_description);
-            }
+            reportResult = "";
         }
 
-        reportResult = title + " - " + text;
-        reportResult += "\n\n" + heartRateReport();
+        reportResult += heartRateReport();
+
+        if(reportResult.isEmpty()){
+            reportResult = context.getString(R.string.no_data_available);
+        }
 
         ((TextView) view.findViewById(R.id.lbl_result)).setText(reportResult);
         scrollReportResult();
@@ -653,23 +679,27 @@ public class UserDataController {
         String title = "";
         String text = "";
 
-        if(average < 60){
-            title = context.getString(R.string.low_hr);
-            text = context.getString(R.string.low_hr_description);
-        } else if(average >= 60 && average <= 100){
-            title = context.getString(R.string.normal_hr);
-            text = context.getString(R.string.normal_hr_description);
-        } else{
-            title = context.getString(R.string.high_hr);
-            text = context.getString(R.string.high_hr_description);
+        if(average > 0.0){
+            if(average < 60){
+                title = context.getString(R.string.low_hr);
+                text = context.getString(R.string.low_hr_description);
+            } else if(average >= 60 && average <= 100){
+                title = context.getString(R.string.normal_hr);
+                text = context.getString(R.string.normal_hr_description);
+            } else{
+                title = context.getString(R.string.high_hr);
+                text = context.getString(R.string.high_hr_description);
+            }
+
+            if(average >= maximumHeartRate){
+                title = context.getString(R.string.extreme_hr);
+                text = context.getString(R.string.extreme_hr_description);
+            }
+
+            return title + " - " + text;
         }
 
-        if(average >= maximumHeartRate){
-            title = context.getString(R.string.extreme_hr);
-            text = context.getString(R.string.extreme_hr_description);
-        }
-
-        return title + " - " + text;
+        return "";
     }
 
     private void scrollReportResult(){
