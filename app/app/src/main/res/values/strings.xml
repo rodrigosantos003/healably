@@ -57,6 +57,15 @@
     <string name="cancel">Cancel</string>
     <string name="logout">Logout</string>
     <string name="result">Result</string>
+    <string name="delete_value">Delete Value</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="delete_account_confirmation">Do you really want to delete your account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="b_struct">B. Struct.</string>
+    <string name="bl_sug">Bl. Sug.</string>
+    <string name="bl_press">Bl. Press.</string>
 
     <!--REPORT STRINGS-->
     <!--BMI-->
@@ -161,6 +170,4 @@
         Your Heart Rate is on an extremely high value, which means that your heart is pumping <b>way too harder</b> than the recommended for your body.
         You have <b>extreme</b> high risk of suffering a Heart Attack, so call 911 <b>IMMEDIATELY</b>.
     </string>
-    <string name="delete_value">Delete Value</string>
-    <string name="delete_account">Delete Account</string>
 </resources>

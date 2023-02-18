@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
 import com.example.healably.accounts.views.LoginActivity;
+import com.example.healably.accounts.views.SignupActivity;
 import com.example.healably.data.HealablySQLiteHelper;
 import com.example.healably.user_profile.model.UserData;
 
@@ -204,8 +205,24 @@ public class UserDataController {
                 ((Button) dialog.findViewById(R.id.editUser_btDelete)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Elimina utilizador
+                        deleteUserDialog(activity);
+                    }
+                });
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void deleteUserDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(R.string.delete_account_confirmation)
+                .setTitle(R.string.confirmation)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         deleteUser();
+
                         dialog.dismiss();
 
                         //Abre ecrã de login
@@ -213,10 +230,14 @@ public class UserDataController {
                         context.startActivity(it);
                         activity.finish();
                     }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
                 });
-            }
-        });
-
+        AlertDialog dialog = builder.create();
         dialog.show();
     }
 

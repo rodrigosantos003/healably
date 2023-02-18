@@ -50,6 +50,15 @@
     <string name="cancel">Cancelar</string>
     <string name="logout">Sair</string>
     <string name="result">Resultado</string>
+    <string name="delete_value">Eliminar Valor</string>
+    <string name="delete_account">Eliminar Conta</string>
+    <string name="confirmation">Confirmação</string>
+    <string name="delete_account_confirmation">Deseja mesmo eliminar a sua conta?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="b_struct">Est. Corp.</string>
+    <string name="bl_sug">Glic.</string>
+    <string name="bl_press">Tensão Art.</string>
 
     <!--REPORT STRINGS-->
     <string name="low_bmi">IMC Baixo</string>

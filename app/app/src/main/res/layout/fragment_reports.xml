@@ -49,8 +49,8 @@
         android:id="@+id/reports_btnStructure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Structure"
-        android:textSize="10sp"
+        android:text="@string/b_struct"
+        android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@id/bodyStructure_guidelineStart"
         app:layout_constraintEnd_toStartOf="@id/reports_btnSugar"
         app:layout_constraintBottom_toBottomOf="@id/bodyStructure_guidelineTop"/>
@@ -59,8 +59,8 @@
         android:id="@+id/reports_btnSugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sugar"
-        android:textSize="10sp"
+        android:text="@string/bl_sug"
+        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@id/bodyStructure_guidelineTop"
         app:layout_constraintEnd_toStartOf="@id/reports_btnPressure"
         app:layout_constraintStart_toEndOf="@id/reports_btnStructure"/>
@@ -69,8 +69,8 @@
         android:id="@+id/reports_btnPressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pressure"
-        android:textSize="10sp"
+        android:text="@string/bl_press"
+        android:textSize="11sp"
         app:layout_constraintStart_toEndOf="@id/reports_btnSugar"
         app:layout_constraintEnd_toEndOf="@id/bodyStructure_guidelineEnd"
         app:layout_constraintBottom_toBottomOf="@id/bodyStructure_guidelineTop"/>
