@@ -91,11 +91,7 @@ public class UserDataController {
         this.context = context;
         this.view = view;
         this.healablySQLiteHelper = new HealablySQLiteHelper(this.context);
-        this.user = getUser();
-    }
-
-    private User getUser() {
-        return healablySQLiteHelper.getLoggedUser();
+        this.user = healablySQLiteHelper.getLoggedUser();
     }
 
     /**
@@ -210,6 +206,18 @@ public class UserDataController {
                 dateOfBirthValueText.setText(user.getDateOfBirth());
                 emailValueText.setText(user.getEmail());
                 passwordValueText.setText(user.getPassword());
+
+                ((Button) dialog.findViewById(R.id.editUser_btDelete)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteUser();
+                        dialog.dismiss();
+
+                        Intent it = new Intent(context, LoginActivity.class);
+                        context.startActivity(it);
+                        activity.finish();
+                    }
+                });
             }
         });
 
@@ -232,6 +240,10 @@ public class UserDataController {
     private void updateDateOfBirth() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateOfBirthValueText.setText(dateFormat.format(calendar.getTime()));
+    }
+
+    public void deleteUser(){
+        healablySQLiteHelper.deleteUser(user.getId());
     }
 
     /**
@@ -296,7 +308,7 @@ public class UserDataController {
     }
 
     public void deleteValue(UserData deletedUserData){
-        healablySQLiteHelper.deleteUserData(deletedUserData);
+        healablySQLiteHelper.deleteUserData(deletedUserData.getId());
     }
 
     /**

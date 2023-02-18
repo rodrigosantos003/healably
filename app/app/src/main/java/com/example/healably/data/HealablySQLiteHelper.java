@@ -237,6 +237,18 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteUser(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(
+                TABLE_USER,
+                "id = ?",
+                new String[]{String.valueOf(id)}
+        );
+
+        db.close();
+    }
+
     /**
      * Regista um utilizador na BD como loggado
      * @param user Utilizador a loggar*/
@@ -377,14 +389,21 @@ public class HealablySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteUserData(UserData userData){
+    public void deleteUserData(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(
                 TABLE_USER_DATA,
                 "id = ?",
-                new String[]{String.valueOf(userData.getId())}
+                new String[]{String.valueOf(id)}
         );
+
+        db.delete(
+                TABLE_LOGGED_USER,
+                "user_id = ?",
+                new String[]{String.valueOf(id)}
+        );
+
 
         db.close();
     }
