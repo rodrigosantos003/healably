@@ -66,6 +66,7 @@
     <string name="b_struct">B. Struct.</string>
     <string name="bl_sug">Bl. Sug.</string>
     <string name="bl_press">Bl. Press.</string>
+    <string name="password_equals">Password cannot be the same as the old password!</string>
 
     <!--REPORT STRINGS-->
     <!--BMI-->

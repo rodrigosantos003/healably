@@ -12,9 +12,7 @@
 4. A aplicação tem de permitir aos utilizadores introduzirem o seu peso e altura
 5. A aplicação tem de permitir aos utilizadores introduzirem a sua glicémia, i.e os seus níveis de açúcar no sangue
 6. A aplicação tem de permitir aos utilizadores introduzirem a sua tensão arterial e frequência cardíaca
-7. A aplicação tem de permitir a importação dados anteriores
-8. A aplicação tem de permitir a exportação os dados atuais
-9. A aplicação tem de gerar relatórios sobre os indicadores de saúde dos utilizadores
+7. A aplicação tem de gerar relatórios sobre os indicadores de saúde dos utilizadores
 
 ## Não Funcionais
 

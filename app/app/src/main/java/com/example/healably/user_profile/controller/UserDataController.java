@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.healably.R;
 import com.example.healably.accounts.model.User;
@@ -117,12 +118,16 @@ public class UserDataController {
                         email = emailValueText.getText().toString();
                         password = passwordValueText.getText().toString();
 
-                        //Atualiza utilizador
-                        User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
-                        healablySQLiteHelper.updateUserInfo(updatedUser);
+                        if(!user.getPassword().equals(password)){
+                            //Atualiza utilizador
+                            User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
+                            healablySQLiteHelper.updateUserInfo(updatedUser);
 
-                        //Recarrega atividade
-                        activity.recreate();
+                            //Recarrega atividade
+                            activity.recreate();
+                        } else{
+                            Toast.makeText(context, R.string.password_equals, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
