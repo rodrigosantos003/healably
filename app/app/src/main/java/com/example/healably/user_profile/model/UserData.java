@@ -1,5 +1,7 @@
 package com.example.healably.user_profile.model;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,7 +85,9 @@ public class UserData implements Comparable<UserData>{
         try {
             thisDate = new SimpleDateFormat("dd/MM/yyyy").parse(getDate());
             otherDate = new SimpleDateFormat("dd/MM/yyyy").parse(userData.getDate());
-        } catch (ParseException e) {};
+        } catch (ParseException e) {
+            Log.d("EXCEPTION", e.getMessage());
+        };
 
         if (thisDate == null || otherDate == null) {
             return 0;

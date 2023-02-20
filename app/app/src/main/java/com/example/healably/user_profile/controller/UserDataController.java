@@ -86,6 +86,7 @@ public class UserDataController {
     }
 
     //User
+
     /**
      * Define o texto na TextView, com o nome do utilizador
      */
@@ -118,14 +119,19 @@ public class UserDataController {
                         email = emailValueText.getText().toString();
                         password = passwordValueText.getText().toString();
 
-                        if(!user.getPassword().equals(password)){
-                            //Atualiza utilizador
+                        if (!user.getPassword().equals(password)) {
                             User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
-                            healablySQLiteHelper.updateUserInfo(updatedUser);
 
-                            //Recarrega atividade
-                            activity.recreate();
-                        } else{
+                            if (updatedUser.isNameValid() && !gender.isEmpty() && !dateOfBirth.isEmpty() && updatedUser.isEmailValid() && updatedUser.isPasswordValid()) {
+                                //Atualiza utilizador
+                                healablySQLiteHelper.updateUserInfo(updatedUser);
+
+                                //Recarrega atividade
+                                activity.recreate();
+                            } else {
+                                Toast.makeText(context, R.string.invalid_data, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
                             Toast.makeText(context, R.string.password_equals, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -219,7 +225,7 @@ public class UserDataController {
         dialog.show();
     }
 
-    private void deleteUserDialog(Activity activity){
+    private void deleteUserDialog(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.delete_account_confirmation)
                 .setTitle(R.string.confirmation)
@@ -270,12 +276,13 @@ public class UserDataController {
         return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
-    public void deleteUser(){
+    public void deleteUser() {
         healablySQLiteHelper.logoutUser();
         healablySQLiteHelper.deleteUser(user.getId());
     }
 
     //Data
+
     /**
      * Obtém os dados do utilizador
      *
@@ -320,22 +327,30 @@ public class UserDataController {
      * @param value     Valor a adicionar
      */
     public void addValue(String valueType, double value) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = dateFormat.format(new Date());
-        UserData userData = new UserData(user.getId(), valueType, value, date);
-
-        healablySQLiteHelper.addUserData(userData);
+        if (value > 0.0) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String date = dateFormat.format(new Date());
+            UserData userData = new UserData(user.getId(), valueType, value, date);
+            healablySQLiteHelper.addUserData(userData);
+        } else {
+            Toast.makeText(context, R.string.invalid_data, Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public void updateValue(UserData updatedUserData){
-        healablySQLiteHelper.updateUserData(updatedUserData);
+    public void updateValue(UserData updatedUserData) {
+        if (updatedUserData.getValue() > 0.0) {
+            healablySQLiteHelper.updateUserData(updatedUserData);
+        } else {
+            Toast.makeText(context, R.string.invalid_data, Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public void deleteValue(UserData deletedUserData){
+    public void deleteValue(UserData deletedUserData) {
         healablySQLiteHelper.deleteUserData(deletedUserData.getId());
     }
 
     //Body Structure
+
     /**
      * Apresenta os dados da Estrutura Corporal
      */
@@ -389,8 +404,10 @@ public class UserDataController {
 
     /**
      * Apresenta o resultado do IMC na TextView
+     *
      * @param bmi Valor do IMC
-     * @param tv TextView*/
+     * @param tv  TextView
+     */
     private void showBMIResult(double bmi, TextView tv) {
         if (bmi > 0.0) {
             if (bmi < LOW_BMI) {
@@ -411,6 +428,7 @@ public class UserDataController {
 
     /**
      * Calcula o IMC atual
+     *
      * @param weight Peso
      * @param height Altura
      * @return Valor do IMC
@@ -423,8 +441,10 @@ public class UserDataController {
     }
 
     //Blood Sugar
+
     /**
-     * Apresenta os dados da Glicémia*/
+     * Apresenta os dados da Glicémia
+     */
     public void showBloodSugar() {
         UserData bloodSugar = getDataOfType(BLOOD_SUGAR);
 
@@ -449,7 +469,9 @@ public class UserDataController {
 
     /**
      * Calcula o valor da HbA1c atual
-     * @return Valor da HbA1c*/
+     *
+     * @return Valor da HbA1c
+     */
     private double calculateHbA1c() {
         List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
 
@@ -487,9 +509,9 @@ public class UserDataController {
 
     private void showHbA1cResult(double hba1c, TextView tv) {
         if (hba1c > 0.0) {
-            if(hba1c < 5.7 ){
+            if (hba1c < 5.7) {
                 tv.setTextColor(context.getResources().getColor(R.color.yellow, null));
-            } else{
+            } else {
                 tv.setTextColor(context.getResources().getColor(R.color.red, null));
             }
 
@@ -501,7 +523,8 @@ public class UserDataController {
     }
 
     /**
-     * Apresenta os dados da Tensão Arterial*/
+     * Apresenta os dados da Tensão Arterial
+     */
     public void showBloodPressure() {
         UserData sysBloodPressure = getDataOfType(SYS_BLOOD_PRESSURE);
         UserData diaBloodPressure = getDataOfType(DIA_BLOOD_PRESSURE);
@@ -538,7 +561,8 @@ public class UserDataController {
     String reportResult;
 
     /**
-     * Apresenta o relatório da Estrutura Corporal*/
+     * Apresenta o relatório da Estrutura Corporal
+     */
     public void bodyStructureReport() {
         UserData weight = getDataOfType(WEIGHT);
         UserData height = getDataOfType(HEIGHT);
@@ -592,7 +616,8 @@ public class UserDataController {
     }
 
     /**
-     * Constrói o relatório de Perímetro Abdominal para género Masculino*/
+     * Constrói o relatório de Perímetro Abdominal para género Masculino
+     */
     private String maleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
         String title = "";
         String text = "";
@@ -612,7 +637,8 @@ public class UserDataController {
     }
 
     /**
-     * Constrói o relatório de Perímetro Abdominal para género Feminino*/
+     * Constrói o relatório de Perímetro Abdominal para género Feminino
+     */
     private String femaleAbdominalPerimeterAnalysis(double abdominalPerimeter) {
         String title = "";
         String text = "";
@@ -632,7 +658,8 @@ public class UserDataController {
     }
 
     /**
-     * Constrói o relatório de Perímetro Abdominal para género diferente de Masculino ou Feminino*/
+     * Constrói o relatório de Perímetro Abdominal para género diferente de Masculino ou Feminino
+     */
     private String neutralAbdominalPerimeterAnalysis() {
         String title = context.getString(R.string.abdominal_perimeter);
         String text = context.getString(R.string.neutral_ap_description);
@@ -641,7 +668,8 @@ public class UserDataController {
     }
 
     /**
-     * Apresenta o relatório da Glicémia*/
+     * Apresenta o relatório da Glicémia
+     */
     public void bloodSugarReport() {
         List<UserData> bloodSugarValues = getListOfValues(BLOOD_SUGAR);
 
@@ -681,7 +709,8 @@ public class UserDataController {
     }
 
     /**
-     * Apresenta o relatório da Tesão Arterial*/
+     * Apresenta o relatório da Tesão Arterial
+     */
     public void bloodPressureReport() {
         List<UserData> sysBloodPressureValues = getListOfValues(SYS_BLOOD_PRESSURE);
         List<UserData> diaBloodPressureValues = getListOfValues(DIA_BLOOD_PRESSURE);
@@ -746,7 +775,9 @@ public class UserDataController {
 
     /**
      * Constrói o relatório da Frequência Cardíaca
-     * @return Relatório da Frequênica Cardíaca*/
+     *
+     * @return Relatório da Frequênica Cardíaca
+     */
     private String heartRateReport() {
         List<UserData> heartRateValues = getListOfValues(HEART_RATE);
 
@@ -788,7 +819,8 @@ public class UserDataController {
     }
 
     /**
-     * Ajusta a TextView do relatório para ser scrollable*/
+     * Ajusta a TextView do relatório para ser scrollable
+     */
     private void scrollReportResult() {
         ((TextView) view.findViewById(R.id.lbl_result)).setMovementMethod(new ScrollingMovementMethod());
     }
