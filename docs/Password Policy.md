@@ -56,7 +56,7 @@ The passwords must be constituded by the following characters:
 
 ## Change Frequency
 
-The passwords must be changed with a frequency of 3 months.
+The passwords should be changed with a frequency of 3 months.
 
 ## Reuse Frequency
 
