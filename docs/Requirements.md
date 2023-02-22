@@ -34,9 +34,7 @@
 4. The app must allow the users to enter their weight and height;
 5. The app must allow the users to enter their glycemia, i.e their blood sugar levels
 6. The app must allow the users to enter their blood pressure and heart rate
-7. The app must allow the import of previous data
-8. The app must allow the export of current data
-9. The app must generate reports on users' health indicators
+7. The app must generate reports on users' health indicators
 
 ## Non-Functional
 
