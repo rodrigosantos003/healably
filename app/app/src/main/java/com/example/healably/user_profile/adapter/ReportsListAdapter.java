@@ -1,5 +1,6 @@
 package com.example.healably.user_profile.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healably.R;
+import com.example.healably.user_profile.controller.UserDataController;
 import com.example.healably.user_profile.model.UserData;
 
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 /**
  * Adaptador de dados para a funcionalidade Relatórios*/
 public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private final Context context;
     private final List<UserData> items;
     private final OnItemClickListener itemClickListener;
 
@@ -44,7 +48,8 @@ public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    public ReportsListAdapter(List<UserData> items, OnItemClickListener clickListener) {
+    public ReportsListAdapter(Context context, List<UserData> items, OnItemClickListener clickListener) {
+        this.context = context;
         this.items = items;
         this.itemClickListener = clickListener;
     }
@@ -64,7 +69,37 @@ public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         ReportsViewHolder reportsViewHolder = (ReportsViewHolder) holder;
 
-        reportsViewHolder.titulo.setText(userData.getValueType());
+        String valueType = userData.getValueType();
+        String titulo;
+
+        switch (valueType){
+            case UserDataController.WEIGHT:
+                titulo = context.getString(R.string.weight);
+                break;
+            case UserDataController.HEIGHT:
+                titulo = context.getString(R.string.height);
+                break;
+            case UserDataController.ABDOMINAL_PERIMETER:
+                titulo = context.getString(R.string.abdominal_perimeter);
+                break;
+            case UserDataController.BLOOD_SUGAR:
+                titulo = context.getString(R.string.blood_sugar);
+                break;
+            case UserDataController.SYS_BLOOD_PRESSURE:
+                titulo = context.getString(R.string.sys_bp);
+                break;
+            case UserDataController.DIA_BLOOD_PRESSURE:
+                titulo = context.getString(R.string.dia_bp);
+                break;
+            case UserDataController.HEART_RATE:
+                titulo = context.getString(R.string.heart_rate);
+                break;
+            default:
+                titulo = "";
+                break;
+        }
+
+        reportsViewHolder.titulo.setText(titulo);
         reportsViewHolder.data.setText(userData.getDate());
         reportsViewHolder.valor.setText(String.valueOf(userData.getValue()));
         reportsViewHolder.bind(items.get(position), itemClickListener);

@@ -74,7 +74,7 @@ public class ReportsFragment extends Fragment {
                 RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                ReportsListAdapter adapter = new ReportsListAdapter(userData, new ReportsListAdapter.OnItemClickListener(){
+                ReportsListAdapter adapter = new ReportsListAdapter(getContext(), userData, new ReportsListAdapter.OnItemClickListener(){
                     @Override
                     public void onItemClick(Object item) {
                         editHistoryValue((UserData) item);
@@ -100,7 +100,7 @@ public class ReportsFragment extends Fragment {
                 RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                ReportsListAdapter adapter = new ReportsListAdapter(bloodSugarList, new ReportsListAdapter.OnItemClickListener() {
+                ReportsListAdapter adapter = new ReportsListAdapter(getContext(), bloodSugarList, new ReportsListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Object item) {
                         editHistoryValue((UserData) item);
@@ -133,7 +133,7 @@ public class ReportsFragment extends Fragment {
                 RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                ReportsListAdapter adapter = new ReportsListAdapter(userData, new ReportsListAdapter.OnItemClickListener() {
+                ReportsListAdapter adapter = new ReportsListAdapter(getContext(), userData, new ReportsListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Object item) {
                         editHistoryValue((UserData) item);
