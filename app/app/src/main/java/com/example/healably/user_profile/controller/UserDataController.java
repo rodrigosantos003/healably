@@ -6,6 +6,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +79,7 @@ public class UserDataController {
     String dateOfBirth;
     String email;
     String password;
+    boolean passwordChanged;
 
     public UserDataController(Context context, View view) {
         this.context = context;
@@ -119,21 +122,24 @@ public class UserDataController {
                         email = emailValueText.getText().toString();
                         password = passwordValueText.getText().toString();
 
-                        if (!user.getPassword().equals(password)) {
-                            User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
-
-                            if (updatedUser.isNameValid() && !gender.isEmpty() && !dateOfBirth.isEmpty() && updatedUser.isEmailValid() && updatedUser.isPasswordValid()) {
-                                //Atualiza utilizador
-                                healablySQLiteHelper.updateUserInfo(updatedUser);
-
-                                //Recarrega atividade
-                                activity.recreate();
-                            } else {
-                                Toast.makeText(context, R.string.invalid_data, Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
+                        if (passwordChanged && user.getPassword().equals(password)) {
                             Toast.makeText(context, R.string.password_equals, Toast.LENGTH_SHORT).show();
+                            passwordChanged = false;
+                            return;
                         }
+
+                        User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
+
+                        if (updatedUser.isNameValid() && !gender.isEmpty() && !dateOfBirth.isEmpty() && updatedUser.isEmailValid() && updatedUser.isPasswordValid()) {
+                            //Atualiza utilizador
+                            healablySQLiteHelper.updateUserInfo(updatedUser);
+
+                            //Recarrega atividade
+                            activity.recreate();
+                        } else {
+                            Toast.makeText(context, R.string.invalid_data, Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -212,6 +218,22 @@ public class UserDataController {
                 dateOfBirthValueText.setText(user.getDateOfBirth());
                 emailValueText.setText(user.getEmail());
                 passwordValueText.setText(user.getPassword());
+
+                passwordValueText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        passwordChanged = false;
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        passwordChanged = true;
+                    }
+                });
 
                 ((Button) dialog.findViewById(R.id.editUser_btDelete)).setOnClickListener(new View.OnClickListener() {
                     @Override
