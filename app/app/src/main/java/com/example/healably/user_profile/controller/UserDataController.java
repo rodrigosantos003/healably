@@ -780,7 +780,11 @@ public class UserDataController {
                 }
             }
 
-            reportResult = title + " - " + text + "\n\n";
+            if(!title.isEmpty() && !text.isEmpty()){
+                reportResult = title + " - " + text + "\n\n";
+            } else{
+                reportResult = "";
+            }
         } else {
             reportResult = "";
         }
