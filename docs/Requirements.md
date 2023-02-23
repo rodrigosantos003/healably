@@ -16,7 +16,7 @@
 
 ## Não Funcionais
 
-1. A aplicação deverá ser desevolvida em Android
+1. A aplicação deverá ser desenvolvida em Android
 2. A aplicação deverá ser compatível o maior número de dispositivos Android possível
 3. As passwords utilizadas na aplicação devem cumprir as regras da [Política de Passwords](./Password%20Policy.md)
 
