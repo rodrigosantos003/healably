@@ -71,28 +71,36 @@ public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         String valueType = userData.getValueType();
         String titulo;
+        String valor = String.valueOf(userData.getValue());
 
         switch (valueType){
             case UserDataController.WEIGHT:
                 titulo = context.getString(R.string.weight);
+                valor += " " + context.getString(R.string.kg);
                 break;
             case UserDataController.HEIGHT:
                 titulo = context.getString(R.string.height);
+                valor += " " + context.getString(R.string.m);
                 break;
             case UserDataController.ABDOMINAL_PERIMETER:
                 titulo = context.getString(R.string.abdominal_perimeter);
+                valor += " " + context.getString(R.string.cm);
                 break;
             case UserDataController.BLOOD_SUGAR:
                 titulo = context.getString(R.string.blood_sugar);
+                valor += " " + context.getString(R.string.mg_dl);
                 break;
             case UserDataController.SYS_BLOOD_PRESSURE:
                 titulo = context.getString(R.string.sys_bp);
+                valor += " " + context.getString(R.string.mm_hg);
                 break;
             case UserDataController.DIA_BLOOD_PRESSURE:
                 titulo = context.getString(R.string.dia_bp);
+                valor += " " + context.getString(R.string.mm_hg);
                 break;
             case UserDataController.HEART_RATE:
                 titulo = context.getString(R.string.heart_rate);
+                valor += " " + context.getString(R.string.bpm);
                 break;
             default:
                 titulo = "";
@@ -101,7 +109,7 @@ public class ReportsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         reportsViewHolder.titulo.setText(titulo);
         reportsViewHolder.data.setText(userData.getDate());
-        reportsViewHolder.valor.setText(String.valueOf(userData.getValue()));
+        reportsViewHolder.valor.setText(valor);
         reportsViewHolder.bind(items.get(position), itemClickListener);
     }
 

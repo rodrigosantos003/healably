@@ -29,7 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText editPassword;
 
     final Calendar calendar = Calendar.getInstance();
-    String gender;
+    String gender = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +89,6 @@ public class SignupActivity extends AppCompatActivity {
                         break;
                     case R.id.rb_other:
                         gender = "OTHER";
-                        break;
-                    default:
-                        gender = "";
                         break;
                 }
             }

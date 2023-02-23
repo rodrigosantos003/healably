@@ -81,7 +81,7 @@ public class UserController {
      * @param user Utilizador a validar
      * @return True se o utilizador existir, False caso contrário
      * */
-    private boolean userExists(User user){
+    public boolean userExists(User user){
         List<User> users = healablySQLiteHelper.getAllUsers();
 
         return users.contains(user);

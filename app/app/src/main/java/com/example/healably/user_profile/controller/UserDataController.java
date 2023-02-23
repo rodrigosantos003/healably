@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.healably.R;
+import com.example.healably.accounts.controller.UserController;
 import com.example.healably.accounts.model.User;
 import com.example.healably.accounts.views.LoginActivity;
 import com.example.healably.accounts.views.SignupActivity;
@@ -129,6 +130,11 @@ public class UserDataController {
                         }
 
                         User updatedUser = new User(user.getId(), name, gender, dateOfBirth, email, password);
+
+                        if(new UserController(context).userExists(updatedUser)){
+                            Toast.makeText(context, R.string.user_already_exists, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         if (updatedUser.isNameValid() && !gender.isEmpty() && !dateOfBirth.isEmpty() && updatedUser.isEmailValid() && updatedUser.isPasswordValid()) {
                             //Atualiza utilizador
@@ -415,7 +421,7 @@ public class UserDataController {
         }
 
         if (abdominalPerimeterValue > 0.0) {
-            String text = String.format("%.2f", abdominalPerimeterValue) + context.getString(R.string.cm);
+            String text = String.format("%.2f", abdominalPerimeterValue) + " " + context.getString(R.string.cm);
             abdominalPerimeterValueText.setText(text);
             abdominalPerimeterDateText.setText(abdominalPerimeter.getDate());
         } else {
@@ -505,7 +511,7 @@ public class UserDataController {
         }
         average /= bloodSugarValues.size();
 
-        if (average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR)
+        if (average < NORMAL_BLOOD_SUGAR || (average >= NORMAL_BLOOD_SUGAR && average < HIGH_BLOOD_SUGAR))
             value = 4;
         else if (average >= HIGH_BLOOD_SUGAR && average < 140)
             value = 6;
@@ -561,7 +567,7 @@ public class UserDataController {
         TextView bloodPressureDateText = (TextView) view.findViewById(R.id.bloodPressure_date);
 
         if (heartRateValue > 0.0) {
-            String hrText = String.format("%.0f", heartRateValue);
+            String hrText = String.format("%.0f", heartRateValue) + " " + context.getString(R.string.bpm);
             heartRateValueText.setText(hrText);
         } else {
             heartRateValueText.setText(R.string.no_data_available);
