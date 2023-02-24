@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.healably.R;
 import com.example.healably.user_profile.controller.UserDataController;
@@ -24,7 +25,7 @@ public class BodyStructureFragment extends Fragment {
 
     UserDataController userDataController;
     EditText valueText;
-    String valueType;
+    String valueType = "";
 
     public static BodyStructureFragment newInstance() {
         return new BodyStructureFragment();
@@ -69,18 +70,12 @@ public class BodyStructureFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         double value = Double.parseDouble(valueText.getText().toString());
 
-                        switch (valueType) {
-                            case UserDataController.WEIGHT:
-                                userDataController.addValue(valueType, value);
-                                break;
-                            case UserDataController.HEIGHT:
-                                userDataController.addValue(valueType, value);
-                                break;
-                            case UserDataController.ABDOMINAL_PERIMETER:
-                                userDataController.addValue(valueType, value);
-                                break;
+                        if(valueType.isEmpty()){
+                            Toast.makeText(getContext(), R.string.invalid_data, Toast.LENGTH_SHORT).show();
+                            return;
                         }
 
+                        userDataController.addValue(valueType, value);
                         userDataController.showBodyStructure();
                     }
                 })
@@ -109,9 +104,6 @@ public class BodyStructureFragment extends Fragment {
                                 break;
                             case R.id.rb_abdominal_perimeter:
                                 valueType = UserDataController.ABDOMINAL_PERIMETER;
-                                break;
-                            default:
-                                valueType = "";
                                 break;
                         }
                     }

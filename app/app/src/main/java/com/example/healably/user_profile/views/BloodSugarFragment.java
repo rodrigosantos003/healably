@@ -1,7 +1,5 @@
 package com.example.healably.user_profile.views;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 
 import com.example.healably.R;
 import com.example.healably.user_profile.controller.UserDataController;

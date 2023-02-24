@@ -147,10 +147,6 @@ public class User {
 
         final User other = (User) obj;
 
-        if (!this.email.equals(other.email)) {
-            return false;
-        }
-
-        return true;
+        return this.email.equals(other.email);
     }
 }

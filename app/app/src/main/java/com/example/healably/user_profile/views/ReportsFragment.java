@@ -31,6 +31,7 @@ import java.util.List;
 public class ReportsFragment extends Fragment {
 
     UserDataController userDataController;
+    RecyclerView recyclerView;
     EditText editValueText;
 
     public static ReportsFragment newInstance() {
@@ -53,6 +54,10 @@ public class ReportsFragment extends Fragment {
         userDataController = new UserDataController(getContext(), view);
         userDataController.setUserText(getActivity());
 
+        recyclerView = view.findViewById(R.id.reports_rv_history);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         ((Button) view.findViewById(R.id.reports_btnStructure)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,9 +76,6 @@ public class ReportsFragment extends Fragment {
                 Collections.sort(userData);
 
                 //Put on the recyclerview
-                RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
                 ReportsListAdapter adapter = new ReportsListAdapter(getContext(), userData, new ReportsListAdapter.OnItemClickListener(){
                     @Override
                     public void onItemClick(Object item) {
@@ -97,9 +99,6 @@ public class ReportsFragment extends Fragment {
                 Collections.sort(bloodSugarList);
 
                 //Put on the recyclerview
-                RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
                 ReportsListAdapter adapter = new ReportsListAdapter(getContext(), bloodSugarList, new ReportsListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Object item) {
@@ -130,9 +129,6 @@ public class ReportsFragment extends Fragment {
                 Collections.sort(userData);
 
                 //Put on the recyclerview
-                RecyclerView recyclerView = view.findViewById(R.id.reports_rv_history);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
                 ReportsListAdapter adapter = new ReportsListAdapter(getContext(), userData, new ReportsListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Object item) {
