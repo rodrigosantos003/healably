@@ -91,18 +91,18 @@
 
     <string name="normal_ap">Normal Abdominal Perimeter</string>
     <string name="normal_ap_description">
-        Your Abdominal Perimeter is on a normal value, which means you have <b>low</b> risk of getting cardiovascular
+        Your Abdominal Perimeter is on a normal value, which means you have low risk of getting cardiovascular
         diseases, such as diabetes type II, high cholesterol and hypertension.
     </string>
     <string name="augmented_ap">Augmented Abdominal Perimeter</string>
     <string name="augmented_ap_description">
-        Your Abdominal Perimeter is on an augmented value, which means you have <b>intermediate</b> risk of getting cardiovascular
+        Your Abdominal Perimeter is on an augmented value, which means you have intermediate risk of getting cardiovascular
         diseases, such as diabetes type II, high cholesterol and hypertension.
         You should watch your eating habits and maintain a regular practice of physical exercise to lower your Abdominal Perimeter.
     </string>
     <string name="high_ap">High Abdominal Perimeter</string>
     <string name="high_ap_description">
-        Your Abdominal Perimeter is on an high value, which means you have <b>high</b> risk of getting cardiovascular
+        Your Abdominal Perimeter is on an high value, which means you have risk of getting cardiovascular
         diseases, such as diabetes type II, high cholesterol and hypertension.
         This is a concerning value, so you should see your doctor to improve your health.
     </string>
@@ -114,18 +114,18 @@
 
     <string name="low_bs">Low Blood Sugar</string>
     <string name="low_bs_description">
-        Your Blood Sugar average is on a low value, which means that the glucose in your blood is being on a <b>low</b> level
+        Your Blood Sugar average is on a low value, which means that the glucose in your blood is being on a level
         for the previous 2 to 3 months.
         You should see your doctor or nutritionist to increase your Blood Sugar, so you can gain more energy.
     </string>
     <string name="normal_bs">Normal Blood Sugar</string>
     <string name="normal_bs_description">
-        Your Blood Sugar average is on a normal value, which means that the glucose in your blood is being on a <b>good</b> level
+        Your Blood Sugar average is on a normal value, which means that the glucose in your blood is being on a level
         for the previous 2 to 3 months.
     </string>
     <string name="high_bs">High Blood Sugar</string>
     <string name="high_bs_description">
-        Your Blood Sugar average is on a high value, which means that the glucose in your blood is being on a <b>high</b> level
+        Your Blood Sugar average is on a high value, which means that the glucose in your blood is being on a level
         for the previous 2 to 3 months.
         You should see your doctor, because this might indicate that you have Diabetes.
         If you are already diagnosed with Diabetes, maintain the recommendations of your doctor, as well as a regular practice of physical exercise.
@@ -146,30 +146,30 @@
     <string name="high_bp">High Blood Pressure</string>
     <string name="high_bp_description">
         Your Blood Pressure is on a high value, which means that your blood is circulating exerting exaggerated pressure.
-        This causes the heart to work harder, i.e you have <b>high</b> risk of suffering a Stroke.
+        This causes the heart to work harder, i.e you have high risk of suffering a Stroke.
         You should see your doctor to decrease your Blood Pressure.
     </string>
 
     <string name="low_hr">Low Heart Rate</string>
     <string name="low_hr_description">
-        Your Heart Rate is on a low value, which means that your heart is <b>not pumping enough</b> for your body.
-        This can lead to <b>death</b>.
+        Your Heart Rate is on a low value, which means that your heart is not pumping enough for your body.
+        This can lead to death.
         You should see your doctor to increase your Heart Rate.
     </string>
     <string name="normal_hr">Normal Heart Rate</string>
     <string name="normal_hr_description">
-        Your Heart Rate is on a normal value, which means that your heart <b>is pumping enough</b> for your body.
+        Your Heart Rate is on a normal value, which means that your heart is pumping enough for your body.
         You can keep your heating habits and maintain a regular practice of physical exercise.
     </string>
     <string name="high_hr">High Heart Rate</string>
     <string name="high_hr_description">
-        Your Heart Rate is on a high value, which means that your heart is <b>pumping harder</b> than the recommended for your body.
+        Your Heart Rate is on a high value, which means that your heart is pumping harder than the recommended for your body.
         This can lead yo Hypertension, which is a risk factor for cardiovascular diseases.
         You should see your doctor to control your Heart Rate.
     </string>
     <string name="extreme_hr">Extremely High Heart Rate</string>
     <string name="extreme_hr_description">
-        Your Heart Rate is on an extremely high value, which means that your heart is pumping <b>way too harder</b> than the recommended for your body.
-        You have <b>extreme</b> high risk of suffering a Heart Attack, so call 911 <b>IMMEDIATELY</b>.
+        Your Heart Rate is on an extremely high value, which means that your heart is pumping way too harder than the recommended for your body.
+        You have extreme high risk of suffering a Heart Attack, so call 911 IMMEDIATELY.
     </string>
 </resources>

@@ -64,36 +64,36 @@
     <!--REPORT STRINGS-->
     <string name="low_bmi">IMC Baixo</string>
     <string name="low_bmi_description">
-        O seu IMC está num valor baixo, o que sinifica que o seu peso está <b>baixo</b> do recomendado para a sua altura.
+        O seu IMC está num valor baixo, o que sinifica que o seu peso está baixo do recomendado para a sua altura.
         Isto pode enfraquecer o seu sistema imunitário, levando a doenças.
         Deve consultar o seu médico ou nutricionista para ganhar peso.
     </string>
     <string name="normal_bmi">IMC Normal</string>
     <string name="normal_bmi_description">
-        O seu IMC está num valor normal, o que significa que o seu peso é o <b>indicado</b> para a sua altura.
+        O seu IMC está num valor normal, o que significa que o seu peso é o indicado para a sua altura.
         Pode manter os seus hábitos alimentares e manter também exercício físico regular.
     </string>
     <string name="high_bmi">IMC Elevado</string>
     <string name="high_bmi_description">
-        O seu IMC está num valor elevado, o que significa que o seu pesso está <b>acima</b> do recomendado para a sua altura.
+        O seu IMC está num valor elevado, o que significa que o seu pesso está acima do recomendado para a sua altura.
         Isto pode levar a doenças cardiovasculares.
         Deve consultar o seu médico ou nutricionista para perder peso.
     </string>
 
     <string name="normal_ap">Perímetro Abdominal Normal</string>
     <string name="normal_ap_description">
-        O seu Perímetro Abdominal está num valor normal, o que significa que tem <b>baixo</b> risco de contrair doenças
+        O seu Perímetro Abdominal está num valor normal, o que significa que tem baixo risco de contrair doenças
         cardiovasculares, tais como Diabetes Tipo 2, Colestrol Elevado e Hipertensão.
     </string>
     <string name="augmented_ap">Perímetro Abdominal Aumentado</string>
     <string name="augmented_ap_description">
-        O seu Perímetro Abdominal está num valor normal, o que significa que tem risco <b>intermédio</b> de contrair doenças
+        O seu Perímetro Abdominal está num valor normal, o que significa que tem risco intermédio de contrair doenças
         cardiovasculares, tais como Diabetes Tipo 2, Colestrol Elevado e Hipertensão.
         Deve ter atenção aos seus hábitos alimentares e manter uma prática regular de exercício físico.
     </string>
     <string name="high_ap">Perímetro Abdominal Elevado</string>
     <string name="high_ap_description">
-        O seu Perímetro Abdominal está num valor normal, o que significa que tem risco <b>elevado</b> de contrair doenças
+        O seu Perímetro Abdominal está num valor normal, o que significa que tem risco elevado de contrair doenças
         cardiovasculares, tais como Diabetes Tipo 2, Colestrol Elevado e Hipertensão.
         É um valor preocupante, pelo que deve consultar o seu médico para melhorar a sua saúde.
     </string>
@@ -105,18 +105,18 @@
 
     <string name="low_bs">Glicémia Baixa</string>
     <string name="low_bs_description">
-        A sua média glicémica está num baixo valor, o que significa que a glucose no seu sangue tem estado num nível <b>baixo</b>
+        A sua média glicémica está num baixo valor, o que significa que a glucose no seu sangue tem estado num nível
         durante os últimos 2 a 3 meses.
         Deve consultar o seu médico para aumentar a Glicémia, para que possa ganhar mais energia.
     </string>
     <string name="normal_bs">Glicémia Normal</string>
     <string name="normal_bs_description">
-        A sua mádia glicémica está num valor normal, o que signifca que a glucose no seu sange tem estado num <b>bom</b> nível
+        A sua mádia glicémica está num valor normal, o que signifca que a glucose no seu sange tem estado num bom nível
         durante os últimos 2 a 3 meses.
     </string>
     <string name="high_bs">Glicémia Elevada</string>
     <string name="high_bs_description">
-        A sua média Glicémia está num valor elevado, o que significa que a glucose no seu sange tem estado num nível <b>elevado</b>
+        A sua média Glicémia está num valor elevado, o que significa que a glucose no seu sange tem estado num nível elevado
         durante os últimos 2 a 3 meses.
         Deve consultar o seu médico, pois isto pode indicar que possui Diabetes.
         Se já foi diagnosticado com Diabetes, mantenha as recomendações do seu médico, bem como uma prática regular de exercício
@@ -138,34 +138,34 @@
     <string name="high_bp">Tensão Arterial Elevada</string>
     <string name="high_bp_description">
         A sua Tensão Arterial está num nível elevado, o que significa que o seu sange está a circular exercendo força exagerada.
-        Isto causa o coração fazer mais esforço, ou seja, tem <b>elevado</b> risco de sofrer um AVC.
+        Isto causa o coração fazer mais esforço, ou seja, tem elevado risco de sofrer um AVC.
         Deve consultar o seu médico para diminuir a sua Tensão Arterial.
     </string>
 
     <string name="low_hr">Frequência Cardíaca Baixa</string>
     <string name="low_hr_description">
-        A sua Frequência Cardíaca está num valor baixo, o que significa que o seu coração <b>não está a bater o suficiente</b>
+        A sua Frequência Cardíaca está num valor baixo, o que significa que o seu coração não está a bater o suficiente
         para o seu corpo.
-        Isto pode levar à <b>morte</b>.
+        Isto pode levar à morte.
         Deve consultar o seu médico para aumentar a sua Frequência Cardíaca.
     </string>
     <string name="normal_hr">Frequência Cardíaca Normal</string>
     <string name="normal_hr_description">
-        A sua Frequência Cardíaca está num valor normal, o que significa que o seu coração <b>está a bater o suficiente</b>
+        A sua Frequência Cardíaca está num valor normal, o que significa que o seu coração está a bater o suficiente
         para o seu corpo.
         Pode manter os seus hábitos alimentares e manter uma prática regular de exercício físico.
     </string>
     <string name="high_hr">Frequência Cardíaca Elevada</string>
     <string name="high_hr_description">
-        A sua Frequência Cardíca está num valor elevado, o que significa que o seu coração <b>está a bater mais</b>
+        A sua Frequência Cardíca está num valor elevado, o que significa que o seu coração está a bater mais
         do que o recomendado para o seu corpo.
         Isto pode levar à Hipertensão, que é um fator de risco para doenças cardiovasculares.
         Deve consultar o seu médico para reduzir a sua Frequência Cardíaca.
     </string>
     <string name="extreme_hr">Frequência Cardíaca Extremamente Elevada</string>
     <string name="extreme_hr_description">
-        A sua Frequência Cardíca está num valor extremamente elevado, o que significa que o seu coração <b>está a bater demasiado</b>
+        A sua Frequência Cardíca está num valor extremamente elevado, o que significa que o seu coração está a bater demasiado
         do que o recomendado para o seu corpo.
-        Tem rsico <b>extremo</b> de sofrer um Ataque Cardíaco, então ligue 112 <b>IMEDIATAMENTE</b>.
+        Tem rsico extremo de sofrer um Ataque Cardíaco, então ligue 112 IMEDIATAMENTE.
     </string>
 </resources>
